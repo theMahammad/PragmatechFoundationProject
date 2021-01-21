@@ -8,9 +8,9 @@ function performOperation(secondInteger, secondDecimal, secondString) {
     const firstString = 'HackerRank ';
     
     
-    console.log(Number(firstInteger+secondInteger))
+    console.log(firstInteger+Number(secondInteger))
 
-     console.log(firstDecimal+secondDecimal)
+     console.log(firstDecimal+ parseFloat(secondDecimal) )
     
     console.log(firstString + secondString )
 }
