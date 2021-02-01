@@ -10,7 +10,7 @@
         
         
         
-        //dinamik şəkildə şəkilləri yerləşdirmək üçün
+         //dinamik şəkildə şəkilləri yerləşdirmək üçün
         let count = 0;
         for( let forRow = 0; forRow < 2 ;forRow++){
             

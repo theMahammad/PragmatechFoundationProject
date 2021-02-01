@@ -1,0 +1,96 @@
+/*Design of top div*/
+.top {
+  width: 100%;
+  height: 130px;
+}
+
+.container {
+  height: 100%;
+  margin: 0 !important;
+}
+
+.contact {
+  width: 400px;
+  height: 50%;
+  display: flex !important;
+}
+.contact .contact-item {
+  display: flex;
+  margin-right: 20px;
+  height: 70px;
+}
+.contact .contact-item .contact-item-icon {
+  align-self: center;
+  margin-right: 2px;
+}
+.contact .contact-item:first-child i {
+  padding: 9px;
+  padding-left: 10px;
+  font-size: 1.5rem;
+}
+.contact .contact-item i {
+  font-size: 1.4rem;
+  color: #fff;
+  padding: 8px;
+  background-color: #010101;
+  border: 3px solid #9a9a9a;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+}
+.contact .contact-item-text {
+  color: gray;
+  font-size: 1rem;
+}
+
+#social-media i {
+  font-size: 1.9rem;
+  color: lightgray;
+  padding: 8px;
+  transition: all 0.3s linear;
+}
+#social-media i:hover {
+  color: orange;
+}
+
+/*Design of Navigation Bar*/
+.nav {
+  width: 1000px;
+  margin: 10px auto -30px;
+  background-color: #F16121;
+  display: flex;
+  justify-content: center;
+  border-radius: 50px;
+  padding: 15px;
+  position: sticky;
+  top: 0px;
+}
+.nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.nav ul li {
+  display: inline-block;
+}
+.nav ul li:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+.nav ul li a {
+  padding: 5px;
+  color: white;
+  text-decoration: none;
+  font-family: "Comfortaa";
+  font-size: 20px;
+}
+
+.introduction {
+  width: 100%;
+  height: 750px;
+  background-color: red;
+}
+
+/*# sourceMappingURL=style.css.map */
