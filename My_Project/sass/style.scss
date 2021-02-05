@@ -11,7 +11,8 @@
     padding: 0;
     list-style: none;
 }
-@mixin classic-border($color){
+
+@mixin classic-border($color) {
     border: 1px solid $color;
 }
 
@@ -21,26 +22,30 @@ $font-antonio: "Antonio";
 $font-comfortaa : "Comfortaa";
 $dark-gray : darken(gray, 50%);
 
-html{
+html {
     font-size: 10px;
 }
+
 .show {
-  opacity: 1;
+    opacity: 1;
 }
+
 .hide {
-  opacity: 0;
-  transition: opacity 400ms;
+    opacity: 0;
+    transition: opacity 400ms;
 }
+
 /*Design of top div*/
 .top {
 
     width: 100%;
     height: 130px;
 
-    
+
 
 }
-.brand-logo{
+
+.brand-logo {
     width: 300px;
     object-fit: cover;
 }
@@ -121,9 +126,9 @@ html{
 .nav {
     width: 1000px;
     margin: 10px auto -30px;
-    background-color: rgba(255,255,255,0.7);
+    background-color: rgba(255, 255, 255, 0.7);
     @include classic-border(#F16121);
-    
+
     display: flex;
     justify-content: center;
     border-radius: 50px;
@@ -143,7 +148,7 @@ html{
             display: inline-block;
 
             &:hover {
-                background-color:  rgb(241, 97, 33,0.3);
+                background-color: rgb(241, 97, 33, 0.3);
                 border-radius: 5px;
             }
 
@@ -159,87 +164,101 @@ html{
     }
 }
 
-.content-slider {
-    overflow: hidden;
-    position: relative;
-     min-width: 1300px;
-    
-    .slider-container{
-            width: 100%;
-          background-color: aliceblue;
+/*Design of slider*/
+
+
+    .slider-container {
+        width: 100%;
+        position: relative;
 
         height: 750px;
-   
-   
-        .slider-item{
+
+
+        .slider-item {
             width: 100%;
             height: 100%;
-            display: flex;
+               display: flex;
             justify-content: center;
-            align-items: center;
+            align-content: center;
+           
+            position:relative;
             
-            margin: 0 auto;
-            background-image:  linear-gradient(rgba(235, 1, 165,0.5), #d13531),url(../img/header.jpg); 
-          
-            
-            .slider-item-list{
-                
+            img{
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .slider-item-list {
+
                 @include reset-list;
                 color: white;
                 font-size: 3rem !important;
-                &-item{
+                position: absolute;
+                top: 65px;
+                margin-left: auto;
+                margin-right: auto;
+               
+                
+
+                &-item {
                     display: flex;
                     justify-content: center;
-                    
-                    h4{
+
+                    h4 {
                         font-size: 6rem;
-                    } 
-                    .logo{
+                    }
+
+                    .logo {
                         text-align: center;
                         max-width: fit-content;
-                        &-icon{
-                        width: 300px;
-                        img{
-                            width: 100%;
+
+                        &-icon {
+                            width: 300px;
+
+                            img {
+                                width: 100%;
+                            }
                         }
+
+                        &-text {
+                            font-family: "Artful Beauty";
+                            font-size: 7rem;
+                            position: relative;
+                            bottom: 20px;
+
+                        }
+
                     }
-                         &-text{
-                        font-family: "Artful Beauty";
-                        font-size: 7rem;
-                             position: relative;
-                             bottom: 20px;
-                       
-                    }
-                    
-                    }
-                   
-                    .btn{
+
+                    .btn {
                         font-size: 3rem;
                         text-align: center;
                         border-radius: 30px;
                         background-color: transparent;
                         transition: all 0.3s linear;
-                        &:hover{
+
+                        &:hover {
                             background-color: chartreuse;
                         }
-                        
-                        
-                            
+
+
+
                     }
-                    
-                
+
+
                 }
             }
-            
-          
-        
-    
-   
+
+
+
+
+
         }
-    
-        
-   
-   
-}
-}
+
+
+
+
+    }
+
 

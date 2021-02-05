@@ -106,63 +106,67 @@ html {
   font-size: 20px;
 }
 
-.content-slider {
-  overflow: hidden;
-  position: relative;
-  min-width: 1300px;
-}
-.content-slider .slider-container {
+/*Design of slider*/
+.slider-container {
   width: 100%;
-  background-color: aliceblue;
+  position: relative;
   height: 750px;
 }
-.content-slider .slider-container .slider-item {
+.slider-container .slider-item {
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
-  margin: 0 auto;
-  background-image: linear-gradient(rgba(235, 1, 165, 0.5), #d13531), url(../img/header.jpg);
+  align-content: center;
+  position: relative;
 }
-.content-slider .slider-container .slider-item .slider-item-list {
+.slider-container .slider-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.slider-container .slider-item .slider-item-list {
   margin: 0;
   padding: 0;
   list-style: none;
   color: white;
   font-size: 3rem !important;
+  position: absolute;
+  top: 65px;
+  margin-left: auto;
+  margin-right: auto;
 }
-.content-slider .slider-container .slider-item .slider-item-list-item {
+.slider-container .slider-item .slider-item-list-item {
   display: flex;
   justify-content: center;
 }
-.content-slider .slider-container .slider-item .slider-item-list-item h4 {
+.slider-container .slider-item .slider-item-list-item h4 {
   font-size: 6rem;
 }
-.content-slider .slider-container .slider-item .slider-item-list-item .logo {
+.slider-container .slider-item .slider-item-list-item .logo {
   text-align: center;
   max-width: fit-content;
 }
-.content-slider .slider-container .slider-item .slider-item-list-item .logo-icon {
+.slider-container .slider-item .slider-item-list-item .logo-icon {
   width: 300px;
 }
-.content-slider .slider-container .slider-item .slider-item-list-item .logo-icon img {
+.slider-container .slider-item .slider-item-list-item .logo-icon img {
   width: 100%;
 }
-.content-slider .slider-container .slider-item .slider-item-list-item .logo-text {
+.slider-container .slider-item .slider-item-list-item .logo-text {
   font-family: "Artful Beauty";
   font-size: 7rem;
   position: relative;
   bottom: 20px;
 }
-.content-slider .slider-container .slider-item .slider-item-list-item .btn {
+.slider-container .slider-item .slider-item-list-item .btn {
   font-size: 3rem;
   text-align: center;
   border-radius: 30px;
   background-color: transparent;
   transition: all 0.3s linear;
 }
-.content-slider .slider-container .slider-item .slider-item-list-item .btn:hover {
+.slider-container .slider-item .slider-item-list-item .btn:hover {
   background-color: chartreuse;
 }
 
