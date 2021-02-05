@@ -12,9 +12,32 @@ $(window).scroll( function(e){
         if(scroll<=130){
 
         
-        nav.css("width" , "1000px") 
+        nav.css("width" , "1000px");
         nav.css("border-radius","50px")  
     }
 
     
 })
+
+
+
+var listItem = $('.slider-item-list > li')
+function display(arg, arr) {
+  $(arg).html(arr[0]);
+
+  var i = 1;
+var myVar = setInterval(function() {
+    $(arg).fadeOut(50, 'linear', function() {
+      $(arg).append(arr[i]).fadeIn(100);
+      i++;
+    });
+    if(i==3){
+        clearInterval(myVar);
+    }
+    
+  }, 1000);
+    
+    
+}
+display($('.slider-item-list'), listItem);
+

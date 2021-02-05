@@ -1,3 +1,16 @@
+html {
+  font-size: 10px;
+}
+
+.show {
+  opacity: 1;
+}
+
+.hide {
+  opacity: 0;
+  transition: opacity 400ms;
+}
+
 /*Design of top div*/
 .top {
   width: 100%;
@@ -5,8 +18,7 @@
 }
 
 .brand-logo {
-  max-width: 100%;
-  height: auto;
+  width: 300px;
   object-fit: cover;
 }
 
@@ -20,6 +32,8 @@
   display: flex;
   margin-right: 20px;
   height: 70px;
+  position: relative;
+  bottom: 10px;
 }
 .contact .contact-item .contact-item-icon {
   align-self: center;
@@ -28,10 +42,10 @@
 .contact .contact-item:first-child i {
   padding: 9px;
   padding-left: 10px;
-  font-size: 1.5rem;
+  font-size: 2.4rem;
 }
 .contact .contact-item i {
-  font-size: 1.4rem;
+  font-size: 2.4rem;
   color: #fff;
   padding: 8px;
   background-color: #010101;
@@ -46,7 +60,7 @@
 }
 
 #social-media i {
-  font-size: 1.9rem;
+  font-size: 2.9rem;
   color: lightgray;
   padding: 8px;
   transition: all 0.3s linear;
@@ -59,13 +73,15 @@
 .nav {
   width: 1000px;
   margin: 10px auto -30px;
-  background-color: #F16121;
+  background-color: rgba(255, 255, 255, 0.7);
+  border: 1px solid #F16121;
   display: flex;
   justify-content: center;
   border-radius: 50px;
   padding: 15px;
   position: sticky;
   top: 0px;
+  z-index: 1;
 }
 .nav ul {
   margin: 0;
@@ -79,28 +95,75 @@
   display: inline-block;
 }
 .nav ul li:hover {
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(241, 97, 33, 0.3);
+  border-radius: 5px;
 }
 .nav ul li a {
   padding: 5px;
-  color: white;
+  color: #F16121;
   text-decoration: none;
   font-family: "Comfortaa";
   font-size: 20px;
 }
 
-.intro {
-  width: 100%;
-  height: 750px;
-  background-color: red;
+.content-slider {
+  overflow: hidden;
+  position: relative;
+  min-width: 1300px;
 }
-.intro .header {
+.content-slider .slider-container {
+  width: 100%;
+  background-color: aliceblue;
+  height: 750px;
+}
+.content-slider .slider-container .slider-item {
   width: 100%;
   height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  background-image: linear-gradient(rgba(235, 1, 165, 0.5), #d13531), url(../img/header.jpg);
 }
-.intro .header img {
-  max-width: 100%;
-  height: auto;
+.content-slider .slider-container .slider-item .slider-item-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: white;
+  font-size: 3rem !important;
+}
+.content-slider .slider-container .slider-item .slider-item-list-item {
+  display: flex;
+  justify-content: center;
+}
+.content-slider .slider-container .slider-item .slider-item-list-item h4 {
+  font-size: 6rem;
+}
+.content-slider .slider-container .slider-item .slider-item-list-item .logo {
+  text-align: center;
+  max-width: fit-content;
+}
+.content-slider .slider-container .slider-item .slider-item-list-item .logo-icon {
+  width: 300px;
+}
+.content-slider .slider-container .slider-item .slider-item-list-item .logo-icon img {
+  width: 100%;
+}
+.content-slider .slider-container .slider-item .slider-item-list-item .logo-text {
+  font-family: "Artful Beauty";
+  font-size: 7rem;
+  position: relative;
+  bottom: 20px;
+}
+.content-slider .slider-container .slider-item .slider-item-list-item .btn {
+  font-size: 3rem;
+  text-align: center;
+  border-radius: 30px;
+  background-color: transparent;
+  transition: all 0.3s linear;
+}
+.content-slider .slider-container .slider-item .slider-item-list-item .btn:hover {
+  background-color: chartreuse;
 }
 
 /*# sourceMappingURL=style.css.map */
