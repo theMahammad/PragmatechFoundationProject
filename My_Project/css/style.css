@@ -58,15 +58,26 @@
   align-items: flex-start;
   justify-content: center;
   margin: 0;
-  min-height: 100vh;
+  height: 100vh;
   background-color: #fff;
   overflow: hidden;
   position: fixed;
   min-width: 100vw;
   top: 0;
   z-index: 1000;
+  animation: disnone 2s linear;
+  animation-delay: 20s;
+  animation-fill-mode: forwards;
 }
 
+@keyframes disnone {
+  from {
+    height: 100vh;
+  }
+  to {
+    height: 0;
+  }
+}
 #container {
   position: relative;
   transform: scale(0.725);
@@ -307,6 +318,61 @@ section.header {
 }
 
 /*Design of slider*/
+.intro {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.8)), url(../img/header.jpg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 860px;
+  color: white;
+}
+.intro-item-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  width: 700px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.intro-item-list-item:first-child {
+  text-align: center;
+}
+.intro-item-list-item:first-child .logo-icon {
+  position: relative;
+  top: 30px;
+}
+.intro-item-list-item:first-child .logo-text {
+  font-family: "Artful Beauty";
+  color: white;
+  font-size: 7rem;
+}
+.intro-item-list h3 {
+  font-size: 5rem !important;
+}
+.intro-item-list p {
+  width: 500px;
+  font-size: 3rem;
+  text-align: center;
+}
+.intro-item-list-item:nth-child(4) {
+  display: flex;
+}
+.intro-item-list-item:nth-child(4) a {
+  --color: #ffa260;
+  --hover: #e5ff60;
+  margin: 10px;
+  font-size: 4rem;
+  background-color: transparent;
+  transition: all 0.4s linear;
+}
+.intro-item-list-item:nth-child(4) a:hover, .intro-item-list-item:nth-child(4) a:focus {
+  background-color: var(--hover);
+  box-shadow: 0.5em 0.5em 0.5em -0.4em var(--hover);
+  transform: translateY(-0.25em);
+  color: black;
+}
+
 .restaurants {
   width: 100%;
   height: 800px;
@@ -324,6 +390,38 @@ section.header {
   color: white;
   text-align: center;
 }
+.intro-item-list-item:nth-child(1) {
+  opacity: 0;
+  animation-name: fadeIn;
+  animation-duration: 2s;
+  animation-delay: 9s;
+  animation-fill-mode: forwards;
+}
+
+.intro-item-list-item:nth-child(2) {
+  opacity: 0;
+  animation-name: fadeIn;
+  animation-duration: 2s;
+  animation-delay: 10s;
+  animation-fill-mode: forwards;
+}
+
+.intro-item-list-item:nth-child(3) {
+  opacity: 0;
+  animation-name: fadeIn;
+  animation-duration: 2s;
+  animation-delay: 11s;
+  animation-fill-mode: forwards;
+}
+
+.intro-item-list-item:nth-child(4) {
+  opacity: 0;
+  animation-name: fadeIn;
+  animation-duration: 2s;
+  animation-delay: 12s;
+  animation-fill-mode: forwards;
+}
+
 /*Design of footer*/
 .footer {
   background-color: #433E3D;

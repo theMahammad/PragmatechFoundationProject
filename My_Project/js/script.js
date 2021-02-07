@@ -23,8 +23,7 @@ $(window).scroll(function (e) {
 let images= ["img/header.jpg","img/header-2.jpg"];
 let slides = $('.slider-item img');
 
-let prevArrow = document.querySelector('.prev-arrow');
-let nxtArrow = $('.next-arrow');
+
 
 
 

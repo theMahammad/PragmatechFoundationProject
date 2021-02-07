@@ -71,17 +71,24 @@ $white: #fff;
   align-items: flex-start;
   justify-content: center;
   margin: 0;
-  min-height: 100vh;
-background-color: $white;
+   
+  height: 100vh;
+    background-color: $white;
   overflow: hidden;
     position: fixed;
     min-width: 100vw;
     top: 0;
     z-index: 1000;
-
+  animation: disnone 2s linear;
+    animation-delay: 20s;
+    animation-fill-mode: forwards;
     
       
 
+}
+@keyframes disnone{
+    from{height: 100vh;}
+    to{height:0 ;}
 }
 #container {
   position: relative;
@@ -383,111 +390,72 @@ section.header{
 }
 
 /*Design of slider*/
-//.content-slider {
-//    overflow: hidden;
-//    height: 750px;
-//
-//
-//    .slider-container {
-//        width: 2800px;
-//        display: flex;
-//        height: 100%;
-//        position: relative;
-//
-//
-//        .slider-item {
-//            width: 100vw;
-//
-//            height: 100%;
-//            display: flex;
-//            justify-content: center;
-//            align-content: center;
-//
-//
-//
-//
-//            img {
-//                width: 100%;
-//
-//                object-fit: cover;
-//            }
-//
-//            .slider-item-list {
-//
-//                @include reset-list;
-//                color: white;
-//                font-size: 3rem !important;
-//                position: absolute;
-//                top: 65px;
-//                margin-left: auto;
-//                margin-right: auto;
-//
-//
-//
-//                &-item {
-//                    display: flex;
-//                    justify-content: center;
-//
-//                    p {
-//                        width: 800px;
-//                        text-align: center;
-//                    }
-//
-//                    h4 {
-//                        font-size: 6rem;
-//                    }
-//
-//                    .logo {
-//                        text-align: center;
-//                        max-width: fit-content;
-//
-//                        &-icon {
-//                            width: 300px;
-//
-//                            img {
-//                                width: 100%;
-//                            }
-//                        }
-//
-//                        &-text {
-//                            font-family: "Artful Beauty";
-//                            font-size: 7rem;
-//                            position: relative;
-//                            bottom: 20px;
-//
-//                        }
-//
-//                    }
-//
-//                    .btn {
-//                        font-size: 3rem;
-//                        text-align: center;
-//                        border-radius: 30px;
-//                        background-color: transparent;
-//                        transition: all 0.3s linear;
-//
-//                        &:hover {
-//                            background-color: chartreuse;
-//                        }
-//
-//
-//
-//                    }
-//
-//
-//                }
-//            }
-//
-//
-//
-//
-//
-//        }
-//
-//
-//
-//
-//    }
+.intro {
+
+   background-image:linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.8)),
+        url(../img/header.jpg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 860px;
+    color: white;
+    &-item-list{
+        @include reset-list;
+        width: 700px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        &-item:first-child{
+         text-align: center;
+            .logo{
+                &-icon{
+                    position: relative;
+                    top: 30px;
+                }
+                &-text{
+                    font-family: "Artful Beauty";
+                    color: white;
+                    font-size: 7rem;
+                }
+            }
+        }
+        
+        h3{
+            font-size: 5rem !important;
+        }
+        
+        p{
+            width: 500px;
+            font-size: 3rem;
+            text-align: center;
+        }
+        &-item:nth-child(4){
+            display: flex;  
+         
+            a{ 
+              --color: #ffa260;
+              --hover: #e5ff60;
+
+
+                  margin: 10px;
+                font-size: 4rem;
+                background-color: transparent;
+             
+                transition: all 0.4s linear;
+                &:hover,&:focus{
+                    background-color: var(--hover);
+  box-shadow: 0.5em 0.5em 0.5em -0.4em var(--hover);
+  transform: translateY(-0.25em);
+                    
+                    color: black;
+}
+
+                }
+            }
+        }
+        
+    }
+
 
 .restaurants{
     width: 100%;
@@ -514,6 +482,18 @@ section.header{
     }
     
 }
+
+
+@for $i from 1 through 4 {
+    .intro-item-list-item:nth-child(#{$i}){
+        opacity: 0;
+        animation-name: fadeIn;
+        animation-duration: 2s;
+        $i:$i+1;
+        animation-delay:#{$i+7}s;
+        animation-fill-mode: forwards;
+    }
+} 
 
 /*Design of footer*/
 .footer{
