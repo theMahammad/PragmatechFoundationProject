@@ -384,7 +384,7 @@ section.header {
   opacity: 0;
   animation-name: fadeIn;
   animation-duration: 2s;
-  animation-delay: 9s;
+  animation-delay: 8s;
   animation-fill-mode: forwards;
 }
 
@@ -392,7 +392,7 @@ section.header {
   opacity: 0;
   animation-name: fadeIn;
   animation-duration: 2s;
-  animation-delay: 10s;
+  animation-delay: 9s;
   animation-fill-mode: forwards;
 }
 
@@ -400,7 +400,7 @@ section.header {
   opacity: 0;
   animation-name: fadeIn;
   animation-duration: 2s;
-  animation-delay: 11s;
+  animation-delay: 10s;
   animation-fill-mode: forwards;
 }
 
@@ -408,7 +408,7 @@ section.header {
   opacity: 0;
   animation-name: fadeIn;
   animation-duration: 2s;
-  animation-delay: 12s;
+  animation-delay: 11s;
   animation-fill-mode: forwards;
 }
 
@@ -419,7 +419,14 @@ section.header {
   height: 250px;
 }
 .footer .container {
-  padding: 30px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.footer .row:first-child .col-4 {
+  text-align: center;
 }
 .footer .col-4 {
   color: white;
@@ -441,6 +448,8 @@ section.header {
   background: #efefef;
   border: 0;
   border-radius: 3px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
   outline: 0;
   text-indent: 65px;
   transition: all 0.3s ease-in-out;
@@ -457,7 +466,7 @@ section.header {
   left: 15px;
   padding: 13.6px 15px;
   text-shadow: 0 1px 0 rgba(19, 74, 70, 0.4);
-  background-color: #f16121 !important;
+  background-color: #333 !important;
   transition: all 0.4s ease-in-out;
   border-top-left-radius: 3px;
   border-bottom-left-radius: 3px;
@@ -472,14 +481,14 @@ section.header {
   bottom: 0;
   left: 0;
   border-radius: 3px;
-  background: #f16121;
+  background: #333;
   transform-origin: left bottom;
   transition: all 0.4s ease-in-out;
   pointer-events: none;
   z-index: -1;
 }
 .footer .gate + label:before {
-  background: rgba(3, 36, 41, 0.2);
+  background: #333;
   z-index: -1;
   right: 20%;
 }
@@ -512,15 +521,14 @@ section.header {
 }
 .footer .sub-button {
   position: relative;
-  left: 5px;
+  bottom: 1px;
+  right: 2.5px;
   color: #fff;
-  background-color: #f16121;
+  background-color: #333;
   padding: 14px 15px;
   border: none;
   border-top-right-radius: 3px;
   border-bottom-right-radius: 3px;
-  border-top-left-radius: 2px;
-  border-bottom-left-radius: 2px;
 }
 .footer .social ul {
   padding: 0;
@@ -566,6 +574,158 @@ section.header {
   color: #ffee10;
   box-shadow: 0 0 5px #f16121;
   text-shadow: 0 0 5px #f16121;
+}
+.footer .phone-number {
+  text-align: center;
+}
+.footer .phone-number-link {
+  font-size: 3rem;
+  border-radius: 5px;
+  background-color: #333;
+}
+.footer .phone-number-link::before {
+  content: "salam";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  background: #f16121;
+  transition: 0.5s;
+  transform: scale(0.9);
+  z-index: -1;
+}
+.footer .phone-number-link:hover::before {
+  transform: scale(1.1);
+  color: red;
+}
+.footer .phone-number-link:hover {
+  color: #ffee10;
+  box-shadow: 0 0 5px #f16121;
+  text-shadow: 0 0 5px #f16121;
+}
+.footer .copyright {
+  color: white;
+  text-align: center;
+  font-size: 3rem;
+}
+
+.review {
+  background-color: #100e17;
+  font-family: "Open Sans", sans-serif;
+  position: relative;
+  width: 100%;
+  height: 700px;
+}
+.review-header {
+  color: white;
+  text-align: center;
+  font-size: 3rem !important;
+  font-family: "Comfortaa";
+}
+.review .container {
+  position: absolute;
+  height: 300px;
+  width: 100%;
+  top: 60px;
+  left: calc(30% - 300px);
+  display: flex;
+  flex-wrap: wrap;
+}
+.review .card {
+  display: flex;
+  height: 280px;
+  width: 200px;
+  background-color: #17141d;
+  border-radius: 10px;
+  box-shadow: -1rem 0 3rem #000;
+  /*   margin-left: -50px; */
+  transition: 0.4s ease-out;
+  position: relative;
+  left: 0px;
+}
+.review .card:not(:first-child) {
+  margin-left: -50px;
+}
+.review .card:hover {
+  transform: translateY(-20px);
+  transition: 0.4s ease-out;
+}
+.review .card:hover ~ .card {
+  position: relative;
+  left: 50px;
+  transition: 0.4s ease-out;
+}
+.review .title {
+  color: white;
+  font-weight: 300;
+  position: absolute;
+  left: 20px;
+  top: 15px;
+}
+.review .user {
+  font-size: 2rem;
+  position: absolute;
+  top: 55px;
+  left: 10px;
+  display: flex;
+}
+.review .user-icon {
+  color: white;
+  align-self: center;
+  font-size: 3rem;
+}
+.review .user-name {
+  color: white;
+}
+.review .bar {
+  position: absolute;
+  top: 100px;
+  left: 20px;
+  height: 5px;
+  width: 150px;
+}
+.review .bar hr {
+  background-color: gray;
+}
+.review .emptybar {
+  background-color: #2e3033;
+  width: 100%;
+  height: 100%;
+}
+.review .filledbar {
+  position: absolute;
+  top: 0px;
+  z-index: 3;
+  width: 0px;
+  height: 100%;
+  background: #009ad9;
+  background: linear-gradient(90deg, #009ad9 0%, #d99300 65%, #ffba00 100%);
+  transition: 0.6s ease-out;
+}
+.review .card:hover .filledbar {
+  width: 120px;
+  transition: 0.4s ease-out;
+}
+.review .circle {
+  position: absolute;
+  top: 150px;
+  left: calc(50% - 60px);
+}
+.review .stroke {
+  stroke: white;
+  stroke-dasharray: 360;
+  stroke-dashoffset: 360;
+  transition: 0.6s ease-out;
+}
+.review svg {
+  fill: #17141d;
+  stroke-width: 2px;
+}
+.review .card:hover .stroke {
+  stroke-dashoffset: 100;
+  transition: 0.6s ease-out;
 }
 
 /*# sourceMappingURL=style.css.map */
