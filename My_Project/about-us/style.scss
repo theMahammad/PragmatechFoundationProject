@@ -1,0 +1,29 @@
+@import '../general-Sass/footer';
+@import '../general-Sass/header';
+@import '../general-Sass/variables';
+@import '../general-Sass/scrollbar';
+html{
+ font-size: 10px;
+}
+
+.about-us{
+    .container{
+        box-shadow: 0 0  2px 0;
+        width: 100%;
+        padding: 25px;
+        height: fit-content;
+        background-color: white;
+    }
+    h2{
+        text-align: center;
+        
+      
+        border-bottom:2px groove $orange;
+       
+        font-size: 3rem !important;
+    }
+    p{
+        font-size: 2rem !important;
+    }
+    
+}

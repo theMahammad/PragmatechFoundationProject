@@ -1,0 +1,22 @@
+$gray : gray;
+$orange : rgb(241, 97, 33);
+$font-antonio: "Antonio";
+$font-comfortaa : "Comfortaa";
+$dark-gray : darken(gray, 50%);
+$black: #000;
+$white: #fff;
+@mixin for-circle($width) {
+    width: $width;
+    height: $width;
+    border-radius: 50%
+}
+
+@mixin reset-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+@mixin classic-border($color) {
+    border: 1px solid $color;
+}

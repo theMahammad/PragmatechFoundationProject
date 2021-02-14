@@ -1,0 +1,151 @@
+@import 'variables';
+*{
+    box-sizing: border-box !important;
+}
+.top {
+
+    width: 100%;
+    height: 130px;
+
+
+
+}
+.brand-logo {
+    width: 300px;
+    object-fit: cover;
+}
+
+
+@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro');
+
+.top-item:nth-child(2) {
+
+
+
+
+    span {
+        display: inline-block;
+
+        white-space: nowrap;
+        overflow: hidden;
+        font-family: 'Artful Beauty', monospace;
+        font-size: 5rem;
+        color: black;
+        margin: 0 auto;
+    }
+
+    /* Animation */
+    span {
+        animation: animated-text 3s steps(29, end) 1s 1 normal both;
+    }
+
+    /* text animation */
+
+    @keyframes animated-text {
+        from {
+            width: 0;
+        }
+
+        to {
+            width: 400px;
+        }
+    }
+
+    /* cursor animations */
+
+
+}
+
+
+
+
+
+
+#social-media {
+    display: flex;
+    justify-content: space-between;
+    width: 200px;
+    a{
+        width: 40px;
+    
+    i {
+        
+        font-size: 2.7rem;
+        background-color:$orange;
+        border-radius: 10px;
+        color: white;
+        padding: 12px;
+        transition: all 0.3s linear;
+        
+        
+        &:hover {
+            color: $orange;
+            background-color: transparent;
+            transform: scale(1.5)
+           
+        }
+    }
+    &:nth-child(2) i{
+       font-size: 2.8rem
+    }
+}
+}
+.active{
+    
+    @include classic-border(white);
+    border-radius: 10px;
+    color: $black !important;
+    border-top: none;
+    border-bottom: none;
+}
+.nav {
+    width: 1000px;
+    margin: 10px auto -30px;
+    background-color: $orange;
+    @include classic-border(#F16121);
+
+    display: flex;
+    justify-content: center;
+    border-radius: 50px;
+    padding: 15px;
+    position: sticky;
+    top: 0px;
+    z-index: 1;
+
+
+    ul {
+        @include reset-list;
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+
+        li {
+            display: inline-block;
+            transition: all 0.2s linear;
+            &:hover {
+                transform: rotate(2deg);
+  
+            }
+
+            a {
+                padding: 5px;
+                color: white;
+                text-decoration: none;
+                font-family: $font-comfortaa;
+                font-size: 20px;
+                transition: all 0.2s linear;
+                &:hover{
+                    @include classic-border(white);
+                    border-radius: 10px;
+                    color: $black !important;
+                    border-top: none;
+                    border-bottom: none;
+
+                  
+                }
+                
+
+            }
+        }
+    }
+}
