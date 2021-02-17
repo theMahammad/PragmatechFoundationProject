@@ -356,8 +356,8 @@ body {
 }
 
 .top-item:nth-child(2) span {
-  -webkit-animation: animated-text 2s steps(29, end) 3s 1 normal both;
-          animation: animated-text 2s steps(29, end) 3s 1 normal both;
+  -webkit-animation: animated-text 2s steps(29, end) 2s 1 normal both;
+          animation: animated-text 2s steps(29, end) 2s 1 normal both;
 }
 
 @-webkit-keyframes animated-text {
@@ -433,7 +433,7 @@ body {
   position: -webkit-sticky;
   position: sticky;
   top: 0px;
-  z-index: 1;
+  z-index: 100;
 }
 
 .nav ul {
@@ -476,6 +476,11 @@ body {
   color: #000 !important;
   border-top: none;
   border-bottom: none;
+}
+
+.top-item:nth-child(2) span {
+  -webkit-animation: animated-text 2s steps(29, end) 6s 1 normal both;
+          animation: animated-text 2s steps(29, end) 6s 1 normal both;
 }
 
 /*Design of Navigation Bar*/

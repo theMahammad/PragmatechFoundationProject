@@ -64,7 +64,7 @@ body{
 
     /* Animation */
     span {
-        animation: animated-text 2s steps(29, end) 3s 1 normal both;
+        animation: animated-text 2s steps(29, end) 2s 1 normal both;
     }
 
     /* text animation */
@@ -136,7 +136,7 @@ body{
     padding: 15px;
     position: sticky;
     top: 0px;
-    z-index: 1;
+    z-index: 100;
 
 
     ul {

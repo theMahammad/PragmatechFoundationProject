@@ -330,8 +330,8 @@ body {
 }
 
 .top-item:nth-child(2) span {
-  -webkit-animation: animated-text 2s steps(29, end) 3s 1 normal both;
-          animation: animated-text 2s steps(29, end) 3s 1 normal both;
+  -webkit-animation: animated-text 2s steps(29, end) 2s 1 normal both;
+          animation: animated-text 2s steps(29, end) 2s 1 normal both;
 }
 
 @-webkit-keyframes animated-text {
@@ -407,7 +407,7 @@ body {
   position: -webkit-sticky;
   position: sticky;
   top: 0px;
-  z-index: 1;
+  z-index: 100;
 }
 
 .nav ul {
@@ -500,5 +500,144 @@ html {
 
 .about-us p {
   font-size: 2rem !important;
+}
+
+/*TODO: clean it all up, finish flex, add aesthetics, icons, redefine to be relative to vh-vw, maybe rework v2 variant using scss and frames and real transitions? */
+.infocardContainer * {
+  font-family: 'Fira Sans Condensed', sans-serif;
+  font-weight: 300;
+}
+
+h2 {
+  font-weight: 600;
+  font-style: italic;
+  font-family: "Fira Sans Condensed", sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:visited {
+  color: #555566;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.infocardContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 200px;
+  width: 200px;
+  border-radius: 100px;
+  background: #f16121;
+  -webkit-transition: all 500ms ease-in;
+  transition: all 500ms ease-in;
+  -webkit-transition-delay: 1s;
+          transition-delay: 1s;
+  margin: auto;
+  margin-top: 100px;
+  --margin-top: 100px;
+}
+
+.infocardContainer:hover {
+  width: 500px;
+  border-radius: 100px 10px 100px 100px;
+  -webkit-transition: all 1s ease-out;
+  transition: all 1s ease-out;
+}
+
+.infocardContainer div {
+  -ms-flex-negative: 1;
+      flex-shrink: 1;
+  width: 100%;
+  --background-color: green;
+}
+
+.infocardContainer div * {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  --flex: inherit;
+  overflow: hidden;
+  text-overflow: hidden;
+  --background-color: yellow;
+  color: white;
+  white-space: nowrap;
+  width: 0;
+  height: auto;
+  -webkit-transition: all 450ms ease-in;
+  transition: all 450ms ease-in;
+  -webkit-transition-delay: 1s;
+          transition-delay: 1s;
+}
+
+.infocardContainer:hover div * {
+  --background-color: purple;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  visibility: visible;
+  -webkit-transition: all 1s ease-out;
+  transition: all 1s ease-out;
+  -webkit-transition-delay: 500ms;
+          transition-delay: 500ms;
+  width: 100%;
+  height: auto;
+}
+
+.infocardContainer .main, .infocardContainer .main img {
+  --background-color: red;
+  height: 200px;
+  width: 200px;
+  padding-right: 10px;
+  border-radius: 100%;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.infocardContainer .main img {
+  height: 180px;
+  width: 180px;
+  -webkit-transform: scale(2);
+          transform: scale(2);
+  -webkit-transition: none;
+  transition: none;
+  display: float;
+  position: relative;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.infocardContainer .textbois {
+  position: relative;
+}
+
+.infocardContainer .textbois .hotlinks {
+  max-width: 60%;
+  max-height: 30px;
+  position: absolute;
+  bottom: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  border-radius: 13px;
+}
+
+.infocardContainer .textbois .hotlinks * {
+  color: white;
+  max-width: 30px;
+  --margin: 0 1px 0 1px;
+  border-radius: 25px;
+  font-size: 5rem;
+  z-index: 100;
 }
 /*# sourceMappingURL=style.css.map */

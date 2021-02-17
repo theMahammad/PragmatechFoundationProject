@@ -3,6 +3,11 @@
 @import '../general-Sass/header';
 @import '../general-Sass/variables';
 
+.top-item:nth-child(2) {
+    span{
+        animation: animated-text 2s steps(29, end) 6s 1 normal both;
+    }
+}
 /*Design of Navigation Bar*/
 
 
