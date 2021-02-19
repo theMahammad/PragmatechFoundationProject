@@ -1,3 +1,4 @@
+# https://www.hackerrank.com/challenges/py-if-else/problem
 n = int(input('Please enter a number for check '))
 
 if n % 2 == 0:

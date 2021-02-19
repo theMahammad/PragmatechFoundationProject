@@ -1,3 +1,4 @@
+# https://www.hackerrank.com/challenges/python-print/problem
 n=int(input('enter a number'))
 
 conc=""
