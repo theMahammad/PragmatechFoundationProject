@@ -13,4 +13,4 @@ def findMax2(list):
         if item>max:
             max=item
     return max
-print(findMax2(myList))        
+print(findMax2(myList))  
