@@ -38,13 +38,13 @@ def sumOfSalary(isciler):
     return sum
 print(sumOfSalary(isciler))
 # 18% vergidən sonrakı maaşlar
-def calculateSalariesAfterTax(isciler):
+def calculateSalariesAfterTax(isciler,tax):
     afterTax = []
     for salary in getSalary(isciler):
-        salary= float(salary)*0.82
+        salary= float(salary)-float(salary)*tax
         afterTax.append(salary)
     return afterTax
-print(calculateSalariesAfterTax(isciler))
+print(calculateSalariesAfterTax(isciler,0.18))
 # Maaş ortalaması ortalamadan yüksək işçiləri tapmaq
 
 def findBetterThanAverage(isciler):
