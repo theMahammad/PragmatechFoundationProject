@@ -1,0 +1,12 @@
+.container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+  }
+  
+  .container .card {
+    margin-left: 10px;
+  }
+  /*# sourceMappingURL=style.css.map */
