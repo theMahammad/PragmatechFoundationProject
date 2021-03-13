@@ -22,7 +22,7 @@
         </div>
     </nav>
     {% if allUsers %}
-    {% for user in allUsers %}
+ 
     <table class="table" >
       <thead>
         <tr>
@@ -34,21 +34,23 @@
         </tr>
       </thead>
       <tbody>
+        {% for user in allUsers %}
         <tr>
+
           <th scope="row">{{user.id}}</th>
           <td>{{user.name}}</td>
           <td>{{user.surname}}</td>
           <td>{{user.email}}</td>
           <td>
-              <a href="" title="Bütün detallar"><i class="bi bi-file-earmark"></i></a>
-              <a href="" title="Dəyişdir"><i class="bi bi-pencil-square"></i></a>
-              <a href="" title="Sil"><i class="bi bi-trash"></i></a>
+              <a href="/users/{{user.id}}" title="Bütün detallar"><i class="bi bi-file-earmark"></i></a>
+              <a href="/update/{{user.id}}" title="Dəyişdir"><i class="bi bi-pencil-square"></i></a>
+              <a href="/delete/{{user.id}}" title="Sil"><i class="bi bi-trash"></i></a>
           </td>
         </tr>
-        
+        {% endfor %}
       </tbody>
     </table>
-    {% endfor %}
+   
     {% else %}
     <h1>Hər hansı user yoxdur</h1>
      

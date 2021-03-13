@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 db = SQLAlchemy(app)
 class User(db.Model):
     id = db.Column(db.Integer,primary_key = True)
@@ -33,7 +33,28 @@ def addUser():
 def showAllUser():
     allUsers = User.query.all()
     return render_template("users.html",allUsers = allUsers)
-
-
+# Delete data from database
+@app.route("/delete/<id>")
+def delete(id):
+    userForDelete = User.query.get(id)
+    db.session.delete(userForDelete)
+    db.session.commit()
+    return redirect("/users") 
+#See Details in user Profile
+@app.route("/users/<int:id>")
+def showDetails(id):
+    userComprehensive = User.query.get(id)
+    return render_template("detail.html",user = userComprehensive)
+@app.route("/update/<int:id>",methods = ["GET","POST"])
+def updateData(id):
+    user=User.query.get(id)
+    if request.method=="POST":
+        user.name = request.form.get("name")
+        user.surname= request.form.get("surname")
+        user.email = request.form.get("mail")
+        user.details = request.form.get("details")
+        db.session.commit()
+        return redirect("/users")
+    return render_template("update.html",_user=user)
 if __name__ == '__main__':
    app.run(debug=True)
