@@ -339,11 +339,7 @@ body {
      object-fit: cover;
 }
 
-.top-item:nth-child(2) {
-  /* Animation */
-  /* text animation */
-  /* cursor animations */
-}
+
 
 .top-item:nth-child(2) span {
   display: inline-block;
