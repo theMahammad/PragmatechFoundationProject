@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}
+Dərmanlar
+{% endblock %}
+{% block activeThird %}
+active
+{% endblock %}
+{% block page %}
+{% if drugs %}
+<div class="container">
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Ad</th>
+        <th scope="col">Ölkə</th>
+        <th scope="col">Şirkət</th>
+        <th scope="col">Əməliyyatlar</th>
+      </tr>
+    </thead>
+    <tbody>
+
+        {% for drug in drugs %}
+
+      <tr>
+        <th scope="row">{{drug.id}}</th>
+        <td>{{drug.name}}</td>
+        <td>{{drug.company}}</td>
+        <td>{{drug.country}}</td>
+      <td> <a href="/update/{{drug.id}}" title="Dəyişdir"><i class="bi bi-pencil-square"></i></a>
+   <a href="/delete/{{drug.id}}" title="Sil"><i class="bi bi-trash"></i></a></td>
+           
+      </tr>
+      
+{% endfor %}
+     
+    </tbody>
+  </table>
+</div>
+{% else %}
+<div class="container">
+    <h1>Burda hər hansı bir dərman yoxdur.</h1>
+    <p><a href="/add_drug" class="btn btn-primary">Əlavə et</a></p>
+</div>
+{% endif %}
+
+{% endblock %}

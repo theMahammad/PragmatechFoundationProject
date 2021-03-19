@@ -17,7 +17,7 @@ def home():
 @app.route("/new",methods = ["GET","POST"])
 def addNewFeedback():
     if request.method=="POST":
-        _fullname = request.form.get("fullname")
+        _fullname = request.form['fullname']
         _email = request.form.get("mail")
         _restaurant_name = request.form.get("restaurant_name")
         _feedback_content = request.form.get("content")

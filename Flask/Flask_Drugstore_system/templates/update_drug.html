@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}
+Dərmanı dəyişdir
+{% endblock %}
+{% block activeThird %}
+active
+{% endblock %}
+{% block page %}
+<div class="container">
+    <form action="/update/{{currentDrug.id}}" method="POST">
+        <div class="form-group">
+            <label for="">Dərmanın adı :</label>
+        <input type="text" class="form-control" name="drug-name" placeholder="" value="{{currentDrug.name}}">
+        </div>
+        <div class="form-group">
+            <label for="">Dərmanın istehsal edildiyi ölkə : </label>
+            <input type="text" class="form-control" name="drug-country" placeholder="" value="{{currentDrug.country}}">
+        </div>
+        <div class="form-group">
+            <label for="">Dərmanı istehsal edən şirkət : </label>
+            <input type="text" class="form-control" name="drug-company" placeholder="" value="{{currentDrug.company}}">
+        </div>
+        <div class="form-group">
+            <label for="">Dərmanın xüsusiyyətlərini yazın</label>
+            <textarea type="text" class="form-control" name="drug-specifications" >{{currentDrug.specifications}}</textarea>
+        </div>
+        <div class="form-group">
+        <button class="form-control btn btn-primary btn-block" type="submit" >Daxil et</button>  
+        </div>
+
+      
+        </form>
+</div>
+   
+
+
+
+{% endblock %}

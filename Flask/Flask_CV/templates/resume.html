@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+{% block title %}
+User adı
+{% endblock %}
+{% block externalCSS %}
+<link rel="stylesheet" href="../static/css/resume.css">
+<style>
+*{
+    font-size: 15px !important;
+}
+.resume-img-box{
+    height: 200px !important;
+    text-align: center;
+   
+}
+.resume-img{
+   height: 100% !important;
+   border-radius: 50%;
+}
+</style>
+{% endblock %}
+{% block page %}
+
+<h1>{{id}} kodlu CV</h1>
+<section class="resume ">
+<div class=" row">
+    <div class="profile col-12">
+        <h1 class="" style="text-align: center;">Məhəmməd Sadıqzadə</h1>
+        <div class="resume-img-box">
+            <img src="../static/img/pp.jpg" alt="" class="resume-img">
+        </div>
+    </div>
+        
+        <div class="contact col-3">
+            <h4>Əlaqə</h4>
+            <table class="table">
+               
+                <tbody>
+                 
+                  <tr >
+                    <th scope="row">Telefon nömrəsi</th>
+                    <td>+9940503303455</td>
+                  </tr>
+                  <tr >
+                    <th scope="row">Ünvan</th>
+                    <td>Lənkəran şəhəri,Şirəli Axundov küçəsi,22</td>
+                  </tr>
+                  <tr >
+                    <th scope="row">Elekton ünvan</th>
+                    <td>mehemmedsadigzade@gmail.com</td>
+                  </tr>
+                 
+                </tbody>
+            </table>
+        </div>  
+        <div class="education col-9">
+            <h4>Təhsil</h4>
+            <table class="table">
+                <thead>
+                  
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">AD</th>
+                    <td> Xüsusiyyət</td>
+                  </tr>
+                  <tr >
+                    <th scope="row">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto, optio.</th>
+                    <td> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aperiam vero provident iure mollitia fugiat? Amet esse fugiat, unde odio adipisci iusto eum, perspiciatis quaerat quod magnam culpa, quae numquam totam. Quos voluptatibus corrupti perferendis illum, sunt facilis, optio ipsum molestiae ut deserunt recusandae blanditiis dolor magni commodi vero ea nostrum.</td>
+                  </tr>
+                 
+                </tbody>
+            </table>
+        </div>
+    
+
+    <div class="skills col-3">
+        <h4>Bacarıqlar</h4>
+        <table class="table">
+           
+            <tbody>
+             
+              <tr >
+                <th scope="row">HTML</th>
+                <td>5</td>
+              </tr>
+             
+            </tbody>
+        </table>
+    </div>  
+    <div class="experience col-9">
+        <h4>Təcrübə</h4>
+        <table class="table">
+            <thead>
+              
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">AD</th>
+                <td> Xüsusiyyət</td>
+              </tr>
+              <tr >
+                <th scope="row">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto, optio.</th>
+                <td> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aperiam vero provident iure mollitia fugiat? Amet esse fugiat, unde odio adipisci iusto eum, perspiciatis quaerat quod magnam culpa, quae numquam totam. Quos voluptatibus corrupti perferendis illum, sunt facilis, optio ipsum molestiae ut deserunt recusandae blanditiis dolor magni commodi vero ea nostrum.</td>
+              </tr>
+             
+            </tbody>
+        </table>
+    </div>
+</div>    
+    
+</section>
+{% endblock %}

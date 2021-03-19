@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+{% block title %}
+CV yarat
+{% endblock %}
+{% block activeSecond %}
+active
+{% endblock activeSecond %}
+{% block page %}
+<h1 style="text-align: center;">CV düzəltməyə xoş gəldiniz!</h1>
+<form action="/add_resume" class="container">
+<fieldset class="form-control profile">
+    <legend ><b>Profil</b></legend>
+    <label for="">Ad</label>
+    <input type="text" class="form-control">
+    <label for="">Soyad</label>
+    <input type="text" class="form-control">
+    <label for="">Telefon nömrəsi</label>
+    <input type="text" class="form-control">
+    <label for="">Yaş</label>
+    <input type="number" class="form-control">
+    <label for="">Ev ünvanı</label>
+    <input type="text" class="form-control">
+   
+</fieldset>
+<fieldset class="form-control education">
+    <legend><b>Təhsil</b></legend>
+    <label for="">Dərəcə</label>
+    <select name="edu-degree" class="form-control edu-degree" id="">
+        <option value="1">Bakalavr</option>
+        <option value="2">Magistratura</option>
+        <option value="3">Doktorantura</option>
+    </select>
+    <label for="">Universitet/Lisey</label>
+    <input type="text"   class="form-control edu-place">
+    <label for="">İl aralığı</label>
+    <input type="text"  class="form-control edu-years">
+    <button type="button" class=" btn btn-primary  edus">Əlavə et</button>
+    <hr>
+    <label for="">Təhsil : </label>
+    <textarea name="educations" id="educ" class = "form-control" readonly cols="30" rows="10"></textarea>
+    
+   
+</fieldset>
+<fieldset class="form-control skills">
+    <legend><b>Bacarıqlar</b></legend>
+    <label for="">Bacarığın adını daxil edin</label>
+    <input type="text" class = "form-control add-skill" name = "skill" >
+    <button type="button" class=" btn btn-primary   addToSkillsArea">Əlavə et</button>
+    <hr>
+    <label for="">Bacarıqlar : </label>
+    <textarea name="all-skills" id="all-skills" class = "form-control" readonly cols="30" rows="10"></textarea>
+   
+
+</fieldset>
+
+
+
+
+<fieldset class="form-control experience">
+    <legend><b>İş təcrübəsi</b></legend>
+    <label for="">Çalışdığınız mövqeni daxil edin</label>
+    <input type="text" class = "form-control position" name = "position" >
+    <label for="">Çalışdığınız şirkətin/qrupun adını daxil edin</label>
+    <input type="text" class = "form-control comp-name" name = "company" >
+    <label for="">Çalışdığınız illəri daxil edin</label>
+    <input type="text" class = "form-control years" name = "years" >
+    <button type="button" class=" btn btn-primary   addToExperienceArea">Əlavə et</button>
+    <hr>
+    <label for="">İş təcrübəsi : </label>
+    <textarea name="all-experience" id="all-experience" class = "form-control" readonly cols="30" rows="10"></textarea>
+   
+
+</fieldset>
+<button type="submit" class="form-control btn btn-primary btn-block"> CV-ni yarat</button>
+</form>
+<script>
+    // ADD EDUCATION-START
+    document.querySelector(".edus").addEventListener('click',function(){
+        area = document.querySelector("#educ")
+        select =  document.querySelector('.edu-degree')
+        selText = select.options[select.selectedIndex].text;
+        eduName = document.querySelector(".edu-place").value
+        eduYears = document.querySelector(".edu-years").value
+        tempText = `"${selText}" "${eduName}"  "${eduYears}"\n`
+        area.append(tempText)
+        select.options.selectedIndex=0
+        document.querySelector(".edu-place").value = ""
+        document.querySelector(".edu-years").value= ""
+       
+        // ADD EDUCATION - END 
+        /*********************************************/
+        // ADD SKILL - START
+       
+
+    })
+    document.querySelector('.addToSkillsArea').addEventListener('click',function(){
+            skill = document.querySelector(".add-skill").value
+            skillArea = document.querySelector("#all-skills") 
+            tempText = `${skill}\n`
+            document.querySelector(".add-skill").value = ''
+            skillArea.append(tempText)
+        })
+        // ADD SKILL - END
+        /**********************************************/
+        // ADD EXPERIENCE - START
+        document.querySelector('.addToExperienceArea').addEventListener('click',function(){
+            position = document.querySelector('.position').value
+            companyName = document.querySelector('.comp-name').value
+            years = document.querySelector('.years').value
+            tempText = `"${position}" "${companyName}" "${years}"\n`
+            experienceArea = document.querySelector("#all-experience")
+            experienceArea.append(tempText)
+            document.querySelector('.position').value = ''
+            document.querySelector('.comp-name').value = ''
+            document.querySelector('.years').value = ''
+
+
+
+
+
+        })
+
+
+
+
+
+        // ADD EXPERIENCE - END
+
+       
+</script>
+{%endblock page %}
