@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}
+<title>Restoranı dəyişdir</title>
+{% endblock %}
+{% block activeFourth %}
+active
+{% endblock %}
+{% block page %}
+<div class="container">
+    <form action="/add_restaurant/update/{{selected.id}}" method="POST" enctype="multipart/form-data">
+        <label for=""></label>
+    <input type="text" class="form-control" name="restaurant-name" placeholder="{{selected.name}}" value="{{selected.name}}">
+    <input type="file" class="form-control" name="restaurant-logo" placeholder="Restoran loqosu">
+    <button type="submit" class="btn btn-primary">Əlavə et</button>
+    </form>
+  
+    </div>
+  
+        <img src="../static/uploads/{{selected.rest_logo}}" style="width: 500px;" alt="">
+   
+{% endblock %}

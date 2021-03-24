@@ -81,7 +81,7 @@ active
         selText = select.options[select.selectedIndex].text;
         eduName = document.querySelector(".edu-place").value
         eduYears = document.querySelector(".edu-years").value
-        tempText = `"${selText}" "${eduName}"  "${eduYears}"\n`
+        tempText = `${selText}|${eduName}|${eduYears}\n`
         area.append(tempText)
         select.options.selectedIndex=0
         document.querySelector(".edu-place").value = ""
@@ -107,7 +107,7 @@ active
             position = document.querySelector('.position').value
             companyName = document.querySelector('.comp-name').value
             years = document.querySelector('.years').value
-            tempText = `"${position}" "${companyName}" "${years}"\n`
+            tempText = `${position}|${companyName}|${years}\n`
             experienceArea = document.querySelector("#all-experience")
             experienceArea.append(tempText)
             document.querySelector('.position').value = ''

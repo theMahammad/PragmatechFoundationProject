@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\PragmatechFoundationPro\Flask\CRUD_Operations(On_my_own)\env"
+VIRTUAL_ENV="C:\PragmatechFoundationPro\Flask\CRUD_Operations_On_my_own\env"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

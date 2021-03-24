@@ -18,13 +18,28 @@ active
           <input type="email" class="form-control" name="mail"  placeholder="Mail adresinizi daxil edin">
       </div>
       <div class="mb-3">
+    <select name="restaurant-name" id="" class="form-control">
+        {% for restaurant in restaurants  %}
+        <option value="{{restaurant.id}}">{{restaurant.name}}</option>
+        {% endfor %}
         
-          <input type="text" class="form-control" name="restaurant_name"  placeholder="Hansı restoran barədə fikir bildirmək istəyirsiniz?" >
-      </div>
+    </select>        
+
+    </div>
+    <div class="mb-3">
+      <label for="">5 üzərindən neçə bal verirsiniz? </label>
+      <hr>
+      <select class="form-control" name="feedback-rating" id="" >
+        {% for i in range(1,6) %}
+        <option style="text-align: center;" value="{{i}}">{{i}}</option>
+        {% endfor %}
+       
+      </select>
+        </div>
       <div class="form-group mb-3">
         
           <textarea name="content" class="form-control" placeholder="Fikrinizi yazın" cols="30" rows="10"></textarea>    
-      </div>
+      </div> 
       <div class="mb-3">
       <button type="submit" class="btn btn-primary">Bildirin</button>
       </div>

@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=C:\PragmatechFoundationPro\Flask\CRUD_Operations(On_my_own)\env
+set VIRTUAL_ENV=C:\PragmatechFoundationPro\Flask\CRUD_Operations_On_my_own\env
 
 if not defined PROMPT set PROMPT=$P$G
 

@@ -17,7 +17,6 @@ class Profile(db.Model):
 class Skills(db.Model):
     id = db.Column(db.Integer,primary_key = True)  
     name = db.Column(db.String(50))
-    star = db.Column(db.Integer)
     profile_id = db.Column(db.Integer,db.ForeignKey("profile.id"),nullable = False) 
 class Education(db.Model):
     id = db.Column(db.Integer,primary_key = True)  
@@ -36,6 +35,10 @@ def index():
     return render_template("index.html")
 @app.route("/add_resume",methods = ["GET","POST"])
 def addResume():
+    if request.method=="POST":
+        skills = request.form.get("skill").splitlines()
+        for skill in skills:
+            print(skill)
     return render_template("add_resume.html")
 @app.route("/show_resumes/<int:id>")
 def showSpecificResume(id):

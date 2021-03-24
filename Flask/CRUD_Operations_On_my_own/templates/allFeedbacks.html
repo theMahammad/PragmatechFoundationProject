@@ -16,15 +16,33 @@ active
                 <a href="/update/{{feedback.id}}" title="Dəyişdir"><i class="bi bi-pencil-square"></i></a>
                 <a href="/delete/{{feedback.id}}" title="Sil"><i class="bi bi-trash"></i></a>
             </li>
+            <li class="list-group-item">Bal : 
+              {% if feedback.rating_star %}
+              {% for star in range(1,feedback.rating_star+1) %}
+              🔹
+              {% endfor %}
+              {% endif %}
+             
+              
+            </li>
             <li class="list-group-item">ID : {{feedback.id}}</li>
             <li class="list-group-item">Ad : {{feedback.fullname}}</li>
             <li class="list-group-item">Mail : {{feedback.email}}</li>
-            <li class="list-group-item">Restoran : {{feedback.restaurant_name}}</li>
+            <li class="list-group-item">Restoran : 
+              {% if feedback.restaurant_id  %}
+              {{restaurants[feedback.restaurant_id-1].name}}
+              {% else %}
+              Restoran adı yoxdur
+              {% endif %} </li>
             <li class="list-group-item">Fikir : {{feedback.feedback_content}}</li>
           </ul>
     </div>
 </div>
   {% endfor %}
+ 
+
+  <p>{{restaurants[1].name}}</p>
+  
   
 </div>
 {% else %}
