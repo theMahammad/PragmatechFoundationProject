@@ -30,7 +30,13 @@ active
             <li class="list-group-item">Mail : {{feedback.email}}</li>
             <li class="list-group-item">Restoran : 
               {% if feedback.restaurant_id  %}
-              {{restaurants[feedback.restaurant_id-1].name}}
+                {% for restaurant in restaurants %}
+               
+               {% if feedback.restaurant_id==restaurant.id %}
+               {{restaurant.name}}
+               {% endif %} 
+                {% endfor %}
+              
               {% else %}
               Restoran adı yoxdur
               {% endif %} </li>
@@ -41,7 +47,7 @@ active
   {% endfor %}
  
 
-  <p>{{restaurants[1].name}}</p>
+  
   
   
 </div>

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}
+<title>{{selected_rest.name}}</title>
+{% endblock %}
+{% block activeFourth %}
+active
+{% endblock %}
+{% block page %}
+<div class="container">
+    <h1 style="text-align: center;"> "{{selected_rest.name}}" barədə yazılan fikirlər</h1>
+    <hr>
+    {% for post in selected_rest.feedbacks %}
+    <div class="row my-5" >
+        <div class="col-6 offset-3" >
+            <ul class="list-group">
+                <li class="list-group-item">Bal : 
+                  {% if post.rating_star %}
+                  {% for star in range(1,post.rating_star+1) %}
+                  🔹
+                  {% endfor %}
+                  {% endif %}
+                 
+                  
+                </li>
+                <li class="list-group-item">ID : {{post.id}}</li>
+                <li class="list-group-item">Ad : {{post.fullname}}</li>
+                <li class="list-group-item">Mail : {{post.email}}</li>
+                <li class="list-group-item">Restoran : 
+                  {% if post.restaurant_id  %}
+                  {{selected_rest.name}}
+                  {% else %}
+                  Restoran adı yoxdur
+                  {% endif %} </li>
+                <li class="list-group-item">Fikir : {{post.feedback_content}}</li>
+              </ul>
+        </div>
+    </div>
+    
+    {% endfor %}
+    
+
+</div>
+{% endblock %}

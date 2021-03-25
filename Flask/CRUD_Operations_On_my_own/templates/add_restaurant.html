@@ -31,12 +31,17 @@ active
                 <th scope="row">{{restaurant.id}}</th>
                 <td>{{restaurant.name}}</td>
                 <td>
+                  {% if restaurant.rest_logo %}
                   <img style="width: 50px;" src="../static/uploads/{{restaurant.rest_logo}}" alt="">
+                    {% else %}
+                    Loqo yeri
+                  {% endif %}
                 </td>
                 <td>
                 <a href="/add_restaurant/update/{{restaurant.id}}" title="Dəyişdir"><i class="bi bi-pencil-square"></i></a>
                 <a href="/add_restaurant/delete/{{restaurant.id}}" title="Sil"><i class="bi bi-trash"></i></a>
-                </td>
+                <a href="/about/{{restaurant.id}}"><i class="bi bi-info-circle"></i></a>
+              </td>
               </tr>
 
             {% endfor %}

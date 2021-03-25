@@ -92,11 +92,13 @@ def deleteFeedback(id):
 # ADD AND SHOW RESTAURANT
 @app.route("/add_restaurant",methods = ["GET","POST"])
 def addRestaurant():
+    filename = None
     restaurants = Restaurant.query.all()
     if request.method=="POST":
-        file = request.files['restaurant-logo']
-        filename = secure_filename(file.filename)
-        file.save(os.path.join(app.config['UPLOAD_PATH'],filename))
+        if request.files['restaurant-logo']:
+            file = request.files['restaurant-logo']
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_PATH'],filename))
         restaurant = Restaurant(
             name = request.form.get("restaurant-name"),
             rest_logo = filename
@@ -124,6 +126,12 @@ def deleteRestaurant(id):
     db.session.delete(selected)
     db.session.commit()
     return redirect("/add_restaurant")
+# Show feedbacks about selected restaurant
+@app.route('/about/<int:id>')
+def showFeedbacks(id):
+    selected_rest = Restaurant.query.get(id)
+    feedbacks = Feedback.query.all()
+    return render_template('aboutRestaurant.html',selected_rest = selected_rest,feedbacks = feedbacks)
 if __name__=="__main__":
     app.run(debug=True)
     
