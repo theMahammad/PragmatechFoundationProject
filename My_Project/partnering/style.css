@@ -1,9 +1,13 @@
 @import url("https://fonts.googleapis.com/css?family=Source+Code+Pro");
+.our-hr-style {
+  border: 2px dashed orange;
+  width: 50px;
+}
+
 .footer {
   background-color: #433E3D;
   width: 100%;
   height: 250px;
-  margin-top: 20px;
   position: relative;
 }
 
@@ -228,6 +232,11 @@
   font-size: 3rem;
 }
 
+.our-hr-style {
+  border: 2px dashed orange;
+  width: 50px;
+}
+
 body {
   margin: 0;
 }
@@ -383,6 +392,16 @@ body {
   color: #000 !important;
   border-top: none;
   border-bottom: none;
+}
+
+.our-hr-style {
+  border: 2px dashed orange;
+  width: 50px;
+}
+
+.our-hr-style {
+  border: 2px dashed orange;
+  width: 50px;
 }
 
 ::-webkit-scrollbar {

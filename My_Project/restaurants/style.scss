@@ -2,10 +2,9 @@
 @import '../general-Sass/header';
 @import '../general-Sass/variables';
 @import '../general-Sass/scrollbar';
-
+@import '../general-Sass/variables';
 html{
     font-size: 10px;
-
 }
 @import url('https://fonts.googleapis.com/css?family=Cardo:400i|Rubik:400,700&display=swap');
 
@@ -25,13 +24,122 @@ $bp-lg: 800px;
   box-sizing: border-box;
 }
 
-html, body {
-  height: 100%;
+
+/* FontAwesome for working BootSnippet :> */
+
+@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background-color: #108d6f;
+    border-color: #108d6f;
+    box-shadow: none;
+    outline: none;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #007b5e;
+    border-color: #007b5e;
+}
+
+section {
+    padding: 60px 0;
+}
+
+section .section-title {
+    text-align: center;
+    color: #007b5e;
+    margin-bottom: 50px;
+    text-transform: uppercase;
 }
 
 
+
+
+
+.frontside {
+    position: relative;
+    -webkit-transform: rotateY(0deg);
+    -ms-transform: rotateY(0deg);
+    z-index: 2;
+    margin-bottom: 30px;
+    
+}.count-feedbacks{
+  font-family: "Comfortaa";
+    position: absolute;
+   
+   bottom: 20%;
+   left: 40%;
+   font-size: 2rem !important;
+    i{
+      margin-left:10px ;
+      font-size: 2rem !important;
+   }
+ 
+    color: white;
+    font-size: 1rem;
+}
+
+
+
+
+.frontside .card,
+.backside .card {
+    min-height: 312px;
+    min-width: 250px;
+}
+.card{
+  background-color: $orange;
+  box-shadow: 3px 4px 3px gray;
+  font-family: "Comfortaa";
+  color: white !important;
+  button{
+    font-size: 1.5rem !important;
+  }
+}
+.btn-see-profile{
+    background-color:transparent;
+    color: white;
+    position: absolute;
+    border: 1px solid white;
+    bottom: 7%;
+    left: 30%;
+    box-shadow: 0px 0px 1px;
+    transition: all 0.2s linear;
+    &:hover{
+        
+        bottom: 10%;
+        box-shadow: 2px 3px 2px;
+    }
+
+}
+
+
+.backside .card a {
+    font-size: 18px;
+    color: #007b5e !important;
+}
+
+
+
+.frontside .card .card-body img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+}
+
 .restaurants{
+min-height: 500px;
 font-size: 16px;
+box-shadow: 0px 0px 2px ;
+padding: 30px;
+font-family: "Comfortaa";
+
+h1{
+  font-size: 4rem !important;
+}
 
 .page-content {
   display: grid;
@@ -49,186 +157,5 @@ font-size: 16px;
     grid-template-columns: repeat(4, 1fr);
   }
 }
-
-
-
-.card {  
-  position: relative;
-  display: flex;
-  align-items: flex-end;
-  overflow: hidden;
-  padding: 1em;
-  width: 100%;
-  text-align: center;
-  color: whitesmoke;
-  background-color: whitesmoke;
-  box-shadow: 0 1px 1px rgba(0,0,0,0.1), 
-    0 2px 2px rgba(0,0,0,0.1), 
-    0 4px 4px rgba(0,0,0,0.1), 
-    0 8px 8px rgba(0,0,0,0.1),
-    0 16px 16px rgba(0,0,0,0.1);
-  
-  @media (min-width: $bp-md) {
-    height: 350px;
-  }
-  
-  &:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 110%;
-    background-size: cover;
-    background-position: 0 0;
-    transition: transform calc(var(--d) * 1.5) var(--e);
-    pointer-events: none;
-  }
-  
-  &:after {
-    content: '';
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 200%;
-    pointer-events: none;
-    background-image: linear-gradient(
-      to bottom,
-      hsla(0, 0%, 0%, 0) 0%,
-      hsla(0, 0%, 0%, 0.009) 11.7%,
-      hsla(0, 0%, 0%, 0.034) 22.1%,
-      hsla(0, 0%, 0%, 0.072) 31.2%,
-      hsla(0, 0%, 0%, 0.123) 39.4%,
-      hsla(0, 0%, 0%, 0.182) 46.6%,
-      hsla(0, 0%, 0%, 0.249) 53.1%,
-      rgba(0, 0, 0, 0.281) 58.9%,
-      $orange 64.3%,
-      hsla(0, 0%, 0%, 0.468) 69.3%,
-      hsla(0, 0%, 0%, 0.540) 74.1%,
-      hsla(0, 0%, 0%, 0.607) 78.8%,
-      $orange 83.6%,
-      hsla(0, 0%, 0%, 0.721) 88.7%,
-      hsla(0, 0%, 0%, 0.762) 94.1%,
-      hsla(0, 0%, 0%, 0.790) 100%
-    );
-    transform: translateY(-50%);
-    transition: transform calc(var(--d) * 2) var(--e);
-  }
-  
-  @each $id in $imageIds {
-    $i: index($imageIds, $id);
-    
-    &:nth-child(#{$i}):before {
-      background-image: url(https://images.unsplash.com/photo-#{$id}?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ);
-    }
-  }
 }
 
-.content {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  padding: 1em;
-  transition: transform var(--d) var(--e);
-  z-index: 1;
-  
-  > * + * {
-    margin-top: 1em;
-  }
-}
-
-.title {
-  font-size: 1.3em;
-  font-weight: bold;
-  line-height: 1.2;
-  color: black;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.copy {
-  font-family: var(--font-serif);
-  font-size: 1.125em;
-  font-style: italic;
-  line-height: 1.35;
-}
-
-.btn {
-  cursor: pointer;
-  margin-top: 1.5em;
-  padding: 0.75em 1.5em;
-  font-size: 0.65em;
-  font-weight: bold;
-  letter-spacing: 0.025em;
-  text-transform: uppercase;
-  color: white;
-  background-color: black;
-  border: none;
-  
-  &:hover {
-    background-color: lighten($orange,55%);
-  }
-  
-  &:focus {
-    outline: 1px dashed yellow;
-    outline-offset: 3px;
-  }
-}
-
-@media (hover: hover) and (min-width: $bp-md) {
-  .card:after {
-    transform: translateY(0);
-  }
-  
-  .content {
-    transform: translateY(calc(100% - 4.5em));
-    
-    > *:not(.title) {
-      opacity: 0;
-      transform: translateY(1em);
-      transition:
-        transform var(--d) var(--e),
-        opacity var(--d) var(--e);
-    }
-  }
-  .btn{
-      transition: all 0.2s linear;
-  }
-  .btn:hover{
-      background-color: rgba(0,0,0,0.5);
-      @include classic-border(white);
-  }
-  
-  .card:hover,
-  .card:focus-within {
-    align-items: center;
-
-    &:before { transform: translateY(-4%); }
-    &:after { transform: translateY(-50%); }
-
-    .content {
-      transform: translateY(0);
-
-      > *:not(.title) {
-        opacity: 1;
-        transform: translateY(0);
-        transition-delay: calc(var(--d) / 8);
-      }
-    }
-  }
-  
-  .card:focus-within {
-    &:before,
-    &:after,
-    .content,
-    .content > *:not(.title) {
-      transition-duration: 0s;
-    }
-  }
-}
-}
