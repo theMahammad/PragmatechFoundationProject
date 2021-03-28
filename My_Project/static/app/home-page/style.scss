@@ -1,0 +1,744 @@
+@import '../../../../general-Sass/scrollbar';
+@import '../../../../general-Sass/footer';
+@import '../../../../general-Sass/header';
+@import '../../../../general-Sass/variables';
+
+
+.top-item:nth-child(2) {
+    span{
+        animation: animated-text 2s steps(29, end) 6s 1 normal both;
+    }
+}
+/*Design of Navigation Bar*/
+
+
+
+
+.fade-in {
+    animation-name: fadeIn;
+    animation-duration: 4s;
+    animation-timing-function: linear;
+
+}
+
+.fade-out {
+    animation: fadeOut 4s linear;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    25% {
+        opacity: 0.25;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    75% {
+        opacity: 0.75;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+
+    25% {
+        opacity: 0.75;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    75% {
+        opacity: 0.25;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400&display=swap');
+
+
+
+@mixin pseudo ($content: '') {
+    position: absolute;
+    content: $content;
+}
+
+* {
+    box-sizing: border-box;
+
+    &::before,
+    &::after {
+        box-sizing: border-box;
+    }
+}
+
+.body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 3rem;
+    line-height: 1.5;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    margin: 0;
+
+    height: 100vh;
+    background-color: $orange;
+    overflow: hidden;
+    position: fixed;
+    min-width: 100vw;
+    top: 0;
+    z-index: 1000;
+    animation: disnone 2s linear;
+    animation-delay: 20s;
+    animation-fill-mode: forwards;
+
+
+
+}
+
+@keyframes disnone {
+    from {
+        height: 100vh;
+    }
+
+    to {
+        height: 0;
+    }
+}
+
+#container {
+    position: relative;
+    transform: scale(0.725);
+    display: flex;
+
+    flex-direction: column;
+    justify-content: flex-start;
+}
+//News from partners
+.news-from-partners{
+    .news-section-header{
+        font-size: 4rem !important;
+        text-align: center;
+    }
+    height: 500px;
+
+    font-family: "Comfortaa";
+    *, *:before, *:after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      
+      body {
+        overflow: hidden;
+        font-family: Helvetica, Arial, sans-serif;
+      }
+      
+      
+      
+      
+      
+      $numOfSlides: 5;
+      $slidingAT: 1.3s;
+      $controlSize: 60px;
+      
+      .slider {
+        position: relative;
+        height: 100vh;
+      
+        &__slides {
+          z-index: 1;
+          position: relative;
+          height: 100%;
+        }
+      
+        &__control {
+          z-index: 2;
+          position: absolute;
+          top: 50%;
+          left: 5%;
+          width: $controlSize;
+          height: $controlSize;
+          margin-left: $controlSize/-2;
+          margin-top: $controlSize/-2;
+          border-radius: 50%;
+          background: #fff;
+          transition: background-color 0.3s;
+          cursor: pointer;
+      
+          &--right {
+            left: 95%;
+          }
+          
+          &:hover {
+            background-color: #2da6ff;
+          }
+      
+          &-line {
+            position: absolute;
+            left: 23px;
+            top: 50%;
+            width: 3px;
+            height: 14px;
+            transform-origin: 50% 0;
+            transform: rotate(-45deg);
+      
+            &:nth-child(2) {
+              transform: translateY(1px) rotate(-135deg);
+            }
+      
+            .slider__control--right & {
+              left: 37px;
+              transform-origin: 1px 0;
+              transform: rotate(45deg);
+      
+              &:nth-child(2) {
+                transform: translateY(1px) rotate(135deg);
+              }
+            }
+      
+            &:after {
+              content: "";
+              position: absolute;
+              left: 0;
+              top: 0;
+              width: 100%;
+              height: 100%;
+              background-color: #e2e2e2;
+              transition: background-color 0.3s;
+            }
+      
+            .slider__control:hover &:after {
+              background-color: #fff;
+            }
+      
+            .slider__control.a--rotation & {
+      
+              &:after {
+                animation: arrowLineRotation 0.49s;
+              }
+      
+              &:nth-child(1):after {
+                animation: arrowLineRotationRev 0.49s;
+              }
+            }
+          }
+        }
+      }
+      
+      @keyframes arrowLineRotation {
+        to {
+          transform: rotate(180deg);
+        }
+      }
+      
+      @keyframes arrowLineRotationRev {
+        to {
+          transform: rotate(-180deg);
+        }
+      }
+      
+      .slide {
+        overflow: hidden;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 150vmax;
+        height: 150vmax;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+        transition: clip-path 0s $slidingAT*0.7;
+        clip-path: circle($controlSize/2 at 120vw 50%);
+      
+        &.s--prev {
+          clip-path: circle($controlSize/2 at 30vw 50%);
+        }
+      
+        &.s--active {
+          z-index: 1;
+          transition: clip-path $slidingAT;
+          clip-path: circle(120vmax at 120vw 50%);
+          
+          &.s--active-prev {
+            clip-path: circle(120vmax at 30vw 50%);
+          }
+        }
+      
+        @for $i from 1 through $numOfSlides {
+          &:nth-child(#{$i}) {
+            .slide__inner {
+              background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/onepgscr-#{$i+1}.jpg');
+            }
+          }
+        }
+      
+        &__inner {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          width: 100vw;
+          height: 100vh;
+          margin-left: -50vw;
+          margin-top: -50vh;
+          background-size: cover;
+          background-position: center center;
+      
+          &:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.3);
+          }
+        }
+      
+        &__content {
+          position: absolute;
+          left: 5%;
+          top: 50%;
+          margin-left: $controlSize/-2;
+          margin-top: $controlSize*0.8;
+          max-width: 480px;
+          color: #fff;
+        }
+      
+        &__heading {
+          margin-bottom: 20px;
+          font-size: 60px;
+        }
+      
+        &__text {
+          font-size: 25px;
+      
+          a {
+            color: inherit;
+          }
+        }
+      }
+}
+
+
+
+//.divider {
+//  position: absolute;
+//  z-index: 2;
+//  top: 65px;
+//  left: 200px;
+//  width: 50px;
+//  height: 15px;
+//
+//}
+
+.loading-text {
+    position: relative;
+    font-size: 6rem;
+    font-weight: 300;
+    margin: 0;
+    white-space: nowrap;
+
+    span:nth-child(2)::before {
+        // For dot
+        @include pseudo;
+        z-index: 1;
+        top: 40px;
+        left: 115px;
+        width: 6px;
+        height: 6px;
+        background: $black;
+        border-radius: 50%;
+        animation: dotMove 1800ms cubic-bezier(0.25, 0.25, 0.75, 0.75) infinite;
+
+    }
+
+    .letter {
+        display: inline-block;
+        position: relative;
+        color: $black;
+        letter-spacing: 8px;
+
+        &:nth-child(7) {
+            // For the letter "i"
+            transform-origin: 100% 70%;
+            animation: letterStretch 1800ms cubic-bezier(0.25, 0.23, 0.73, 0.75) infinite;
+
+            &::before {
+                @include pseudo;
+                top: 15px;
+                left: 2px;
+                width: 9px;
+                height: 15px;
+
+            }
+        }
+    }
+}
+
+// For the dot
+@keyframes dotMove {
+    0% {
+        transform: rotate(180deg) translate(-205px, 30px) rotate(-180deg);
+    }
+
+    80% {
+        transform: rotate(0deg) translate(-97px, 17px);
+    }
+
+    100% {
+        transform: rotate(0deg) translate(-97px, 19px);
+
+
+
+    }
+}
+
+
+
+// For the letter "i"
+@keyframes letterStretch {
+
+    0%,
+    100% {
+        transform: scale(1, 0.35);
+        transform-origin: 100% 75%;
+    }
+
+    8%,
+    28% {
+        transform: scale(1, 2.125);
+        transform-origin: 100% 67%;
+    }
+
+    37% {
+        transform: scale(1, 0.875);
+        transform-origin: 100% 75%;
+    }
+
+    46% {
+        transform: scale(1, 1.03);
+        transform-origin: 100% 75%;
+    }
+
+    50%,
+    97% {
+        transform: scale(1);
+        transform-origin: 100% 75%;
+    }
+}
+
+// For the letter "L"
+@keyframes lineStretch {
+
+    0%,
+    45%,
+    70%,
+    100% {
+        transform: scaleY(0.125);
+    }
+
+    49% {
+        transform: scaleY(0.75);
+    }
+
+    50% {
+        transform: scaleY(0.875);
+    }
+
+    53% {
+        transform: scaleY(0.5);
+    }
+
+    60% {
+        transform: scaleY(0);
+    }
+
+    68% {
+        transform: scaleY(0.18);
+    }
+}
+
+@media(min-width: 48rem) {
+    #container {
+        transform: scale(0.725rem);
+    }
+}
+
+@media(min-width: 62rem) {
+    #container {
+        transform: scale(0.85);
+    }
+}
+
+:root {
+    --animate-duration: 2s !important;
+}
+
+html {
+    font-size: 10px;
+}
+
+.show {
+    opacity: 1;
+}
+
+.hide {
+    opacity: 0;
+    transition: opacity 400ms;
+}
+
+section.header {
+    height: 1300px;
+}
+
+/*Design of top div*/
+
+
+
+/*Design of slider*/
+.intro {
+
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.8)),
+        url(../../img/home_page/img/header.jpg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 860px;
+    color: white;
+
+    &-item-list {
+        @include reset-list;
+        width: 700px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        &-item:first-child {
+            text-align: center;
+
+            .logo {
+                &-icon {
+                    position: relative;
+                    top: 30px;
+                }
+
+                &-text {
+                    font-family: "Artful Beauty";
+                    color: white;
+                    font-size: 7rem;
+                }
+            }
+        }
+
+        h3 {
+            font-size: 5rem !important;
+        }
+
+        p {
+            width: 500px;
+            font-size: 3rem;
+            text-align: center;
+        }
+
+        &-item:nth-child(4) {
+            display: flex;
+
+            a {
+                --color: #fff;
+                --hover: rgb(241, 97, 33);
+
+
+                margin: 10px;
+                font-size: 4rem;
+                background-color: transparent;
+
+                transition: all 0.4s linear;
+
+                &:hover,
+                &:focus {
+                    background-color: var(--hover);
+                    box-shadow: 0.5em 0.5em 0.5em -0.4em var(--hover);
+                    transform: translateY(-0.25em);
+
+                    color: black;
+                }
+
+            }
+        }
+    }
+
+}
+
+/*Design of last reviews*/
+.review {
+  background-color:white;
+  font-family: 'Open Sans', sans-serif;
+    position: relative;
+    width: 100%;
+    height: 400px;
+    &-header{
+        color: $orange;
+        text-align: center;
+        font-size: 3rem !important;
+        font-family: "Comfortaa";
+    }
+
+
+.container {
+  position: absolute;
+  height: 300px;
+  width: 100%;
+  top: 60px;
+  left: calc(30% - 300px);
+  display: flex;
+  flex-wrap:wrap;
+}
+
+.card {
+  display: flex;
+  height: 280px;
+  width: 400px;
+  background-color: $orange;
+  border-radius: 10px;
+  box-shadow: -1rem 0 3rem #000;
+/*   margin-left: -50px; */
+  transition: 0.4s ease-out;
+  position: relative;
+  left: 0px;
+}
+
+.card:not(:first-child) {
+    margin-left: -50px;
+}
+
+.card:hover {
+  transform: translateY(-20px);
+  transition: 0.4s ease-out;
+}
+
+.card:hover ~ .card {
+  position: relative;
+  left: 50px;
+  transition: 0.4s ease-out;
+}
+
+.title {
+  color: white;
+  font-weight: 300;
+  position: absolute;
+  left: 20px;
+  top: 15px;
+}
+    .user{
+        width: 60%;
+        font-size: 2rem;
+        position: absolute;
+        top: 55px;
+        left: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        &-icon{
+            color: white;
+            align-self: center;
+            font-size: 3rem;
+        }
+        &-name{
+            color: white;
+        }
+    }
+    
+
+.bar {
+  position: absolute;
+  top: 100px;
+  left: 20px;
+  height: 5px;
+  width: 90%;
+    hr{
+        background-color: gray;
+        
+    }
+}
+    .content-review{
+        position: absolute;
+        left: 20px;
+        top: 40%;
+        background-color: transparent;
+        
+        width: 90%;
+        display: flex;
+          border: none;
+        i{
+            color: white;
+            font-size: 3rem;
+        }
+        p{
+            font-size: 2rem;
+            color: white;
+            margin-left: 5px;
+        }
+    }
+
+
+.card-footer{
+    width: 90%;
+    position: absolute;
+    bottom: 10px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    background-color: transparent;
+    font-size: 1.5rem;
+    .read-more a{
+        text-decoration: none;
+        color: white ;
+        opacity: 0;
+        animation: border-progress;
+        
+    }
+   
+    }
+     .card:hover  a{
+        opacity: 1;
+         text-decoration: underline;
+         
+    }
+
+}
+
+
+
+@for $i from 1 through 4 {
+    .intro-item-list-item:nth-child(#{$i}) {
+        opacity: 0;
+        animation-name: fadeIn;
+        animation-duration: 2s;
+
+        animation-delay:#{$i+7}s;
+        animation-fill-mode: forwards;
+    }
+}
+
+
+
+ 
+
+
+
