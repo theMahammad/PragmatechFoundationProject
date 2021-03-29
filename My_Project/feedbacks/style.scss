@@ -2,6 +2,7 @@
 @import '../general-Sass/header';
 @import '../general-Sass/variables';
 @import '../general-Sass/scrollbar';
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@600&display=swap');
 html{
     font-size: 10px;
 }
@@ -9,62 +10,54 @@ html{
 .review {
     background-color:white;
     font-family: 'Open Sans', sans-serif;
-      position: relative;
+    box-shadow: 0px 0px 2px ;
       width: 100%;
-      height: max-content;
+      min-height: 500px;
+      padding: 30px;
+  font-family: $usually-used-font;
       &-header{
           color: $orange;
           text-align: center;
-          font-size: 3rem !important;
-          font-family: "Comfortaa";
+          font-size: 4rem !important;
+          
       }
+      &-paragraph{
+       font-family: $usually-used-font;
+        letter-spacing: 2px;
+      }
+      .name-and-rating{
+        position: absolute;
+        width: 90%;
+        left: 20px;
+        top: 15px;
+        .rest-name {
+          text-align: center;
+          color: white;
+          font-weight: 300;
+        
+        }
+      }
+     
   
   
-  .container {
-    position: absolute;
-    height: 300px;
-    width: 100%;
-    top: 60px;
-    left: calc(30% - 300px);
-    display: flex;
-    flex-wrap:wrap;
-  }
   
   .card {
-    display: flex;
+  
     height: 280px;
-    width: 400px;
+    
     background-color: $orange;
     border-radius: 10px;
-    box-shadow: -1rem 0 3rem #000;
+    box-shadow: 0 0 1rem #000;
   /*   margin-left: -50px; */
     transition: 0.4s ease-out;
     position: relative;
-    left: 0px;
+    
   }
   
-  .card:not(:first-child) {
-      margin-left: -50px;
-  }
+ 
+ 
   
-  .card:hover {
-    transform: translateY(-20px);
-    transition: 0.4s ease-out;
-  }
   
-  .card:hover ~ .card {
-    position: relative;
-    left: 50px;
-    transition: 0.4s ease-out;
-  }
-  
-  .title {
-    color: white;
-    font-weight: 300;
-    position: absolute;
-    left: 20px;
-    top: 15px;
-  }
       .user{
           width: 60%;
           font-size: 2rem;

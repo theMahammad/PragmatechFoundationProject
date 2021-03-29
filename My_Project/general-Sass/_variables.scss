@@ -1,3 +1,6 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@600&display=swap');
+
 $gray : gray;
 $orange : rgb(241, 97, 33);
 $font-antonio: "Antonio";
@@ -6,6 +9,7 @@ $dark-gray : darken(gray, 50%);
 $black: #000;
 $white: #fff;
 $footer-bg:#433E3D;
+$usually-used-font: "Comfortaa",cursive;
 @mixin for-circle($width) {
     width: $width;
     height: $width;
