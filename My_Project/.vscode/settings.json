@@ -1,3 +1,4 @@
 {
-    "git.ignoreLimitWarning": true
+    "git.ignoreLimitWarning": true,
+    "python.pythonPath": "c:\\PragmatechFoundationPro\\My_Project\\env\\Scripts\\python.exe"
 }

@@ -1,0 +1,161 @@
+@import '../general-Sass/header';
+@import '../general-Sass/variables';
+@import '../general-Sass/scrollbar';
+@import '../general-Sass/footer';
+@import url('https://fonts.googleapis.com/css?family=Cardo:400i|Rubik:400,700&display=swap');
+
+html{
+    font-size: 10px;
+}
+
+$imageIds: '1517021897933-0e0319cfbc28', '1533903345306-15d1c30952de', '1545243424-0ce743321e11', '1531306728370-e2ebd9d7bb99';
+
+$bp-md: 600px;
+$bp-lg: 800px;
+
+:root {
+  --d: 700ms;
+  --e: cubic-bezier(0.19, 1, 0.22, 1);
+  --font-sans: 'Rubik', sans-serif;
+  --font-serif: 'Cardo', serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+
+/* FontAwesome for working BootSnippet :> */
+
+@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background-color: #108d6f;
+    border-color: #108d6f;
+    box-shadow: none;
+    outline: none;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #007b5e;
+    border-color: #007b5e;
+}
+
+section {
+    padding: 60px 0;
+}
+
+section .section-title {
+    text-align: center;
+    color: #007b5e;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+}
+
+
+
+
+
+.frontside {
+    position: relative;
+    -webkit-transform: rotateY(0deg);
+    -ms-transform: rotateY(0deg);
+    z-index: 2;
+    margin-bottom: 30px;
+    
+}.count-feedbacks{
+  font-family: "Comfortaa";
+    position: absolute;
+   
+   bottom: 20%;
+   left: 40%;
+   font-size: 2rem !important;
+    i{
+      margin-left:10px ;
+      font-size: 2rem !important;
+   }
+ 
+    color: white;
+    font-size: 1rem;
+}
+
+
+
+
+.frontside .card,
+.backside .card {
+    min-height: 312px;
+    min-width: 250px;
+}
+.card{
+  background-color: $orange;
+  box-shadow: 3px 4px 3px gray;
+  font-family: "Comfortaa";
+  color: white !important;
+  button{
+    font-size: 1.5rem !important;
+  }
+}
+.btn-see-profile{
+    background-color:transparent;
+    color: white;
+    position: absolute;
+    border: 1px solid white;
+    bottom: 7%;
+    left: 30%;
+    box-shadow: 0px 0px 1px;
+    transition: all 0.2s linear;
+    &:hover{
+        
+        bottom: 10%;
+        box-shadow: 2px 3px 2px;
+    }
+
+}
+
+
+.backside .card a {
+    font-size: 18px;
+    color: #007b5e !important;
+}
+
+
+
+.frontside .card .card-body img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+}
+
+.restaurants{
+min-height: 500px;
+font-size: 16px;
+box-shadow: 0px 0px 2px ;
+padding: 30px;
+font-family: "Comfortaa";
+
+h1{
+  font-size: 4rem !important;
+}
+
+.page-content {
+  display: grid;
+  grid-gap: 1em;
+  padding: 1em;
+  max-width: 1024px;
+  margin: 0 auto;
+  font-family: var(--font-sans);
+  
+  @media (min-width: $bp-md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  @media (min-width: $bp-lg) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+}
+
