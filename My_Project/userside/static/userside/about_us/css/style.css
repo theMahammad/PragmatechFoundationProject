@@ -1,8 +1,199 @@
 @import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@600&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@600&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Source+Code+Pro");
 @import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@600&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@600&display=swap");
+.our-hr-style {
+  border: 2px dashed orange;
+  width: 50px;
+}
+
+.our-hr-style {
+  border: 2px dashed orange;
+  width: 50px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: gray;
+  border-radius: 10px;
+}
+
+::selection {
+  color: white;
+  background-color: #f16121;
+}
+
+.our-hr-style {
+  border: 2px dashed orange;
+  width: 50px;
+}
+
+body {
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box !important;
+}
+
+.register {
+  background-color: #f16121;
+  height: 50px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.register .buttons {
+  width: 300px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.register .buttons a {
+  font-size: 2rem;
+  color: white;
+  border: 1px solid white;
+  padding: 5px;
+  border-radius: 10px;
+  transition: all 0.2s linear;
+}
+
+.register .buttons a:hover {
+  border: none;
+  border-bottom: 1px solid white;
+}
+
+.top {
+  width: 100%;
+  height: 130px;
+}
+
+.brand-logo {
+  width: 300px;
+  object-fit: cover;
+}
+
+.top-item:nth-child(2) {
+  /* Animation */
+  /* text animation */
+  /* cursor animations */
+}
+
+.top-item:nth-child(2) span {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  font-family: 'Artful Beauty', monospace;
+  font-size: 5rem;
+  color: black;
+  margin: 0 auto;
+}
+
+.top-item:nth-child(2) span {
+  animation: animated-text 2s steps(29, end) 2s 1 normal both;
+}
+
+@keyframes animated-text {
+  from {
+    width: 0;
+  }
+  to {
+    width: 400px;
+  }
+}
+
+#social-media {
+  display: flex;
+  justify-content: space-between;
+  width: 200px;
+}
+
+#social-media a {
+  width: 40px;
+}
+
+#social-media a i {
+  font-size: 2.7rem;
+  background-color: #f16121;
+  border-radius: 10px;
+  color: white;
+  padding: 12px;
+  transition: all 0.3s linear;
+}
+
+#social-media a i:hover {
+  color: #f16121;
+  background-color: transparent;
+  transform: scale(1.5);
+}
+
+.active {
+  border: 1px solid white;
+  border-radius: 10px;
+  color: #000 !important;
+  border-top: none;
+  border-bottom: none;
+}
+
+.nav {
+  width: 1000px;
+  margin: 10px auto -30px;
+  background-color: #f16121;
+  border: 1px solid #F16121;
+  display: flex;
+  justify-content: center;
+  border-radius: 50px;
+  padding: 15px;
+  position: sticky;
+  top: 0px;
+  z-index: 100;
+}
+
+.nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.nav ul li {
+  display: inline-block;
+  transition: all 0.2s linear;
+}
+
+.nav ul li:hover {
+  transform: rotate(2deg);
+}
+
+.nav ul li a {
+  padding: 5px;
+  color: white;
+  text-decoration: none;
+  font-family: "Comfortaa";
+  font-size: 20px;
+  transition: all 0.2s linear;
+}
+
+.nav ul li a:hover {
+  border: 1px solid white;
+  border-radius: 10px;
+  color: #000 !important;
+  border-top: none;
+  border-bottom: none;
+}
+
 .our-hr-style {
   border: 2px dashed orange;
   width: 50px;
@@ -235,197 +426,6 @@
   color: white;
   text-align: center;
   font-size: 3rem;
-}
-
-.our-hr-style {
-  border: 2px dashed orange;
-  width: 50px;
-}
-
-body {
-  margin: 0;
-}
-
-* {
-  box-sizing: border-box !important;
-}
-
-.register {
-  background-color: #f16121;
-  height: 50px;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
-
-.register .buttons {
-  width: 300px;
-  display: flex;
-  justify-content: space-around;
-}
-
-.register .buttons a {
-  font-size: 2rem;
-  color: white;
-  border: 1px solid white;
-  padding: 5px;
-  border-radius: 10px;
-  transition: all 0.2s linear;
-}
-
-.register .buttons a:hover {
-  border: none;
-  border-bottom: 1px solid white;
-}
-
-.top {
-  width: 100%;
-  height: 130px;
-}
-
-.brand-logo {
-  width: 300px;
-  object-fit: cover;
-}
-
-.top-item:nth-child(2) {
-  /* Animation */
-  /* text animation */
-  /* cursor animations */
-}
-
-.top-item:nth-child(2) span {
-  display: inline-block;
-  white-space: nowrap;
-  overflow: hidden;
-  font-family: 'Artful Beauty', monospace;
-  font-size: 5rem;
-  color: black;
-  margin: 0 auto;
-}
-
-.top-item:nth-child(2) span {
-  animation: animated-text 2s steps(29, end) 2s 1 normal both;
-}
-
-@keyframes animated-text {
-  from {
-    width: 0;
-  }
-  to {
-    width: 400px;
-  }
-}
-
-#social-media {
-  display: flex;
-  justify-content: space-between;
-  width: 200px;
-}
-
-#social-media a {
-  width: 40px;
-}
-
-#social-media a i {
-  font-size: 2.7rem;
-  background-color: #f16121;
-  border-radius: 10px;
-  color: white;
-  padding: 12px;
-  transition: all 0.3s linear;
-}
-
-#social-media a i:hover {
-  color: #f16121;
-  background-color: transparent;
-  transform: scale(1.5);
-}
-
-.active {
-  border: 1px solid white;
-  border-radius: 10px;
-  color: #000 !important;
-  border-top: none;
-  border-bottom: none;
-}
-
-.nav {
-  width: 1000px;
-  margin: 10px auto -30px;
-  background-color: #f16121;
-  border: 1px solid #F16121;
-  display: flex;
-  justify-content: center;
-  border-radius: 50px;
-  padding: 15px;
-  position: sticky;
-  top: 0px;
-  z-index: 100;
-}
-
-.nav ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-}
-
-.nav ul li {
-  display: inline-block;
-  transition: all 0.2s linear;
-}
-
-.nav ul li:hover {
-  transform: rotate(2deg);
-}
-
-.nav ul li a {
-  padding: 5px;
-  color: white;
-  text-decoration: none;
-  font-family: "Comfortaa";
-  font-size: 20px;
-  transition: all 0.2s linear;
-}
-
-.nav ul li a:hover {
-  border: 1px solid white;
-  border-radius: 10px;
-  color: #000 !important;
-  border-top: none;
-  border-bottom: none;
-}
-
-.our-hr-style {
-  border: 2px dashed orange;
-  width: 50px;
-}
-
-.our-hr-style {
-  border: 2px dashed orange;
-  width: 50px;
-}
-
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px grey;
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: gray;
-  border-radius: 10px;
-}
-
-::selection {
-  color: white;
-  background-color: #f16121;
 }
 
 html {

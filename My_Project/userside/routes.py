@@ -13,3 +13,15 @@ def about():
 @user_bp.route("/rules")
 def rules():
     return render_template("userside/rules.html")
+@user_bp.route("/FAQ")
+def faq():
+    return render_template("userside/faq.html")
+@user_bp.route("/partnering")
+def partnering():
+    return render_template("userside/partnering.html")
+@user_bp.route("/feedbacks")
+def feedbacks():
+    return render_template("userside/feedbacks.html")
+@user_bp.route("/login")
+def login():
+    return render_template("userside/login.html")

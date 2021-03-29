@@ -3,7 +3,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@600&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Source+Code+Pro");
 @import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@600&display=swap");
-@import url("https://fonts.googleapis.com/css?family=Hind:300,400&display=swap");
 .our-hr-style {
   border: 2px dashed orange;
   width: 50px;
@@ -433,132 +432,140 @@ html {
   font-size: 10px;
 }
 
-* {
-  box-sizing: border-box;
+.partnership {
+  box-shadow: 0px 0px 2px;
+  padding: 30px;
+  min-height: 500px;
+  font-family: "Comfortaa";
 }
 
-*::before, *::after {
-  box-sizing: border-box;
+.partnership .container {
+  height: 100%;
 }
 
-.faq {
-  margin: 0;
-  padding: 0;
-  font-family: 'Hind', sans-serif;
-  background: #fff;
-  color: #4d5974;
-  display: flex;
-  min-height: 100vh;
+.partnership hr {
+  border: 2px dashed orange;
+  width: 50px;
+}
+
+.partnership h1 {
+  font-size: 4rem !important;
+}
+
+.partnership h2 {
+  font-size: 3rem;
+}
+
+.partnership p {
   font-size: 2rem;
 }
 
-.faq .container {
-  margin: 0 auto;
-  padding: 4em;
-  width: 48em;
+.superiorieties *,
+.superiorieties *::before,
+.superiorieties *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
 }
 
-.faq h2 {
-  font-size: 4rem !important;
-  text-align: center;
+.superiorieties html {
+  box-sizing: border-box;
+  font-size: 62.5%;
 }
 
-.faq .accordion .accordion-item {
-  border-bottom: 1px solid #e5e5e5;
+.superiorieties body {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  padding: 6rem;
+  background-color: #f5f5f5;
+  font-family: "Inter", sans-serif;
 }
 
-.faq .accordion .accordion-item button[aria-expanded='true'] {
-  border-bottom: 1px solid #f16121 !important;
+@media (max-width: 60em) {
+  .superiorieties body {
+    padding: 3rem;
+  }
 }
 
-.faq .accordion button {
-  position: relative;
-  display: block;
-  text-align: left;
-  width: 100%;
-  padding: 1em 0;
-  color: #7288a2;
-  font-size: 1.15em;
-  font-weight: 400;
-  border: none;
-  background: none;
-  outline: none;
+.superiorieties .grid {
+  display: grid;
+  width: 114rem;
+  grid-gap: 6rem;
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  align-items: start;
 }
 
-.faq .accordion button:hover, .faq .accordion button:focus {
-  cursor: pointer;
-  color: #f16121 !important;
+@media (max-width: 60em) {
+  .superiorieties .grid {
+    grid-gap: 3rem;
+  }
 }
 
-.faq .accordion button:hover::after, .faq .accordion button:focus::after {
-  cursor: pointer;
-  color: #f16121 !important;
-  border: 1px solid #f16121 !important;
-}
-
-.faq .accordion button .accordion-title {
-  padding: 1em 1.5em 1em 0;
-}
-
-.faq .accordion button .icon {
-  display: inline-block;
-  position: absolute;
-  top: 18px;
-  right: 0;
-  width: 22px;
-  height: 22px;
-  border: 1px solid;
-  border-radius: 22px;
-}
-
-.faq .accordion button .icon::before {
-  display: block;
-  position: absolute;
-  content: '';
-  top: 9px;
-  left: 5px;
-  width: 10px;
-  height: 2px;
-  background: currentColor;
-}
-
-.faq .accordion button .icon::after {
-  display: block;
-  position: absolute;
-  content: '';
-  top: 5px;
-  left: 9px;
-  width: 2px;
-  height: 10px;
-  background: currentColor;
-}
-
-.faq .accordion button[aria-expanded='true'] {
-  color: #f16121 !important;
-}
-
-.faq .accordion button[aria-expanded='true'] .icon::after {
-  width: 0;
-}
-
-.faq .accordion button[aria-expanded='true'] + .accordion-content {
-  opacity: 1;
-  max-height: 9em;
-  transition: all 200ms linear;
-  will-change: opacity, max-height;
-}
-
-.faq .accordion .accordion-content {
-  opacity: 0;
-  max-height: 0;
+.superiorieties .grid__item {
+  background-color: #fff;
+  border-radius: .4rem;
   overflow: hidden;
-  transition: opacity 200ms linear, max-height 200ms linear;
-  will-change: opacity, max-height;
+  box-shadow: 0 3rem 6rem rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: 0.2s;
 }
 
-.faq .accordion .accordion-content p {
-  font-size: 1em;
-  font-weight: 300;
-  margin: 2em 0;
+.superiorieties .grid__item:hover {
+  transform: translateY(-0.5%);
+  box-shadow: 0 4rem 8rem rgba(0, 0, 0, 0.2);
+}
+
+.superiorieties .card__img {
+  display: block;
+  width: 100%;
+  height: 18rem;
+  object-fit: cover;
+}
+
+.superiorieties .card__content {
+  padding: 3rem 3rem;
+}
+
+.superiorieties .card__header {
+  font-size: 3rem;
+  font-weight: 500;
+  color: #0d0d0d;
+  margin-bottom: 1.5rem;
+}
+
+.superiorieties .card__text {
+  font-size: 1.5rem;
+  letter-spacing: .1rem;
+  line-height: 1.7;
+  color: #3d3d3d;
+  margin-bottom: 2.5rem;
+}
+
+.superiorieties .card__btn {
+  display: block;
+  width: 100%;
+  padding: 1.5rem;
+  font-size: 2rem;
+  text-align: center;
+  color: #3363ff;
+  background-color: #e6ecff;
+  border: none;
+  border-radius: .4rem;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.superiorieties .card__btn span {
+  margin-left: 1rem;
+  transition: 0.2s;
+}
+
+.superiorieties .card__btn:hover, .superiorieties .card__btn:active {
+  background-color: #dce4ff;
+}
+
+.superiorieties .card__btn:hover span, .superiorieties .card__btn:active span {
+  margin-left: 1.5rem;
 }
 /*# sourceMappingURL=style.css.map */

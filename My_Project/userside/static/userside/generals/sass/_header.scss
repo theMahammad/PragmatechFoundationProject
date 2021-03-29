@@ -1,0 +1,177 @@
+@import 'variables';
+body{
+    margin: 0;
+}
+*{
+    box-sizing: border-box !important;
+}
+.register{
+    background-color:$orange ;
+    height: 50px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    .buttons{
+        width: 300px;
+        display: flex;
+        justify-content: space-around;
+        a{
+            font-size: 2rem;
+            color: white;
+            @include classic-border(white);
+            padding: 5px;
+            border-radius: 10px;
+            transition: all 0.2s linear;
+            &:hover{
+                border:none ;
+                border-bottom: 1px solid white;
+            }
+        }
+    }
+   
+}
+.top {
+
+    width: 100%;
+    height: 130px;
+
+
+
+}
+.brand-logo {
+    width: 300px;
+    object-fit: cover;
+}
+
+
+@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro');
+
+.top-item:nth-child(2) {
+
+
+
+
+    span {
+        display: inline-block;
+
+        white-space: nowrap;
+        overflow: hidden;
+        font-family: 'Artful Beauty', monospace;
+        font-size: 5rem;
+        color: black;
+        margin: 0 auto;
+    }
+
+    /* Animation */
+    span {
+        animation: animated-text 2s steps(29, end) 2s 1 normal both;
+    }
+
+    /* text animation */
+
+    @keyframes animated-text {
+        from {
+            width: 0;
+        }
+
+        to {
+            width: 400px;
+        }
+    }
+
+    /* cursor animations */
+
+
+}
+
+
+
+
+
+
+#social-media {
+    display: flex;
+    justify-content: space-between;
+    width: 200px;
+    a{
+        width: 40px;
+    
+    i {
+        
+        font-size: 2.7rem;
+        background-color:$orange;
+        border-radius: 10px;
+        color: white;
+        padding: 12px;
+        transition: all 0.3s linear;
+        
+        
+        &:hover {
+            color: $orange;
+            background-color: transparent;
+            transform: scale(1.5)
+           
+        }
+    }
+    
+}
+}
+.active{
+    
+    @include classic-border(white);
+    border-radius: 10px;
+    color: $black !important;
+    border-top: none;
+    border-bottom: none;
+}
+.nav {
+    width: 1000px;
+    margin: 10px auto -30px;
+    background-color: $orange;
+    @include classic-border(#F16121);
+
+    display: flex;
+    justify-content: center;
+    border-radius: 50px;
+    padding: 15px;
+    position: sticky;
+    top: 0px;
+    z-index: 100;
+
+
+    ul {
+        @include reset-list;
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+
+        li {
+            display: inline-block;
+            transition: all 0.2s linear;
+            &:hover {
+                transform: rotate(2deg);
+  
+            }
+
+            a {
+                padding: 5px;
+                color: white;
+                text-decoration: none;
+                font-family: $font-comfortaa;
+                font-size: 20px;
+                transition: all 0.2s linear;
+                &:hover{
+                    @include classic-border(white);
+                    border-radius: 10px;
+                    color: $black !important;
+                    border-top: none;
+                    border-bottom: none;
+
+                  
+                }
+                
+
+            }
+        }
+    }
+}
