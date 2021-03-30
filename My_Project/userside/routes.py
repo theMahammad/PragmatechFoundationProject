@@ -1,9 +1,16 @@
-from flask import render_template,Blueprint
+from flask import render_template,Blueprint,redirect,request
 
 user_bp = Blueprint('user',__name__,template_folder='templates',static_folder='static',static_url_path='/static/userside')
 
-@user_bp.route("/")
+@user_bp.route("/",methods = ["GET","POST"])
 def index():
+    from app import db,Subscription
+    if request.method == "POST":
+        db.session.add(
+            Subscription(mail = request.form['subscribe'])
+        )
+        db.session.commit()
+        return redirect("/")
     return render_template("userside/home-page.html")
 @user_bp.route("/restaurants")
 def restaurants():
@@ -16,7 +23,9 @@ def rules():
     return render_template("userside/rules.html")
 @user_bp.route("/FAQ")
 def faq():
-    return render_template("userside/faq.html")
+    from app import FAQ
+    FAQS = FAQ.query.all()
+    return render_template("userside/faq.html" ,FAQS = FAQS)
 @user_bp.route("/partnering")
 def partnering():
     return render_template("userside/partnering.html")
@@ -26,3 +35,5 @@ def feedbacks():
 @user_bp.route("/login")
 def login():
     return render_template("userside/login.html")
+
+

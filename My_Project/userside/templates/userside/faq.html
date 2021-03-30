@@ -16,37 +16,17 @@ Tez-tez soruşulan suallar
     <div class="container">
         <h2>Tez-tez soruşulan suallar</h2>
         <div class="accordion">
+          {% for faq  in FAQS %}
+          
+          
           <div class="accordion-item">
-            <button id="accordion-button-1" aria-expanded="false"><span class="accordion-title">Lorem ipsum dolor sit amet.</span><span class="icon" aria-hidden="true"></span></button>
+            <button id="accordion-button-1" aria-expanded="false"><span class="accordion-title">{{faq.question}}</span><span class="icon" aria-hidden="true"></span></button>
             <div class="accordion-content">
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Elementum sagittis vitae et leo duis ut. Ut tortor pretium viverra suspendisse potenti.</p>
+              <p>{{faq.answer}}</p>
             </div>
           </div>
-          <div class="accordion-item">
-            <button id="accordion-button-2" aria-expanded="false"><span class="accordion-title">Lorem ipsum dolor sit amet.</span><span class="icon" aria-hidden="true"></span></button>
-            <div class="accordion-content">
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Elementum sagittis vitae et leo duis ut. Ut tortor pretium viverra suspendisse potenti.</p>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <button id="accordion-button-3" aria-expanded="false"><span class="accordion-title">Lorem ipsum dolor sit amet.</span><span class="icon" aria-hidden="true"></span></button>
-            <div class="accordion-content">
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Elementum sagittis vitae et leo duis ut. Ut tortor pretium viverra suspendisse potenti.</p>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <button id="accordion-button-4" aria-expanded="false"><span class="accordion-title">Lorem ipsum dolor sit amet.</span><span class="icon" aria-hidden="true"></span></button>
-            <div class="accordion-content">
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Elementum sagittis vitae et leo duis ut. Ut tortor pretium viverra suspendisse potenti.</p>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <button id="accordion-button-5" aria-expanded="false"><span class="accordion-title">Lorem ipsum dolor sit amet.</span><span class="icon" aria-hidden="true"></span></button>
-            <div class="accordion-content">
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Elementum sagittis vitae et leo duis ut. Ut tortor pretium viverra suspendisse potenti.</p>
-            </div>
-          </div>
-        </div>
+          {%endfor%}
+                  </div>
       </div>
     </section>
 

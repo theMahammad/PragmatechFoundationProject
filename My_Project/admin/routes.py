@@ -23,3 +23,14 @@ def faq():
         db.session.commit()
         return redirect("/adminside/faq")
     return render_template("admin/FAQ.html",allFaq = allFaq)
+@admin_bp.route("/faq/delete/<int:id>")
+def deleteFaq(id):
+    from app import FAQ,db
+    db.session.delete(FAQ.query.get(id))
+    db.session.commit()
+    return redirect("/adminside/faq")
+@admin_bp.route("/subscribers")
+def subscribers():
+    from app import db,Subscription
+    allSubscribers =  Subscription.query.all()
+    return render_template("admin/subscription.html",allSubs = allSubscribers)
