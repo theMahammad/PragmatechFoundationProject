@@ -17,9 +17,21 @@ naming_convention = {
 app=Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
 app.config['UPLOAD_PATH'] = 'static/uploads'
-db = SQLAlchemy(app)
+
+db = SQLAlchemy(app,metadata= MetaData(naming_convention=naming_convention))
 migrate = Migrate()
 migrate.init_app(app,db,compare_type=True,render_as_batch = True)
-from app import models
+
 app.register_blueprint(admin_bp)
 app.register_blueprint(user_bp)
+class FAQ(db.Model):
+    id=db.Column(db.Integer,primary_key=True)
+    question = db.Column(db.String(150))
+    answer = db.Column(db.String(250))
+class Rules(db.Model):
+     id=db.Column(db.Integer,primary_key=True)
+     title = db.Column(db.String(150))
+     content = db.Column(db.String(250))
+class Subscription(db.Model):
+    id = db.Column(db.Integer,primary_key=True)
+    mail = db.Column(db.String(250))

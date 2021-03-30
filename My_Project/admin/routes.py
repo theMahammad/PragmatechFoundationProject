@@ -10,8 +10,8 @@ def index():
     return render_template("admin/index.html")
 @admin_bp.route("/faq",methods=["GET","POST"])
 def faq():
-    from app.models import FAQ
-    from app import db 
+    from app import FAQ,db 
+    
     allFaq = FAQ.query.all()
     if request.method=="POST":
         db.session.add(
