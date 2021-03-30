@@ -16,7 +16,7 @@ naming_convention = {
 }
 app=Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
-app.config['UPLOAD_PATH'] = 'static/uploads'
+app.config['UPLOAD_PATH'] = 'admin/static/admin/uploads'
 app.config['SECRET_KEY'] = 'parol'
 
 db = SQLAlchemy(app,metadata= MetaData(naming_convention=naming_convention))
@@ -25,6 +25,12 @@ migrate.init_app(app,db,compare_type=True,render_as_batch = True)
 
 app.register_blueprint(admin_bp)
 app.register_blueprint(user_bp)
+class Restaurant(db.Model):
+    id=db.Column(db.Integer,primary_key=True)
+    name = db.Column(db.String(50))
+    logo = db.Column(db.String(50))
+    about = db.Column(db.Text)
+    # feedbacks = db.relationship('Restaurant',backref = 'restaurant', lazy = True)
 class FAQ(db.Model):
     id=db.Column(db.Integer,primary_key=True)
     question = db.Column(db.String(150))
@@ -36,3 +42,7 @@ class Rules(db.Model):
 class Subscription(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     mail = db.Column(db.String(250))
+class Details(db.Model):
+    id = db.Column(db.Integer,primary_key=True)
+    text = db.Column(db.String(100))
+    logo = db.Column(db.String(100))

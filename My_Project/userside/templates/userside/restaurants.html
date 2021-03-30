@@ -35,37 +35,18 @@ active
           <hr class="our-hr-style">
       
           <main class="rest-list row">
-           
-            <div class="col-xs-12 col-sm-6 col-md-3">
-              <div class="image-flip" >
-                  <div class="mainflip flip-0">
-                      <div class="frontside">
-                          <div class="card">
-                              <div class="card-body text-center">
-                                  <p><img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_01.png" alt="card image"></p>
-                                  <h4 class="card-title">Restoran adı</h4>
-                                  <span class="card-rating">Reytinq <i class="fas fa-star"></i></span>
-                                  <span class="count-feedbacks">8<i class="fas fa-comments"></i></span>
-  
-                              </div>
-                              <button class="btn-see-profile btn " >Profilə bax</button>
-                            </div>
-                      </div>
-                    
-                  </div>
-              </div>
-          </div>
-          <div class="col-xs-12 col-sm-6 col-md-3">
+           {% for restaurant in restaurants %}
+           <div class="col-xs-12 col-sm-6 col-md-3">
             <div class="image-flip" >
                 <div class="mainflip flip-0">
                     <div class="frontside">
                         <div class="card">
                             <div class="card-body text-center">
-                                <p><img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_01.png" alt="card image"></p>
-                                <h4 class="card-title">Restoran adı</h4>
+                                <p><img class=" img-fluid" src="{{url_for('adminPanel.static',filename = 'admin/uploads/%s' %restaurant.logo)}}" alt="card image"></p>
+                                <h4 class="card-title">{{restaurant.name}}</h4>
                                 <span class="card-rating">Reytinq <i class="fas fa-star"></i></span>
                                 <span class="count-feedbacks">8<i class="fas fa-comments"></i></span>
-  
+
                             </div>
                             <button class="btn-see-profile btn " >Profilə bax</button>
                           </div>
@@ -74,120 +55,9 @@ active
                 </div>
             </div>
         </div>
-        <div class="col-xs-12 col-sm-6 col-md-3">
-          <div class="image-flip" >
-              <div class="mainflip flip-0">
-                  <div class="frontside">
-                      <div class="card">
-                          <div class="card-body text-center">
-                              <p><img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_01.png" alt="card image"></p>
-                              <h4 class="card-title">Restoran adı</h4>
-                              <span class="card-rating">Reytinq <i class="fas fa-star"></i></span>
-                              <span class="count-feedbacks">8<i class="fas fa-comments"></i></span>
-  
-                          </div>
-                          <button class="btn-see-profile btn " >Profilə bax</button>
-                        </div>
-                  </div>
-                
-              </div>
-          </div>
-      </div>
-      <div class="col-xs-12 col-sm-6 col-md-3">
-        <div class="image-flip" >
-            <div class="mainflip flip-0">
-                <div class="frontside">
-                    <div class="card">
-                        <div class="card-body text-center">
-                            <p><img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_01.png" alt="card image"></p>
-                            <h4 class="card-title">Restoran adı</h4>
-                            <span class="card-rating">Reytinq <i class="fas fa-star"></i></span>
-                            <span class="count-feedbacks">8<i class="fas fa-comments"></i></span>
-  
-                        </div>
-                        <button class="btn-see-profile btn " >Profilə bax</button>
-                      </div>
-                </div>
-              
-            </div>
-        </div>
-    </div>
-    <div class="col-xs-12 col-sm-6 col-md-3">
-      <div class="image-flip" >
-          <div class="mainflip flip-0">
-              <div class="frontside">
-                  <div class="card">
-                      <div class="card-body text-center">
-                          <p><img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_01.png" alt="card image"></p>
-                          <h4 class="card-title">Restoran adı</h4>
-                          <span class="card-rating">Reytinq <i class="fas fa-star"></i></span>
-                          <span class="count-feedbacks">8<i class="fas fa-comments"></i></span>
-  
-                      </div>
-                      <button class="btn-see-profile btn " >Profilə bax</button>
-                    </div>
-              </div>
+           {% endfor %}
             
-          </div>
-      </div>
-  </div>
-  <div class="col-xs-12 col-sm-6 col-md-3">
-    <div class="image-flip" >
-        <div class="mainflip flip-0">
-            <div class="frontside">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <p><img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_01.png" alt="card image"></p>
-                        <h4 class="card-title">Restoran adı</h4>
-                        <span class="card-rating">Reytinq <i class="fas fa-star"></i></span>
-                        <span class="count-feedbacks">8<i class="fas fa-comments"></i></span>
-  
-                    </div>
-                    <button class="btn-see-profile btn " >Profilə bax</button>
-                  </div>
-            </div>
-          
-        </div>
-    </div>
-  </div>
-  <div class="col-xs-12 col-sm-6 col-md-3">
-  <div class="image-flip" >
-      <div class="mainflip flip-0">
-          <div class="frontside">
-              <div class="card">
-                  <div class="card-body text-center">
-                      <p><img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_01.png" alt="card image"></p>
-                      <h4 class="card-title">Restoran adı</h4>
-                      <span class="card-rating">Reytinq <i class="fas fa-star"></i></span>
-                      <span class="count-feedbacks">8<i class="fas fa-comments"></i></span>
-  
-                  </div>
-                  <button class="btn-see-profile btn " >Profilə bax</button>
-                </div>
-          </div>
-        
-      </div>
-  </div>
-  </div>
-  <div class="col-xs-12 col-sm-6 col-md-3">
-  <div class="image-flip" >
-    <div class="mainflip flip-0">
-        <div class="frontside">
-            <div class="card">
-                <div class="card-body text-center">
-                    <p><img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_01.png" alt="card image"></p>
-                    <h4 class="card-title">Restoran adı</h4>
-                    <span class="card-rating">Reytinq <i class="fas fa-star"></i></span>
-                    <span class="count-feedbacks">8<i class="fas fa-comments"></i></span>
-  
-                </div>
-                <button class="btn-see-profile btn " >Profilə bax</button>
-              </div>
-        </div>
-      
-    </div>
-  </div>
-  </div>
+         
               
           
             

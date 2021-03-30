@@ -16,7 +16,9 @@ def index():
     return render_template("userside/home-page.html")
 @user_bp.route("/restaurants")
 def restaurants():
-    return render_template("userside/restaurants.html")
+    from app import Restaurant
+    restaurants = Restaurant.query.all()
+    return render_template("userside/restaurants.html",restaurants = restaurants)
 @user_bp.route("/about_us")
 def about():
    return render_template("userside/about_us.html")

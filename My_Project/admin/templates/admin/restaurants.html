@@ -6,11 +6,15 @@ active
 Restoranlar
 {% endblock %}
 {% block page %}
-<form action="/adminside/restaurants" method="POST" enctype="multipart/form-data">
-<input type="text" class="form-control" placeholder="Restoranın adını daxil edin">
-<input type="file" class="form-control" placeholder="Restoranın loqosunu daxil edin">
-<button type="submit">Əlavə et</button>
-</form>
+<div class="container">
+    <form action="/adminside/restaurants" method="POST" enctype="multipart/form-data">
+        <label for=""></label>
+    <input type="text" class="form-control" name="restaurant-name" placeholder="Restoran adı">
+    <input type="file" class="form-control" name="restaurant-logo" placeholder="Restoran loqosu">
+    <textarea name="restaurant-about" class="form-control" placeholder="Restoran haqqında məlumat daxil edin" id="" cols="30" rows="10"></textarea>
+    <button type="submit" class="btn btn-primary">Əlavə et</button>
+    </form>
+    </div>
 <table class="table">
     <thead>
       <tr>
