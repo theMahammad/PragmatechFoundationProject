@@ -1,4 +1,4 @@
-from flask import render_template,Blueprint,request,redirect
+from flask import render_template,Blueprint,request,redirect,flash
 
 
 
@@ -28,7 +28,9 @@ def deleteFaq(id):
     from app import FAQ,db
     db.session.delete(FAQ.query.get(id))
     db.session.commit()
+  
     return redirect("/adminside/faq")
+
 @admin_bp.route("/subscribers")
 def subscribers():
     from app import db,Subscription

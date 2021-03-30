@@ -1,4 +1,4 @@
-from flask import render_template,Blueprint,redirect,request
+from flask import render_template,Blueprint,redirect,request,flash
 
 user_bp = Blueprint('user',__name__,template_folder='templates',static_folder='static',static_url_path='/static/userside')
 
@@ -10,7 +10,9 @@ def index():
             Subscription(mail = request.form['subscribe'])
         )
         db.session.commit()
-        return redirect("/")
+        flash("Abunə oldunuz.Təbriklər!")
+        return redirect("/FAQ")
+      
     return render_template("userside/home-page.html")
 @user_bp.route("/restaurants")
 def restaurants():
