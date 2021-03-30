@@ -1,4 +1,5 @@
 from flask import render_template,Blueprint
+
 user_bp = Blueprint('user',__name__,template_folder='templates',static_folder='static',static_url_path='/static/userside')
 
 @user_bp.route("/")

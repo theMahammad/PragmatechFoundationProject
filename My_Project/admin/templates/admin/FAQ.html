@@ -1,0 +1,33 @@
+{% extends "admin/base.html" %}
+{% block title %}
+
+{% endblock %}
+{% block faq %}
+active
+{% endblock %}
+{% block page %}
+<div class="container">
+    <form action="/adminside/faq" method="POST" enctype="multipart/form-data">
+        <textarea name="faq-question" id="" cols="30" rows="10" class="form-control" placeholder="Sualı daxil edin"></textarea>
+        <textarea name="faq-answer" id="" cols="30" rows="10" class="form-control" placeholder="Cavabı  daxil edin"></textarea>
+        <button type="submit" class="form-control btn btn-primary">Əlavə et</button>
+    </form>
+</div>
+
+{% for faq in  allFaq %}
+
+<div class="card">
+    <div class="card-header">
+      {{faq.id}}
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">{{faq.question}}</h5>
+      <p class="card-text">{{faq.answer}}</p>
+      <a href="#" class="btn btn-danger">Sil</a>
+      <a href="#" class="btn btn-primary">Dəyişdir</a>
+      <a href="#" class=" btn btn-success">Sayta yüklə</a>
+    </div>
+</div>
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends "admin/base.html" %}
+{% block restaurants %}
+active
+{% endblock %}
+{% block title %}
+Restoranlar
+{% endblock %}
+{% block page %}
+<form action="/adminside/restaurants" method="POST" enctype="multipart/form-data">
+<input type="text" class="form-control" placeholder="Restoranın adını daxil edin">
+<input type="file" class="form-control" placeholder="Restoranın loqosunu daxil edin">
+<button type="submit">Əlavə et</button>
+</form>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Ad </th>
+        <th scope="col">Loqo</th>
+        <th scope="col">Əməliyyat</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td>Mark</td>
+        <td>Otto</td>
+        <td>@mdo</td>
+      </tr>
+     
+    </tbody>
+  </table>
+
+{% endblock %}
