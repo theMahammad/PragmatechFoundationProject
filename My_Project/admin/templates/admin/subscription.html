@@ -1,11 +1,12 @@
 {% extends "admin/base.html" %}
 {% block page %}
-<table class="table">
+<div class="container">
+  <table class="table" style="width: 500px;">
     <thead>
       <tr>
         <th scope="col">#</th>
         <th scope="col">E-mail </th>
-        
+        <th scope="col">Əməliyyat </th>
       </tr>
     </thead>
     <tbody>
@@ -15,10 +16,16 @@
       <tr>
         <th scope="row">{{sub.id}}</th>
         <td>{{sub.mail}}</td>
-       
+        <td>
+         
+            <a href="/adminside/subscribers/delete/{{sub.id}}" title="Sil" style="color: red;"><i class="bi bi-trash"></i></a>
+         
+        </td>
       </tr>
       {% endfor %}
     </tbody>
   </table>
+</div>
+
 
 {% endblock %}

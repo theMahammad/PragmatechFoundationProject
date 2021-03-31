@@ -1,0 +1,24 @@
+{% extends "admin/base.html" %}
+{% block restaurants %}
+active
+{% endblock %}
+{% block title %}
+Dəyişdir
+{% endblock %}
+{% block page %}
+
+<div class="container">
+    <div class="rest-logo mx-auto" style="padding: 20px; border:1px  solid black; border-radius: 50%; max-width: fit-content; min-height: 250px;">
+        <img src="{{url_for('adminPanel.static',filename = 'admin/uploads/%s' %selectedRest.logo)}}" style="max-height:200px  ; border-radius: 50%;" alt="">
+    </div>
+    <form action="/adminside/restaurants/edit/{{selectedRest.id}}" method="POST" enctype="multipart/form-data">
+        <label for=""></label>
+    <input type="text" class="form-control" name="restaurant-name" placeholder="Restoran adı" value="{{selectedRest.name}}">
+    <input type="file" class="form-control" name="restaurant-logo" placeholder="Restoran loqosu" value="{{selectedRest.logo}}">
+    <textarea name="restaurant-about" class="form-control" placeholder="Restoran haqqında məlumat daxil edin" id="" cols="30" rows="10">{{selectedRest.about}}</textarea>
+    <button type="submit" class="btn btn-primary">Təsdiq et</button>
+    </form>
+    </div>
+
+
+{% endblock %}

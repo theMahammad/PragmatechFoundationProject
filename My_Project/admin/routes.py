@@ -48,6 +48,12 @@ def subscribers():
     from app import db,Subscription
     allSubscribers =  Subscription.query.all()
     return render_template("admin/subscription.html",allSubs = allSubscribers)
+@admin_bp.route("/subscribers/delete/<int:id>")
+def deleteSubscriber(id):
+    from app import db,Subscription
+    db.session.delete(Subscription.query.get(id))
+    db.session.commit()
+    return redirect("/adminside/subscribers")
 @admin_bp.route("/restaurants", methods = ['GET','POST'])
 def restaurants():
     from app import Restaurant,db,app
@@ -66,4 +72,32 @@ def restaurants():
         
             db.session.add(restaurant)
             db.session.commit()
+            return redirect("/adminside/restaurants")
     return render_template("admin/restaurants.html",restaurants = restaurants)
+@admin_bp.route("/restaurants/seeDetails/<int:id>")
+def showRestaurantDetails(id):
+    from app import db,Restaurant
+    return render_template("admin/see_restaurant_details.html",selectedRest = Restaurant.query.get(id))
+@admin_bp.route("/restaurants/delete/<int:id>")
+def deleteRestaurant(id):
+    from app import db,Restaurant
+    restaurantForDelete = Restaurant.query.get(id)
+    db.session.delete(restaurantForDelete)
+    db.session.commit()
+    return redirect("/adminside/restaurants")
+@admin_bp.route("/restaurants/edit/<int:id>",methods = ['GET','POST'])
+def updateRestaurant(id):
+    from app import app,db,Restaurant
+    restaurantForUpdate = Restaurant.query.get(id)
+    if request.method == "POST":
+        if request.files['restaurant-logo']:
+            file = request.files['restaurant-logo']
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_PATH'],filename))
+            restaurantForUpdate.name = request.form['restaurant-name']
+            restaurantForUpdate.logo = filename
+            restaurantForUpdate.about = request.form['restaurant-about']
+            db.session.commit()
+        return redirect('/adminside/restaurants')
+    return render_template("admin/update_restaurant.html",selectedRest = restaurantForUpdate)
+    

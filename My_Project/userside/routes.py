@@ -5,12 +5,20 @@ user_bp = Blueprint('user',__name__,template_folder='templates',static_folder='s
 @user_bp.route("/",methods = ["GET","POST"])
 def index():
     from app import db,Subscription
+    count = 0
     if request.method == "POST":
-        db.session.add(
-            Subscription(mail = request.form['subscribe'])
-        )
-        db.session.commit()
-        flash("Abunə oldunuz.Təbriklər!")
+        allSubscribers = Subscription.query.all()
+        for subscriber in allSubscribers:
+            if(subscriber.mail == request.form['subscribe']):
+                count+=1
+        if count==0:
+            db.session.add(
+                Subscription(mail = request.form['subscribe'])
+            )
+            db.session.commit()
+            flash("Abunə oldunuz.Təbriklər!")
+        else:
+            flash("Siz abunə olmusunuz")
         return redirect("/FAQ")
       
     return render_template("userside/home-page.html")

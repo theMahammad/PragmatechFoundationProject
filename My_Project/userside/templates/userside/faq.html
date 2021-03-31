@@ -11,7 +11,7 @@ Tez-tez soruşulan suallar
 {% endblock %}
    {% block page %}
    {% for message in get_flashed_messages() %}
-<p class="alert alert-success">{{ message }}</p>
+<p class="alert alert-success d-none" id="subscriber-message" >{{ message }}</p>
 {% endfor %}
    <section class="faq">
 
@@ -46,5 +46,8 @@ Tez-tez soruşulan suallar
   
    {% block jsLink %}
    <script src="{{url_for('user.static', filename='userside/faq/js/script.js')}}"></script>
-
+<script>
+  alert($('#subscriber-message').html())
+  
+</script>
    {% endblock %}

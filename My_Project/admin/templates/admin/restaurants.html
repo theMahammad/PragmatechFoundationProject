@@ -17,20 +17,28 @@ Restoranlar
     </div>
 <table class="table">
     <thead>
+        
       <tr>
         <th scope="col">#</th>
         <th scope="col">Ad </th>
-        <th scope="col">Loqo</th>
         <th scope="col">Əməliyyat</th>
       </tr>
     </thead>
     <tbody>
+        {% for restaurant in restaurants %}
+        
+       
       <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
+        <th scope="row">{{restaurant.id}}</th>
+        <td>{{restaurant.name}}</td>
+        
+        <td>
+            <a href="/adminside/restaurants/edit/{{restaurant.id}}" title="Dəyişdir" style="color: green;"><i class="bi bi-pencil-square"></i></a>
+            <a href="/adminside/restaurants/delete/{{restaurant.id}}" title="Sil" style="color: red;"><i class="bi bi-trash"></i></a>
+            <a href="/adminside/restaurants/seeDetails/{{restaurant.id}}" title="Detallarına bax"><i class="bi bi-info-square"></i></a>
+        </td>
       </tr>
+      {% endfor %}
      
     </tbody>
   </table>
