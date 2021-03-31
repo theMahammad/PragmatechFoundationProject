@@ -130,5 +130,25 @@ def deleteRule(id):
     db.session.delete(Rules.query.get(id))
     db.session.commit()
     return redirect("/adminside/rules")
+@admin_bp.route("/superiorities",methods = ["GET","POST"])
+def superiority():
+    from app import Superiorities,db,app
+    supers = Superiorities.query.all()
+    filename = None
+    if request.method=="POST":
+        if request.files['super-img']:
+            file = request.files['super-img']
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_PATH'],filename))
+        super = Superiorities(
+            img  = filename,
+            title = request.form['super-title'],
+            content = request.form['super-content']
+
+        )    
+        db.session.add(super)
+        db.session.commit()
+        return redirect("/adminside/superiorities")
+    return render_template("admin/superiorities.html",supers = supers)
 
     

@@ -10,6 +10,7 @@ $black: #000;
 $white: #fff;
 $footer-bg:#433E3D;
 $usually-used-font: "Comfortaa",cursive;
+$usually-used-box-shadow: 0 0 2px;
 @mixin for-circle($width) {
     width: $width;
     height: $width;

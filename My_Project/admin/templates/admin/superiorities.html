@@ -1,0 +1,58 @@
+{% extends "admin/base.html" %}
+{% block  superiority %}
+active
+{% endblock %}
+{% block cssLink %}
+<link rel="stylesheet" href="{{url_for('adminPanel.static' , filename= 'admin/superiorities/css/style.css')}}">
+<style>
+    h2{
+        text-align: center;
+    }
+</style>
+{% endblock %}
+{% block title %}
+active
+{% endblock %}
+{% block page %}
+<div class="container">
+    <h2>Üstünlük əlavə et</h2>
+    <form action="/adminside/superiorities" method="POST" enctype="multipart/form-data">
+        <input type="file" class="form-control" name="super-img">
+        <textarea name="super-title" id=""  class="form-control" cols="30" rows="10"></textarea>
+        
+        <textarea name="super-content" id="" class="form-control" cols="30" rows="10"></textarea>
+        <button type="submit" class="form-control btn-primary btn">Əlavə et</button>
+    </form>
+</div>
+<hr>
+
+
+<div class="superiorieties container">
+  <h2>Üstünlüklər</h2>
+    <div class="grid my-5">
+  
+       {% for super in supers %}
+       <div class="grid__item">
+        <div class="card">
+            <img class="card__img" src="{{url_for('adminPanel.static',filename = 'admin/uploads/%s'% super.img)}}" alt="Snowy Mountains">
+          <div class="card__content">
+            <h3 class="card__header">{{super.title}}</h3>
+            <p class="card__text">{{super.content}} </p>
+          <div class="card__footer">
+              <a href="" class="btn btn-block btn-danger">Sil</a>
+              <a href="" class="btn btn-block btn-warning">Dəyişdir</a>
+          </div>
+          </div>
+        </div>
+      </div>
+       {% endfor %}
+       
+         
+  
+       
+       
+       
+       
+      </div>
+  </div>
+{% endblock %}

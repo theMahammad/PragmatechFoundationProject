@@ -31,33 +31,18 @@ active
             <div class="grid my-5">
           
                
-                <div class="grid__item">
-                    <div class="card"><img class="card__img" src="https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=2250&amp;q=80" alt="Snowy Mountains">
-                      <div class="card__content">
-                        <h3 class="card__header">A starry night</h3>
-                        <p class="card__text">Look up at the night sky, and find yourself <strong>immersed</strong> in the amazing mountain range of Aspen. </p>
-                      
-                      </div>
-                    </div>
+              {% for super in supers %}
+              <div class="grid__item">
+                <div class="card">
+                    <img class="card__img" src="{{url_for('adminPanel.static',filename = 'admin/uploads/%s'% super.img)}}" alt="Snowy Mountains">
+                  <div class="card__content">
+                    <h3 class="card__header">{{super.title}}</h3>
+                    <p class="card__text">{{super.content}} </p>
+                  
                   </div>
-                  <div class="grid__item">
-                    <div class="card"><img class="card__img" src="https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=2250&amp;q=80" alt="Snowy Mountains">
-                      <div class="card__content">
-                        <h3 class="card__header">A starry night</h3>
-                        <p class="card__text">Look up at the night sky, and find yourself <strong>immersed</strong> in the amazing mountain range of Aspen. </p>
-                      
-                      </div>
-                    </div>
-                  </div>
-                  <div class="grid__item">
-                    <div class="card"><img class="card__img" src="https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=2250&amp;q=80" alt="Snowy Mountains">
-                      <div class="card__content">
-                        <h3 class="card__header">A starry night</h3>
-                        <p class="card__text">Look up at the night sky, and find yourself <strong>immersed</strong> in the amazing mountain range of Aspen. </p>
-                      
-                      </div>
-                    </div>
-                  </div>
+                </div>
+              </div>
+              {% endfor %}
           
                
                

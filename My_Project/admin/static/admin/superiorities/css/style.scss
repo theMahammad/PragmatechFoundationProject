@@ -1,0 +1,96 @@
+.superiorieties{
+    // MEDIA QUERY
+@mixin media($breakpoint) {
+  @if $breakpoint == small {
+    @media (max-width: 60em) {
+      @content;
+    }
+  }
+}
+
+// VARIABLES
+$color-header: #0d0d0d;
+$color-text: #404040;
+
+$color-btn-text: #3363ff;
+$color-btn-background: #e6ecff;
+
+$transition: .2s;
+
+// RESET
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+
+
+// MAIN CONTENT
+.grid {
+  display: flex;
+  justify-content: space-evenly;
+  
+  
+  
+  &__item {
+      
+    background-color: #fff;
+    border-radius: .4rem;
+    
+    box-shadow: 0 3rem 6rem rgba(0, 0, 0, .1);
+    cursor: pointer;
+    transition: $transition;
+    
+    &:hover {
+      transform: translateY(-.5%);
+      box-shadow: 0 4rem 8rem rgba(0, 0, 0, .2);
+    }
+  }
+}
+
+.card {
+    display: flex;
+    width: 300px;
+    
+  &__img {
+    display: block;
+   
+    height: 10rem;
+    object-fit: cover;
+   }
+   
+  
+  
+  &__content {
+    padding: 3rem 3rem;
+  
+  }
+  
+  &__header {
+    font-size: 2rem;
+    font-weight: 500;
+    color: $color-header;
+    margin-bottom: 1.5rem;
+  }
+  
+  &__text {
+    font-size: 1rem;
+    letter-spacing: .1rem;
+    line-height: 1.7;
+    color: darken($color-text, 1%);
+    margin-bottom: 2.5rem;
+  }
+  &__footer
+  {
+      
+       a{
+      padding: 5px;
+  }
+}
+  
+  
+}
+}

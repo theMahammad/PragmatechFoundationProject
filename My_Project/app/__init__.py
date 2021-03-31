@@ -46,9 +46,9 @@ class Details(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     text = db.Column(db.String(100))
     logo = db.Column(db.String(100))
-# class Superiority(db.Model):
-#     id = db.Column(db.Integer,primary_key=True)
-#     img = db.Column(db.String(100))
-#     title = db.Column(db.String(100))
-#     content = db.Column(db.String(100))
+class Superiorities(db.Model):
+    id = db.Column(db.Integer,primary_key=True)
+    img = db.Column(db.String(100))
+    title = db.Column(db.String(100))
+    content = db.Column(db.String(100))
 

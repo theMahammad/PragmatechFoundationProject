@@ -42,7 +42,8 @@ def faq():
     return render_template("userside/faq.html" ,FAQS = FAQS)
 @user_bp.route("/partnering")
 def partnering():
-    return render_template("userside/partnering.html")
+    from app import Superiorities
+    return render_template("userside/partnering.html",supers = Superiorities.query.all())
 @user_bp.route("/feedbacks")
 def feedbacks():
     return render_template("userside/feedbacks.html")
