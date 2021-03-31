@@ -4,15 +4,22 @@ active
 {% endblock %}
 {% block cssLink %}
 <link rel="stylesheet" href="{{url_for('user.static', filename='userside/faq/css/style.css')}}">
-
+<style>
+  .accordion,h2{
+    font-family: "Comfortaa";
+  }
+</style>
 {% endblock %}
     {% block title %}
 Tez-tez soruşulan suallar
 {% endblock %}
    {% block page %}
+   {% if get_flashed_messages() %}
    {% for message in get_flashed_messages() %}
-<p class="alert alert-success d-none" id="subscriber-message" >{{ message }}</p>
-{% endfor %}
+  <p class="alert alert-success d-none" id="subscriber-message" >{{ message }}</p>
+  {% endfor %}
+   {% endif %}
+   
    <section class="faq">
 
    
@@ -46,8 +53,11 @@ Tez-tez soruşulan suallar
   
    {% block jsLink %}
    <script src="{{url_for('user.static', filename='userside/faq/js/script.js')}}"></script>
+{% if get_flashed_messages() %}
 <script>
   alert($('#subscriber-message').html())
   
 </script>
+{% endif %}
+
    {% endblock %}

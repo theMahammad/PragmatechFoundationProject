@@ -100,4 +100,35 @@ def updateRestaurant(id):
             db.session.commit()
         return redirect('/adminside/restaurants')
     return render_template("admin/update_restaurant.html",selectedRest = restaurantForUpdate)
+
+@admin_bp.route("/rules",methods = ['GET','POST'])
+def rules():
+    from app import db,Rules
+    rules = Rules.query.all()
+    if request.method=="POST": 
+        db.session.add(
+            Rules(
+            title = request.form['rule-title'],
+            content = request.form['rule-content']
+        ))
+        db.session.commit()
+        return redirect("/adminside/rules")
+    return render_template("admin/rules.html",rules = rules)
+@admin_bp.route("/rules/edit/<int:id>",methods = ['GET','POST'])
+def editRules(id):
+    from app import db,Rules
+    selectedRule = Rules.query.get(id)
+    if request.method=="POST":
+        selectedRule.title = request.form['rule-title']
+        selectedRule.content = request.form['rule-content']
+        db.session.commit()
+        return redirect("/adminside/rules")
+    return render_template("admin/update_rule.html",selectedRule = selectedRule)
+@admin_bp.route("/rules/delete/<int:id>")
+def deleteRule(id):
+    from app import db,Rules
+    db.session.delete(Rules.query.get(id))
+    db.session.commit()
+    return redirect("/adminside/rules")
+
     

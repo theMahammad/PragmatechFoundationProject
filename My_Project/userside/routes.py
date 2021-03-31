@@ -32,7 +32,9 @@ def about():
    return render_template("userside/about_us.html")
 @user_bp.route("/rules")
 def rules():
-    return render_template("userside/rules.html")
+    from app import Rules
+    rules = Rules.query.all()
+    return render_template("userside/rules.html",rules = rules)
 @user_bp.route("/FAQ")
 def faq():
     from app import FAQ

@@ -1,0 +1,33 @@
+{% extends "admin/base.html" %}
+{% block title %}
+Qaydalar
+{% endblock %}
+{% block rules %}
+active
+{% endblock %}
+{% block page %}
+<div class="container">
+    <form action="/adminside/rules" method="POST" enctype="multipart/form-data">
+        <textarea name="rule-title" id="" cols="30" rows="10" class="form-control" placeholder="Başlığı daxil edin"></textarea>
+        <textarea name="rule-content" id="" cols="30" rows="10" class="form-control" placeholder="Tərkibi  daxil edin"></textarea>
+        <button type="submit" class="form-control btn btn-primary">Əlavə et</button>
+    </form>
+</div>
+
+{% for rule in  rules %}
+
+<div class="card">
+    <div class="card-header">
+      {{rule.id}}
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">{{rule.title}}</h5>
+      <p class="card-text">{{rule.content}}</p>
+      <a href="/adminside/rules/delete/{{rule.id}}" class="btn btn-danger">Sil</a>
+      <a href="/adminside/rules/edit/{{rule.id}}" class="btn btn-primary">Dəyişdir</a>
+      
+    </div>
+</div>
+{% endfor %}
+
+{% endblock %}

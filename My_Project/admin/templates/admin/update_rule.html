@@ -1,0 +1,21 @@
+{% extends "admin/base.html" %}
+{% block title %}
+Qaydalar
+{% endblock %}
+{% block rules %}
+active
+{% endblock %}
+{% block page %}
+<div class="container">
+    <form action="/adminside/rules/edit/{{selectedRule.id}}" method="POST" enctype="multipart/form-data">
+        <textarea name="rule-title" id="" cols="30" rows="10" class="form-control" placeholder="Başlığı daxil edin">{{selectedRule.title}}</textarea>
+        <textarea name="rule-content" id="" cols="30" rows="10" class="form-control" placeholder="Tərkibi  daxil edin">{{selectedRule.content}}</textarea>
+        <button type="submit" class="form-control btn btn-primary">Təsdiq et</button>
+    </form>
+</div>
+
+
+
+
+
+{% endblock %}
