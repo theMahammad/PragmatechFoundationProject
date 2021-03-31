@@ -505,10 +505,15 @@ section .section-title {
   box-shadow: 3px 4px 3px gray;
   font-family: "Comfortaa";
   color: white !important;
+  transition: all 0.2s linear;
 }
 
 .card button {
   font-size: 1.5rem !important;
+}
+
+.card:hover {
+  transform: translateY(-10px);
 }
 
 .btn-see-profile {
@@ -536,6 +541,11 @@ section .section-title {
   width: 120px;
   min-height: 120px;
   border-radius: 50%;
+}
+
+.rest-list ::selection {
+  color: orange;
+  background-color: white;
 }
 
 .restaurants {

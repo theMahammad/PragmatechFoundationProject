@@ -467,6 +467,11 @@ html {
   font-weight: 300;
 }
 
+.review .review-list ::selection {
+  color: #f16121;
+  background-color: white;
+}
+
 .review .card {
   height: 280px;
   background-color: #f16121;

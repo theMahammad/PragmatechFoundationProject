@@ -39,7 +39,12 @@ html{
       }
      
   
-  
+      .review-list{
+          ::selection{
+              color: $orange;
+              background-color: white;
+          }
+      }
   
   .card {
   
