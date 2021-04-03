@@ -18,22 +18,23 @@
         <div class="form-container sign-up-container">
             <form action="/login" method="POST">
                 <h1>Hesab yarat</h1>
-                {{forms.fullname(placeholder = "Ad və soyadınızı daxil edin")}}
-                {{forms.email(placeholder = "E-mail adresinizi daxil edin")}}
-                {{forms.password(class="password",placeholder = "Şifrənizi daxil edin")}}
+                {{reg_form.fullname(placeholder = "Ad və soyadınızı daxil edin")}}
+                {{reg_form.email(placeholder = "E-mail adresinizi daxil edin")}}
+                {{reg_form.password(class="password",placeholder = "Şifrənizi daxil edin")}}
                 <span class="focus-on-password">Şifrəniz minimum 6 simvoldan ibarət olmalıdır</span>
-                {{forms.confirm(placeholder = "Şifrənizi təkrar daxil edin")}}
-               {{forms.button(value="Aramıza qatıl",class= "submitButton")}}
+                {{reg_form.confirm(placeholder = "Şifrənizi təkrar daxil edin")}}
+               {{reg_form.button(value="Aramıza qatıl",class= "submitButton")}}
             </form>
         </div>
         <div class="form-container sign-in-container">
-            <form action="#">
+            <form action="/login" method="POST">
                 <h1>Daxil ol</h1>
                 
-                <input type="email" placeholder="Email adressinizi daxil edin" />
-                <input type="password" placeholder="Şifrənizi daxil edin" />
+                {{log_form.email(placeholder= "E-mail adresinizi daxil edin")}}
+                {{log_form.password(class ="password" ,placeholder="Şifrənizi daxil edin")}}
+                {{log_form.remember(class="form-control")}}
                 <a href="#">Şifrənizi unutdunuz?</a>
-                <button>Daxil ol</button>
+                {{log_form.button(class="submitButton" ,value="Daxil ol")}}
             </form>
         </div>
         <div class="overlay-container">

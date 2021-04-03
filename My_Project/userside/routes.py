@@ -1,7 +1,11 @@
 from flask import render_template,Blueprint,redirect,request,flash
 from app.models import (ContactWays,Details,FAQ,Restaurant,Rules,Subscription,Superiorities,User)
-from .forms import RegistrationForm
+from .forms import RegistrationForm,LoginForm
 from app import db
+from werkzeug.security import generate_password_hash,check_password_hash
+from flask_login import login_user,current_user,logout_user,login_required
+
+
 user_bp = Blueprint('user',__name__,template_folder='templates',static_folder='static',static_url_path='/static/userside')
 
 @user_bp.route("/",methods = ["GET","POST"])
@@ -47,27 +51,46 @@ def partnering():
 def feedbacks():
     return render_template("userside/feedbacks.html")
 @user_bp.route("/login",methods = ['GET','POST'])
-def registration():
-    forms = RegistrationForm()
-    
+def login():
+    reg_form = RegistrationForm()
+    log_form  = LoginForm()
     if request.method=="POST":
-        user = User(
-            fullname=forms.fullname.data,
-            email = forms.email.data,
-            password = forms.password.data
-            )
-        registeredUser = User.query.filter_by(email=forms.email.data).first()
-        if registeredUser:
-            flash("Bu mail sistemdə qeydiyyatdan keçmişdir")
-            return redirect("/login")
-        else:
-            
-            db.session.add(user)
-            db.session.commit()
-            flash("Qeydiyyat tamamlandı")
-            return redirect("/")
-    return render_template("userside/login.html",forms = forms)
+        if reg_form.fullname.data:
+            user = User(
+                fullname=reg_form.fullname.data,
+                email = reg_form.email.data,
+                password = reg_form.password.data
+                )
+            registeredUser = User.query.filter_by(email=reg_form.email.data).first()
+            if registeredUser:
+                flash("Bu mail sistemdə qeydiyyatdan keçmişdir")
+                return redirect("/login")
+            else:
+                db.session.add(user)
+                db.session.commit()
+                flash('Qeydiyyat tamamlandı')
+                return redirect("/")
+        if log_form.email.data:
+            searchedUser = User.query.filter_by(email=log_form.email.data).first()
+            if searchedUser:
+                if searchedUser.password==log_form.password.data:
+                    login_user(searchedUser,remember = log_form.remember.data)
+                    flash("Təkrar xoş gəldiniz!")
+                    return redirect("/")
+                    
+                else:
+                    flash("Şifrənizdə yanlışlıq var")
+                    return redirect("/login")
+            else:
+                flash("Sistemdə belə bir istifadəçi yoxdur")
+                return redirect("/login")
+
+        
+       
+    return render_template("userside/login.html",reg_form = reg_form,log_form = log_form)
+
 @user_bp.route("/add_feedback")
+@login_required
 def addFeedback():
     return render_template("userside/add_feedback.html")
 @user_bp.route("/feedback_details")

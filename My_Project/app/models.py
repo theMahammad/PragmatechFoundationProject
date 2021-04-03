@@ -1,5 +1,5 @@
 from app import db
-from flas_login import UserMixin
+from flask_login import UserMixin
 class Restaurant(db.Model):
     id=db.Column(db.Integer,primary_key=True)
     name = db.Column(db.String(50))
