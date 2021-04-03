@@ -16,15 +16,14 @@
    
     <div class="container" id="container">
         <div class="form-container sign-up-container">
-            <form action="#">
+            <form action="/login" method="POST">
                 <h1>Hesab yarat</h1>
-              
-                <input type="text" placeholder="Adınız və soyadınız" />
-                <input type="email" placeholder="Email adressiniz" />
-                <input type="password" placeholder="Şifrənizi daxil edin" class="password" />
+                {{forms.fullname(placeholder = "Ad və soyadınızı daxil edin")}}
+                {{forms.email(placeholder = "E-mail adresinizi daxil edin")}}
+                {{forms.password(class="password",placeholder = "Şifrənizi daxil edin")}}
                 <span class="focus-on-password">Şifrəniz minimum 6 simvoldan ibarət olmalıdır</span>
-                <input type="password" placeholder="Şifrənizi təkrar daxil edin" />
-                <button>Aramıza qatılın!</button>
+                {{forms.confirm(placeholder = "Şifrənizi təkrar daxil edin")}}
+               {{forms.button(value="Aramıza qatıl",class= "submitButton")}}
             </form>
         </div>
         <div class="form-container sign-in-container">
@@ -54,18 +53,29 @@
     </div>
     
     
-
-
+   
 
 
 
    
-    <script src="../../JQuery/jquery-3.5.1.js"></script>
+    <script src=".{{url_for('user.static', filename='userside/generals/JQuery/jquery-3.5.1.js')}}"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 
    
     <script src="{{url_for('user.static', filename='userside/login/js/script.js')}}"></script>
+    {% if get_flashed_messages() %}
+    {% for message in get_flashed_messages() %}
+   <p class="alert alert-success d-none" id="subscriber-message" >{{ message }}</p>
+   {% endfor %}
+   <script>
+    alert($('#subscriber-message').html())
+    
+  </script>
+   {% endif %}
+  
+
 </body>
 </html>

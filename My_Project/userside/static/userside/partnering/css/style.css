@@ -477,12 +477,12 @@ html {
 
 .superiorieties .grid__item:hover {
   transform: translateY(-0.5%);
-  box-shadow: 0 4rem 8rem rgba(0, 0, 0, 0.2);
 }
 
 .superiorieties .card {
   width: 250px;
   height: 400px;
+  box-shadow: 0 0 2px;
 }
 
 .superiorieties .card__img {

@@ -1,0 +1,27 @@
+{% extends "admin/base.html" %}
+{% block title %}
+{{selectedSup.title}}
+{% endblock %}
+{% block page %}
+
+<div class="container">
+    <h2>Üstünlüyü dəyişdir</h2>
+    <div class="img-fluid  d-flex justify-content-center">
+        <img style="height: 200px;  " class="my-5" src="{{url_for('adminPanel.static',filename = 'admin/uploads/%s' %selectedSup.img)}}" alt="">
+    </div>
+    <form action="/adminside/superiorities/edit/{{selectedSup.id}}" method="POST" enctype="multipart/form-data">
+        {{forms.img(class="img form-control")}}
+        
+        {{forms.title(class="title form-control")}}
+        {{forms.content(class="content form-control")}}     
+        {{forms.button( class="form-control btn-primary btn", value = "Təsdiq et")}}
+    </form>
+</div>
+
+{% endblock %}
+{% block jsLink %}
+<script>
+document.querySelector('.title').innerHTML='{{selectedSup.title}}'
+document.querySelector('.content').innerHTML='{{selectedSup.content}}'
+</script>
+{% endblock %}

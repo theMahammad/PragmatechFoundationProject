@@ -1,7 +1,10 @@
 from flask import render_template,Blueprint,request,redirect,flash
 from werkzeug.utils import secure_filename
-import os
-
+import os 
+from app import db
+from app.models import (ContactWays,Details,FAQ,Restaurant,Rules,Subscription,Superiorities,User)
+from app import app
+from admin.forms import SuperioritiesForm,RestaurantsForm
 
 
 
@@ -11,9 +14,11 @@ admin_bp = Blueprint('adminPanel',__name__,url_prefix="/adminside",template_fold
 def index():
     
     return render_template("admin/index.html")
+@admin_bp.route("/users")
+def users():
+    return render_template("admin/users.html",users = User.query.all())
 @admin_bp.route("/faq",methods=["GET","POST"])
 def faq():
-    from app import FAQ,db 
     
     allFaq = FAQ.query.all()
     if request.method=="POST":
@@ -28,14 +33,13 @@ def faq():
     return render_template("admin/FAQ.html",allFaq = allFaq)
 @admin_bp.route("/faq/delete/<int:id>")
 def deleteFaq(id):
-    from app import FAQ,db
+   
     db.session.delete(FAQ.query.get(id))
     db.session.commit()
   
     return redirect("/adminside/faq")
 @admin_bp.route("/faq/edit/<int:id>",methods = ["GET","POST"])
 def editFaq(id):
-    from app import db,FAQ
     selectedFAQ =  FAQ.query.get(id)
     if request.method == "POST":
         selectedFAQ.question = request.form['faq-question']
@@ -45,65 +49,61 @@ def editFaq(id):
     return render_template("admin/update_faq.html",selected = selectedFAQ)
 @admin_bp.route("/subscribers")
 def subscribers():
-    from app import db,Subscription
     allSubscribers =  Subscription.query.all()
     return render_template("admin/subscription.html",allSubs = allSubscribers)
 @admin_bp.route("/subscribers/delete/<int:id>")
 def deleteSubscriber(id):
-    from app import db,Subscription
     db.session.delete(Subscription.query.get(id))
     db.session.commit()
     return redirect("/adminside/subscribers")
 @admin_bp.route("/restaurants", methods = ['GET','POST'])
 def restaurants():
-    from app import Restaurant,db,app
     filename = None
+    forms = RestaurantsForm()
     restaurants = Restaurant.query.all()
     if request.method=="POST":
-        if request.files['restaurant-logo']:
-            file = request.files['restaurant-logo']
+        if forms.logo.data:
+            file = forms.logo.data
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_PATH'],filename))
             restaurant = Restaurant(
-            name = request.form.get("restaurant-name"),
+            name = forms.name.data,
             logo = filename,
-            about = request.form.get("restaurant-about"),
+            about = forms.about.data,
             )
         
             db.session.add(restaurant)
             db.session.commit()
             return redirect("/adminside/restaurants")
-    return render_template("admin/restaurants.html",restaurants = restaurants)
+    return render_template("admin/restaurants.html",restaurants = restaurants,forms = forms)
 @admin_bp.route("/restaurants/seeDetails/<int:id>")
 def showRestaurantDetails(id):
-    from app import db,Restaurant
     return render_template("admin/see_restaurant_details.html",selectedRest = Restaurant.query.get(id))
 @admin_bp.route("/restaurants/delete/<int:id>")
 def deleteRestaurant(id):
-    from app import db,Restaurant
     restaurantForDelete = Restaurant.query.get(id)
     db.session.delete(restaurantForDelete)
     db.session.commit()
     return redirect("/adminside/restaurants")
 @admin_bp.route("/restaurants/edit/<int:id>",methods = ['GET','POST'])
 def updateRestaurant(id):
-    from app import app,db,Restaurant
     restaurantForUpdate = Restaurant.query.get(id)
+    forms = RestaurantsForm()
     if request.method == "POST":
-        if request.files['restaurant-logo']:
-            file = request.files['restaurant-logo']
+        if forms.logo.data:
+            file = forms.logo.data
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_PATH'],filename))
-            restaurantForUpdate.name = request.form['restaurant-name']
+            restaurantForUpdate.name = forms.name.data
             restaurantForUpdate.logo = filename
-            restaurantForUpdate.about = request.form['restaurant-about']
+            restaurantForUpdate.about = forms.about.data
             db.session.commit()
         return redirect('/adminside/restaurants')
-    return render_template("admin/update_restaurant.html",selectedRest = restaurantForUpdate)
+    return render_template("admin/update_restaurant.html",selectedRest = restaurantForUpdate,forms = forms)
 
 @admin_bp.route("/rules",methods = ['GET','POST'])
 def rules():
-    from app import db,Rules
+   
     rules = Rules.query.all()
     if request.method=="POST": 
         db.session.add(
@@ -116,7 +116,6 @@ def rules():
     return render_template("admin/rules.html",rules = rules)
 @admin_bp.route("/rules/edit/<int:id>",methods = ['GET','POST'])
 def editRules(id):
-    from app import db,Rules
     selectedRule = Rules.query.get(id)
     if request.method=="POST":
         selectedRule.title = request.form['rule-title']
@@ -126,29 +125,93 @@ def editRules(id):
     return render_template("admin/update_rule.html",selectedRule = selectedRule)
 @admin_bp.route("/rules/delete/<int:id>")
 def deleteRule(id):
-    from app import db,Rules
     db.session.delete(Rules.query.get(id))
     db.session.commit()
     return redirect("/adminside/rules")
+# ##################################################
+# SUPERIORITIES CRUD
 @admin_bp.route("/superiorities",methods = ["GET","POST"])
 def superiority():
-    from app import Superiorities,db,app
+    
+    forms = SuperioritiesForm()
     supers = Superiorities.query.all()
     filename = None
     if request.method=="POST":
-        if request.files['super-img']:
-            file = request.files['super-img']
+        if forms.img.data:
+            file = forms.img.data
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_PATH'],filename))
         super = Superiorities(
             img  = filename,
-            title = request.form['super-title'],
-            content = request.form['super-content']
+            title = forms.title.data,
+            content = forms.content.data
 
         )    
+
         db.session.add(super)
         db.session.commit()
         return redirect("/adminside/superiorities")
-    return render_template("admin/superiorities.html",supers = supers)
+    return render_template("admin/superiorities.html",supers = supers,restaurants = Restaurant.query.all(),forms = forms)
+@admin_bp.route("/superiorities/delete/<int:id>")
+def deleteSuperiority(id):
+    db.session.delete(Superiorities.query.get(id))
+    db.session.commit()
+    return redirect("/adminside/superiorities")
+@admin_bp.route("/superiorities/edit/<int:id>",methods = ['GET','POST'])
+def editSuperiority(id):
+    selectedSup  = Superiorities.query.get(id)
+    forms =  SuperioritiesForm()
+    filename = None
+    if request.method=="POST":
+        if forms.img.data:
+            file = forms.img.data
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_PATH'],filename))
+       
+        selectedSup.img  = filename
+        selectedSup.title = forms.title.data
+        selectedSup.content = forms.content.data
+        db.session.commit()
+        return redirect("/adminside/superiorities")
+    return render_template("admin/update_superiority.html",selectedSup = selectedSup,forms = forms)
+
+# CONTACT WAYS CRUD
+@admin_bp.route("/contact_ways",methods = ['GET','POST'])
+def addAndShowcontact():
+    contacts = ContactWays.query.all()
+    if request.method=='POST':
+        contact = ContactWays(
+            facebook = request.form['facebook'],
+            twitter = request.form['twitter'],
+            instagram = request.form['instagram'],
+            youtube = request.form['youtube'],
+            gmail  = request.form['gmail'],
+            phoneNumber = request.form['phone-number']
+        )
+        db.session.add(contact)
+        db.session.commit()
+        return redirect("/adminside/contact_ways")
+    return render_template('admin/contact_ways.html',contacts = contacts)
+@admin_bp.route('/contact_ways/delete/<int:id>')
+def deleteContact(id):
+    db.session.delete(ContactWays.query.get(id))
+    db.session.commit()
+    return redirect("/adminside/contact_ways")
+@admin_bp.route("/contact_ways/edit/<int:id>",methods = ['GET','POST'])
+def editContact(id):
+    selectedContact = ContactWays.query.get(id)
+    if request.method=='POST':    
+        selectedContact.facebook = request.form['facebook']
+        selectedContact.twitter = request.form['twitter']
+        selectedContact.instagram = request.form['instagram']
+        selectedContact.youtube = request.form['youtube']
+        selectedContact.gmail  = request.form['gmail']
+        selectedContact.phoneNumber = request.form['phone-number']
+        db.session.commit()
+        return redirect("/adminside/contact_ways")
+    return render_template('admin/update_contact_ways.html',selectedContact = selectedContact)
+    
+
+
 
     

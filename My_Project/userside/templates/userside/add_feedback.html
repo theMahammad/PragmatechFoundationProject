@@ -1,0 +1,59 @@
+{% extends "userside/base.html" %}
+{% block cssLink %}
+<link rel="stylesheet" href="{{url_for('user.static', filename='userside/add_feedback/style.css')}}">
+
+{% endblock %}
+{% block title %}
+Fikir əlavə et
+{% endblock %}
+{% block page %}
+<section class="adding">
+    <div class="container">
+        <form action="/add_feedback" class="add-feedback" method = "POST">
+            
+            <!-- <div class="mb-5">
+            <input type="text" name="fullname" class="form-control"  placeholder="Ad və soyadınızı daxil edin">
+            </div>
+            <div class="mb-5">
+              
+                <input type="email" class="form-control" name="mail"  placeholder="Mail adresinizi daxil edin">
+            </div> -->
+            <div class="mb-5">
+              
+               <input type="text " class="form-control" placeholder="Restoran adını daxil edin" name="review-restaurant">
+               <input type="file" >
+            </div>
+            <div class="form-group mb-5">
+              
+                <textarea name="review-header" class="form-control" placeholder="Fikrinizin başlığını yazın" cols="30" rows="10"></textarea>    
+            </div>
+            <div class="form-group mb-5">
+              
+                <textarea name="review-content" class="form-control" placeholder="Fikrinizi yazın" cols="30" rows="10"></textarea>    
+            </div>
+            <div class="form-group mb-5">
+              
+                <select name="review-rating" class="form-control"   cols="30" rows="10">
+                    <option value="" disabled selected>Restorana neçə bal verirsiniz?</option>
+                    <option value="0">0</option>
+                    <option value="1" class="">1</option>
+                    <option value="2" class="">2</option>
+                    <option value="3" class="">3</option>
+                    <option value="4" class="">4</option>
+                    <option value="5" class="">5</option>
+                    <option value="6" class="">6</option>
+                    <option value="7" class="">7</option>
+                    <option value="8" class="">8</option>
+                    <option value="9" class="">9</option>
+                    <option value="10">10</option>
+                </select>    
+            </div>
+            <div class="mb-5">
+            <button type="submit" class="btn btn-primary btn-block">Bildirin</button>
+            </div>
+          </form>
+    </div>
+     
+</section>
+
+{% endblock %}

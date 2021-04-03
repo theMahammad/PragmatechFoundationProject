@@ -1,5 +1,7 @@
 from flask import render_template,Blueprint,redirect,request,flash
-
+from app.models import (ContactWays,Details,FAQ,Restaurant,Rules,Subscription,Superiorities,User)
+from .forms import RegistrationForm
+from app import db
 user_bp = Blueprint('user',__name__,template_folder='templates',static_folder='static',static_url_path='/static/userside')
 
 @user_bp.route("/",methods = ["GET","POST"])
@@ -24,7 +26,6 @@ def index():
     return render_template("userside/home-page.html")
 @user_bp.route("/restaurants")
 def restaurants():
-    from app import Restaurant
     restaurants = Restaurant.query.all()
     return render_template("userside/restaurants.html",restaurants = restaurants)
 @user_bp.route("/about_us")
@@ -32,23 +33,46 @@ def about():
    return render_template("userside/about_us.html")
 @user_bp.route("/rules")
 def rules():
-    from app import Rules
+    
     rules = Rules.query.all()
     return render_template("userside/rules.html",rules = rules)
 @user_bp.route("/FAQ")
 def faq():
-    from app import FAQ
     FAQS = FAQ.query.all()
     return render_template("userside/faq.html" ,FAQS = FAQS)
 @user_bp.route("/partnering")
 def partnering():
-    from app import Superiorities
     return render_template("userside/partnering.html",supers = Superiorities.query.all())
 @user_bp.route("/feedbacks")
 def feedbacks():
     return render_template("userside/feedbacks.html")
-@user_bp.route("/login")
-def login():
-    return render_template("userside/login.html")
+@user_bp.route("/login",methods = ['GET','POST'])
+def registration():
+    forms = RegistrationForm()
+    
+    if request.method=="POST":
+        user = User(
+            fullname=forms.fullname.data,
+            email = forms.email.data,
+            password = forms.password.data
+            )
+        registeredUser = User.query.filter_by(email=forms.email.data).first()
+        if registeredUser:
+            flash("Bu mail sistemdə qeydiyyatdan keçmişdir")
+            return redirect("/login")
+        else:
+            
+            db.session.add(user)
+            db.session.commit()
+            flash("Qeydiyyat tamamlandı")
+            return redirect("/")
+    return render_template("userside/login.html",forms = forms)
+@user_bp.route("/add_feedback")
+def addFeedback():
+    return render_template("userside/add_feedback.html")
+@user_bp.route("/feedback_details")
+def showFeedbackDetails():
+    return render_template("userside/detailed_feedback.html")
 
-
+   
+      

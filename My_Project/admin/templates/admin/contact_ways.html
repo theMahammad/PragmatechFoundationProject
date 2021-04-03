@@ -1,0 +1,67 @@
+{% extends "admin/base.html" %}
+{% block title %}
+Əlaqə 
+{% endblock %}
+{% block contact_ways %}
+active
+{% endblock %}
+{% block page %}
+<div class="container">
+
+<h2>Əlaqə yolu əlavə et</h2>
+<form action="/adminside/contact_ways" method="POST">
+<label for="">Facebook</label>
+<input type="text" class="form-control" name="facebook">
+<label for="">Twitter</label>
+<input type="text" class="form-control" name="twitter">
+<label for="">Instagram</label>
+<input type="text" class="form-control" name="instagram">
+<label for="">Gmail</label>
+<input type="email" class="form-control" name="gmail">
+<label for="">Youtube</label>
+<input type="text" class="form-control" name="youtube">
+<label for="">Əlaqə nömrəsi</label>
+<input type="tel" class="form-control" name="phone-number">
+<button type="submit" class="btn btn-primary btn-block my-3">Əlavə et</button>
+</form>
+</div>
+<div class="container">
+    <h2 style="text-align: center;">Əlaqə yolları</h2>
+    <table class="table table-bordered " >
+        <thead>
+          <tr>
+            <th scope="col ">ID</th>
+            <th scope="col">Facebook</th>
+            <th scope="col">Twitter</th>
+            <th scope="col">Instagram</th>
+            <th scope="col">Gmail</th>
+            <th scope="col">Youtube</th>
+            <th scope="col">Əlaqə nömrəsi</th>
+            <th>Əməliyyat</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for contact in contacts %}
+    
+        
+          <tr>
+            <th scope="row">{{contact.id}}</th>
+            <td>{{contact.facebook}}</td>
+            <td>{{contact.twitter}}</td>
+            <td>{{contact.instagram}}</td>
+            <td>{{contact.gmail}}</td>
+            <td>{{contact.youtube}}</td>
+            <td>{{contact.phoneNumber}}</td>
+            <td>
+                <a href="/adminside/contact_ways/edit/{{contact.id}}" title="Dəyişdir" style="color: green;"><i class="bi bi-pencil-square"></i></a>
+                <a href="/adminside/contact_ways/delete/{{contact.id}}" title="Sil" style="color: red;"><i class="bi bi-trash"></i></a>
+            </td>
+          </tr>
+          {% endfor %}
+         
+         
+        </tbody>
+      </table>
+</div>
+
+{% endblock %}

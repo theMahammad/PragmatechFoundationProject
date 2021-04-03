@@ -1,0 +1,25 @@
+{% extends "admin/base.html" %}
+{% block title %}
+Əlaqə yolları
+{% endblock %}
+{% block page %}
+<div class="container">
+
+    <h2>Əlaqə yolunu dəyişdir</h2>
+    <form action="/adminside/contact_ways/edit/{{selectedContact.id}}" method="POST">
+    <label for="">Facebook</label>
+    <input type="text" class="form-control"  value="{{selectedContact.facebook}}"  name="facebook">
+    <label for="">Twitter</label>
+    <input type="text" class="form-control" value="{{selectedContact.twitter}}"  name="twitter">
+    <label for="">Instagram</label>
+    <input type="text" class="form-control" value="{{selectedContact.instagram}}"  name="instagram">
+    <label for="">Gmail</label>
+    <input type="email" class="form-control"  value="{{selectedContact.gmail}}" name="gmail">
+    <label for="">Youtube</label>
+    <input type="text" class="form-control" value="{{selectedContact.youtube}}"  name="youtube">
+    <label for="">Əlaqə nömrəsi</label>
+    <input type="tel" class="form-control" value="{{selectedContact.phoneNumber}}"  name="phone-number">
+    <button type="submit" class="btn btn-primary btn-block my-3">Təsdiq et</button>
+    </form>
+    </div>
+{% endblock %}

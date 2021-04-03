@@ -11,12 +11,12 @@ active
 {% endblock %}
 {% block page %}
 <section class="loading-screen">
-    <div class="body animate__animated animate__delay-4s ">
+    <div class="body animate__animated animate__delay-2s ">
     <div id="container">
-    <div class="load-screen-logo animate__animated animate__delay-3s animate__flash">
+    <div class="load-screen-logo animate__animated animate__delay-1s animate__flash">
         <img src="{{url_for('user.static', filename='userside/generals/img/brand-logo.png')}}"  alt="">
     </div>
-  <p class="loading-text animate__animated animate__delay-4s animate__slideOutDown" aria-label="Loading">
+  <p class="loading-text animate__animated animate__delay-2s animate__slideOutDown" aria-label="Loading">
     <span class="letter" aria-hidden="true">Y</span>
     <span class="letter" aria-hidden="true">Ü</span>
     <span class="letter" aria-hidden="true">K</span>
@@ -61,7 +61,7 @@ active
                 <a class="get-Idea btn btn-secondary" href="/feedbacks">
                     Fikir sahibi ol
                 </a>
-                <a class="set-Idea btn btn-secondary" href="#">
+                <a class="set-Idea btn btn-secondary" href="/add_feedback">
                     Fikir bildir
                 </a>
 
@@ -200,7 +200,17 @@ active
 
 </div>
 </section>
+
 {% endblock %}
-{% block jsFolderName %}
-home_page
+{% block jsLink %}
+{% if get_flashed_messages() %}
+{% for message in get_flashed_messages() %}
+<p class="alert alert-success d-none" id="subscriber-message" >{{ message }}</p>
+{% endfor %}
+<script>
+alert($('#subscriber-message').html())
+
+</script>
+{% endif %}
+
 {% endblock %}

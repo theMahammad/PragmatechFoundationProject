@@ -78,7 +78,7 @@ align-content: space-between;
   
   &:hover {
     transform: translateY(-.5%);
-    box-shadow: 0 4rem 8rem rgba(0, 0, 0, .2);
+    
   }
 }
 }
@@ -87,6 +87,8 @@ align-content: space-between;
 
   width: 250px;
   height: 400px;
+ 
+  box-shadow: $usually-used-box-shadow;
   
 &__img {
   display: block;

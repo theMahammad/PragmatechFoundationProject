@@ -5,6 +5,8 @@ Qaydalar
 {% block rules %}
 active
 {% endblock %}
+{% block cssLink %}
+{% endblock %}
 {% block page %}
 <div class="container">
     <form action="/adminside/rules" method="POST" enctype="multipart/form-data">
@@ -30,4 +32,7 @@ active
 </div>
 {% endfor %}
 
+
+{% endblock %}
+{% block jsLink %}
 {% endblock %}

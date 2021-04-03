@@ -11,17 +11,25 @@ active
 </style>
 {% endblock %}
 {% block title %}
-active
+Üstünlüklər
 {% endblock %}
 {% block page %}
-<div class="container">
+<!-- <label>Choose a browser from this list:
+    <input type="input" onkeyup="myFunc()" list="mylist"></label>
+    <datalist class="data"   style="display: none;">
+        {% for restaurant in restaurants %}
+        <option value="{{restaurant.id}}">{{restaurant.name}}</option>
+        {% endfor %}
+        
+        
+     </datalist> -->
+<div class="container" >
     <h2>Üstünlük əlavə et</h2>
     <form action="/adminside/superiorities" method="POST" enctype="multipart/form-data">
-        <input type="file" class="form-control" name="super-img">
-        <textarea name="super-title" id=""  class="form-control" cols="30" rows="10"></textarea>
-        
-        <textarea name="super-content" id="" class="form-control" cols="30" rows="10"></textarea>
-        <button type="submit" class="form-control btn-primary btn">Əlavə et</button>
+        {{forms.img(class="form-control",placeholder = "Şəkil daxil edin")}}
+        {{forms.title(class="form-control title",placeholder = "Başlıq daxil edin")}}        
+        {{forms.content(class="form-control content", placeholder = "Kontent  daxil edin")}}  
+        {{forms.button(class = "form-control btn btn-primary",value = "Əlavə et")}}        
     </form>
 </div>
 <hr>
@@ -39,8 +47,8 @@ active
             <h3 class="card__header">{{super.title}}</h3>
             <p class="card__text">{{super.content}} </p>
           <div class="card__footer">
-              <a href="" class="btn btn-block btn-danger">Sil</a>
-              <a href="" class="btn btn-block btn-warning">Dəyişdir</a>
+              <a href="/adminside/superiorities/delete/{{super.id}}" class="btn btn-block btn-danger">Sil</a>
+              <a href="/adminside/superiorities/edit/{{super.id}}" class="btn btn-block btn-warning">Dəyişdir</a>
           </div>
           </div>
         </div>
@@ -55,4 +63,13 @@ active
        
       </div>
   </div>
+  {%endblock %}
+ 
+ 
+  {% block jsLink %}
+  
+
+<script>
+
+</script>
 {% endblock %}

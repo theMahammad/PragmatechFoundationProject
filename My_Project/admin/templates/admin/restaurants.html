@@ -9,11 +9,11 @@ Restoranlar
 <div class="container">
     <form action="/adminside/restaurants" method="POST" enctype="multipart/form-data">
         <label for=""></label>
-    <input type="text" class="form-control" name="restaurant-name" placeholder="Restoran adı">
-    <input type="file" class="form-control" name="restaurant-logo" placeholder="Restoran loqosu">
-    <textarea name="restaurant-about" class="form-control" placeholder="Restoran haqqında məlumat daxil edin" id="" cols="30" rows="10"></textarea>
-    <button type="submit" class="btn btn-primary">Əlavə et</button>
-    </form>
+      {{forms.name(class="form-control",placeholder = "Restoran adını daxil edin")}}
+      {{forms.logo(class="form-control",placeholder = "Restoran loqosunu daxil edin")}} 
+      {{forms.about(class="form-control",placeholder = "Restoran barədə ətraflı məlumat daxil edin")}}    
+      {{forms.button(class="form-control btn btn-primary",placeholder = "Restoran", value = "Əlavə et")}}   
+     </form>
     </div>
 <table class="table">
     <thead>

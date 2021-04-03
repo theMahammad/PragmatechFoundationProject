@@ -12,13 +12,17 @@ Dəyişdir
         <img src="{{url_for('adminPanel.static',filename = 'admin/uploads/%s' %selectedRest.logo)}}" style="max-height:200px  ; border-radius: 50%;" alt="">
     </div>
     <form action="/adminside/restaurants/edit/{{selectedRest.id}}" method="POST" enctype="multipart/form-data">
-        <label for=""></label>
-    <input type="text" class="form-control" name="restaurant-name" placeholder="Restoran adı" value="{{selectedRest.name}}">
-    <input type="file" class="form-control" name="restaurant-logo" placeholder="Restoran loqosu" value="{{selectedRest.logo}}">
-    <textarea name="restaurant-about" class="form-control" placeholder="Restoran haqqında məlumat daxil edin" id="" cols="30" rows="10">{{selectedRest.about}}</textarea>
-    <button type="submit" class="btn btn-primary">Təsdiq et</button>
+        {{forms.name(class = "form-control",value=selectedRest.name)}}
+         {{forms.logo(class = "form-control ")}}
+        {{forms.about(class = "form-control about")}}
+        {{forms.button(class = "form-control btn btn-primary",value = "Təsdiq et")}}
     </form>
     </div>
 
 
+{% endblock %}
+{% block jsLink %}
+<script>
+    document.querySelector('.about').innerHTML='{{selectedRest.about}}'
+</script>
 {% endblock %}

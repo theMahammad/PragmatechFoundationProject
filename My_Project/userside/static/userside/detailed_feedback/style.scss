@@ -1,0 +1,389 @@
+@import '../generals/sass/variables';
+@import '../generals/sass/scrollbar';
+@import '../generals/sass/header';
+@import '../generals/sass/footer';
+
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@600&display=swap');
+html{
+    font-size: 10px;
+}
+
+.review {
+    background-color:white;
+    font-family: 'Open Sans', sans-serif;
+    box-shadow: 0px 0px 2px ;
+      width: 100%;
+      min-height: 500px;
+      padding: 30px;
+  font-family: $usually-used-font;
+      &-header{
+          color: $orange;
+          text-align: center;
+          font-size: 4rem !important;
+          
+      }
+      &-paragraph{
+       font-family: $usually-used-font;
+        letter-spacing: 2px;
+      }
+      .name-and-rating-section{
+        display: flex;
+        width: 100%;
+        height: min-content;
+      }
+      .user-and-rest{
+        margin-top: 20px;
+        justify-content: center;
+
+        display: flex;
+
+      }
+   
+      .rest-profile,.user-profile{
+        $imageIds: '1517021897933-0e0319cfbc28', '1533903345306-15d1c30952de', '1545243424-0ce743321e11', '1531306728370-e2ebd9d7bb99';
+        
+        $bp-md: 600px;
+        $bp-lg: 800px;
+        
+        :root {
+          --d: 700ms;
+          --e: cubic-bezier(0.19, 1, 0.22, 1);
+          --font-sans: 'Rubik', sans-serif;
+          --font-serif: 'Cardo', serif;
+        }
+        
+        * {
+          box-sizing: border-box;
+        }
+        .card-title{
+            font-size: 2rem !important;
+        }
+        .card-rating{
+            font-size: 1.5rem;
+        }
+
+        
+        
+        /* FontAwesome for working BootSnippet :> */
+        
+        @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+        
+        
+        .btn-primary:hover,
+        .btn-primary:focus {
+            background-color: #108d6f;
+            border-color: #108d6f;
+            box-shadow: none;
+            outline: none;
+        }
+        
+        .btn-primary {
+            color: #fff;
+            background-color: #007b5e;
+            border-color: #007b5e;
+        }
+        
+        section {
+            padding: 60px 0;
+        }
+        
+        section .section-title {
+            text-align: center;
+            color: #007b5e;
+            margin-bottom: 50px;
+            text-transform: uppercase;
+        }
+        
+        
+        
+        
+        
+        .frontside {
+            position: relative;
+            -webkit-transform: rotateY(0deg);
+            -ms-transform: rotateY(0deg);
+            z-index: 2;
+            margin-bottom: 30px;
+            
+        }.count-feedbacks{
+          font-family: "Comfortaa";
+            position: absolute;
+           
+           bottom: 20%;
+           left: 40%;
+           font-size: 2rem !important;
+            i{
+              margin-left:10px ;
+              font-size: 2rem !important;
+           }
+         
+            color: white;
+            font-size: 1rem;
+        }
+        
+        
+        
+        
+        .frontside .card,
+        .backside .card {
+            min-height: 312px;
+            min-width: 250px;
+        }
+        .card{
+          background-color: $orange;
+          box-shadow: 3px 4px 3px gray;
+          font-family: "Comfortaa";
+          color: white !important;
+          transition: all 0.2s linear;
+          &:hover{
+              transform: translateY(-10px);
+          }
+          button{
+            font-size: 1.5rem !important;
+          }
+        }
+        .btn-see-profile{
+            background-color:transparent;
+            color: white;
+            position: absolute;
+            border: 1px solid white;
+            bottom: 7%;
+            left: 30%;
+            box-shadow: 0px 0px 1px;
+            transition: all 0.2s linear;
+            &:hover{
+                
+                bottom: 10%;
+                box-shadow: 2px 3px 2px;
+            }
+        
+        }
+        
+        
+        .backside .card a {
+            font-size: 18px;
+            color: #007b5e !important;
+        }
+        
+        
+        
+        .frontside .card .card-body img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+        }
+        
+        .restaurants{
+        min-height: 500px;
+        font-size: 16px;
+        box-shadow: 0px 0px 2px ;
+        padding: 30px;
+        font-family: "Comfortaa";
+        
+        h1{
+          font-size: 4rem !important;
+        }
+        
+        .page-content {
+          display: grid;
+          grid-gap: 1em;
+          padding: 1em;
+          max-width: 1024px;
+          margin: 0 auto;
+          font-family: var(--font-sans);
+          
+          @media (min-width: $bp-md) {
+            grid-template-columns: repeat(2, 1fr);
+          }
+          
+          @media (min-width: $bp-lg) {
+            grid-template-columns: repeat(4, 1fr);
+          }
+        }
+        }
+        
+        
+        }
+     
+  
+  .photo{
+    background-color: $orange;
+    padding: 20px;
+    max-height: 500px;
+    border-radius: 50px;
+    margin-bottom: 10px;
+    .review-photo{
+        min-width: 100%;
+        object-fit: cover;
+        border-radius: 50px;
+        height: 100%;
+
+    }
+  }
+  
+  .cardam {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: $orange;
+    border-radius: 10px;
+    box-shadow: 0 0 1rem #000;
+  /*   margin-left: -50px; */
+    transition: 0.4s ease-out;
+    position: relative;
+    
+  }
+
+  
+ 
+ 
+  
+  .name-and-rating{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+    width: 90%;
+    min-height: 5rem;
+    .rest-name {
+      text-align: center;
+      color: white;
+      font-weight: 300;
+    
+    }
+    .rating-section{
+        color: white;
+        font-weight: 300;
+        font-size: 1.5rem;
+        margin-left: 5px ;
+    }
+  }
+
+      .user{
+          width: 60%;
+          font-size: 2rem;
+          
+         
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          &-icon{
+              color: white;
+              align-self: center;
+              font-size: 3rem;
+          }
+          &-name{
+              color: white;
+          }
+      }
+      
+  
+ 
+      .content-review{
+        
+         
+          height: fit-content;
+          .real-content{
+             
+          
+            background-color: transparent;
+         
+            width: 90%;
+            display: flex;
+          
+              border: none;
+            i{
+                color: white;
+                font-size: 3rem;
+            }
+            p{
+                font-size: 2rem;
+                color: white;
+                margin-left: 5px;
+            }
+          }
+          
+      }
+  
+  
+  .cardam-footer{
+      width: 90%;
+      min-height:30px ;
+      bottom: 10px;
+      color: white;
+      display: flex;
+      margin-left:10px ;
+      justify-content: space-between;
+      background-color: transparent;
+      font-size: 1.5rem;
+      
+     
+      }
+       .cardam:hover  a{
+          opacity: 1;
+           text-decoration: underline;
+           
+      }
+  
+  }
+  .blockquote-wrapper {
+    display: flex;
+    
+    padding: 0 20px;
+ }
+ 
+ /* Blockquote main style */
+ .blockquote {
+     position: relative;
+     font-family: $usually-used-font;
+     font-weight: 800;
+     color: $orange;
+     padding: 30px 0;
+     width: 100%;
+     max-width: 500px;
+     z-index: 1;
+     margin: 10px auto;
+     align-self: center;
+     border-top: solid 1px;
+     border-bottom: solid 1px;
+ }
+ 
+ /* Blockquote header */
+ .blockquote h1 {
+     position: relative;
+     color: $orange;
+     font-size: 40px;
+     font-weight: 800;
+     line-height: 1;
+     margin: 0;
+ }
+ 
+ /* Blockquote right double quotes */
+ .blockquote:after {
+     position: absolute;
+     content: "”";
+     color: $orange;
+     font-size: 10rem;
+     line-height: 0;
+     bottom: -33px;
+     right: 30px;
+ }
+ 
+ /* increase header size after 600px */
+ @media all and (min-width: 600px) {
+     .blockquote h1 {
+         font-size: 60px;
+    }
+ 
+ }
+ 
+ /* Blockquote subheader */
+ .blockquote h4 {
+     position: relative;
+     color: #292a2b;
+     font-size: 1.4rem;
+     font-weight: normal;
+     line-height: 1;
+     margin: 0;
+     padding-top: 20px;
+     z-index: 1;
+ }
