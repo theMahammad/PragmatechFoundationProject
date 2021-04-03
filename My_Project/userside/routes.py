@@ -10,7 +10,7 @@ user_bp = Blueprint('user',__name__,template_folder='templates',static_folder='s
 
 @user_bp.route("/",methods = ["GET","POST"])
 def index():
-    from app import db,Subscription
+    
     count = 0
     if request.method == "POST":
         allSubscribers = Subscription.query.all()
@@ -19,7 +19,8 @@ def index():
                 count+=1
         if count==0:
             db.session.add(
-                Subscription(mail = request.form['subscribe'])
+                Subscription(mail = request.form['subscribe']
+                )
             )
             db.session.commit()
             flash("Abunə oldunuz.Təbriklər!")
@@ -74,7 +75,12 @@ def login():
             searchedUser = User.query.filter_by(email=log_form.email.data).first()
             if searchedUser:
                 if searchedUser.password==log_form.password.data:
-                    login_user(searchedUser,remember = log_form.remember.data)
+                    
+                    if log_form.remember.data:
+                        remember=True
+                    else:
+                        remember = False
+                    login_user(searchedUser,remember = remember)
                     flash("Təkrar xoş gəldiniz!")
                     return redirect("/")
                     
@@ -88,7 +94,10 @@ def login():
         
        
     return render_template("userside/login.html",reg_form = reg_form,log_form = log_form)
-
+@user_bp.route("/logout")
+def logout():
+    logout_user()
+    return redirect("/")
 @user_bp.route("/add_feedback")
 @login_required
 def addFeedback():

@@ -26,8 +26,14 @@
 
 <div class="register">
     <div class="buttons">
-        <a class=" btn login" href="/login">{{current_user.username}}</a>
+        {% if current_user.is_authenticated %}
+        <a class=" btn login" href="/login">{{current_user.fullname}}</a>
+        <a class=" btn login" href="/logout">Çıx</a>
+        {% else %}
+        <a class=" btn login" href="/login">Daxil ol</a>
         <a class=" btn registration" href="/login">Qeydiyyatdan keç</a>
+        {% endif %}
+        
     </div>
    
     

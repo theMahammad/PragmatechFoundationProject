@@ -3,13 +3,13 @@ from werkzeug.utils import secure_filename
 import os 
 from app import db
 from app.models import (ContactWays,Details,FAQ,Restaurant,Rules,Subscription,Superiorities,User)
-from app import app
+from app import create_app
 from admin.forms import SuperioritiesForm,RestaurantsForm
 
 
 
 admin_bp = Blueprint('adminPanel',__name__,url_prefix="/adminside",template_folder='templates',static_folder='static',static_url_path='/static/admin')
-
+app = create_app()
 @admin_bp.route("")
 def index():
     

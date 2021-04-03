@@ -69,7 +69,7 @@
     <script src="{{url_for('user.static', filename='userside/login/js/script.js')}}"></script>
     {% if get_flashed_messages() %}
     {% for message in get_flashed_messages() %}
-   <p class="alert alert-success d-none" id="subscriber-message" >{{ message }}</p>
+   <p class="alert alert-success d-none" id="subscriber-message" >{{ message}}</p>
    {% endfor %}
    <script>
     alert($('#subscriber-message').html())
