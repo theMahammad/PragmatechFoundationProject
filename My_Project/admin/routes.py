@@ -27,9 +27,22 @@ def save_file_and_return(file,filename,specialName):
     else:
         file.save(os.path.join(app.config['UPLOAD_PATH'],filename))
     return filename
+def secure_and_save_file(data,prefix):
+    file = data
+    filename = secure_filename(file.filename)
+    filename = save_file_and_return(specialName=prefix.split()[0],file = file,filename= filename)
+    return filename
+
 def deleteFromUploadFolder(element):
     if(os.path.exists(os.path.join(app.config['UPLOAD_PATH'],element))):
         os.remove(os.path.join(app.config['UPLOAD_PATH'],element))
+def deleteCompletely(id,class_,*args):
+    obj = class_.query.get(id)
+    for arg in args:
+        deleteFromUploadFolder(arg)
+    db.session.delete(obj)
+    db.session.commit()
+
 @admin_bp.route("")
 def index():
     
@@ -91,18 +104,17 @@ def restaurants():
     restaurants = Restaurant.query.all()
     if request.method=="POST":
         if forms.logo.data:
-            file = forms.logo.data
-            filename = secure_filename(file.filename)
-            filename = save_file_and_return(specialName=forms.name.data,file = file,filename= filename)
-            restaurant = Restaurant(
+            filename = secure_and_save_file(forms.logo.data,prefix=forms.name.data)
+
+        restaurant = Restaurant(
             name = forms.name.data,
             logo = filename,
             about = forms.about.data,
             )
         
-            db.session.add(restaurant)
-            db.session.commit()
-            return redirect("/adminside/restaurants")
+        db.session.add(restaurant)
+        db.session.commit()
+        return redirect("/adminside/restaurants")
     return render_template("admin/restaurants.html",restaurants = restaurants,forms = forms)
 @admin_bp.route("/restaurants/seeDetails/<int:id>")
 def showRestaurantDetails(id):
@@ -184,10 +196,7 @@ def superiority():
     return render_template("admin/superiorities.html",supers = supers,restaurants = Restaurant.query.all(),forms = forms)
 @admin_bp.route("/superiorities/delete/<int:id>")
 def deleteSuperiority(id):
-    supForDeleting = Superiorities.query.get(id)
-    deleteFromUploadFolder(supForDeleting.img)
-    db.session.delete(supForDeleting)
-    db.session.commit()
+    deleteCompletely(id,Superiorities,Superiorities.query.get(id).img)
     return redirect("/adminside/superiorities")
 @admin_bp.route("/superiorities/edit/<int:id>",methods = ['GET','POST'])
 def editSuperiority(id):
