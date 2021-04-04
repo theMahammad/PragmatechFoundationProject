@@ -23,11 +23,19 @@
                 {{reg_form.password(class="password",placeholder = "Şifrənizi daxil edin")}}
                 <span class="focus-on-password">Şifrəniz minimum 6 simvoldan ibarət olmalıdır</span>
                 {{reg_form.confirm(placeholder = "Şifrənizi təkrar daxil edin")}}
-               {{reg_form.button(value="Aramıza qatıl",class= "submitButton")}}
+                <div class="checkbox d-flex">
+                    <input type="checkbox" value = "salam" class="approve-rules"   style="border-radius: 20px ;width: max-content; display: inline-block;" id="vehicle1" name="vehicle1" value="Bike">
+                    <label for="vehicle1" > <a href="/rules" target="_parent">Qaydaları </a> oxudum və qəbul edirəm </label><br>
+                </div>
+               
+             
+                <p class="alert alert-danger d-none non-confirmed " style="font-size: 10px; padding: 0.5rem !important; width: 100%;">Şifrələr eyni olmalıdır</p>
+               {{reg_form.button(value="Aramıza qatıl",class= "submitButton reg")}}
+               
             </form>
         </div>
         <div class="form-container sign-in-container">
-            <form action="/login" method="POST">
+            <form action="/login"  method="POST">
                 <h1>Daxil ol</h1>
                 
                 {{log_form.email(placeholder= "E-mail adresinizi daxil edin")}}
@@ -35,6 +43,7 @@
                 {{log_form.remember(class="form-control")}}
                 <a href="#">Şifrənizi unutdunuz?</a>
                 {{log_form.button(class="submitButton" ,value="Daxil ol")}}
+                
             </form>
         </div>
         <div class="overlay-container">
@@ -76,6 +85,62 @@
     
   </script>
    {% endif %}
+   <script>
+       $('#confirm').focusout(function(){
+        if( $("#confirm").val()!=$('#password').val()){
+            $('.non-confirmed').removeClass("d-none")
+            $(".reg").attr("disabled",true)
+        }else{
+            $('.non-confirmed').addClass("d-none")
+            $('.reg').removeAttr("disabled")
+        }
+    })
+    
+   
+        
+            $('.reg').mouseover(function(){
+                if (!($('.approve-rules').is(':checked'))){
+
+                
+            document.querySelector('.approve-rules').classList = "approve-rules animate__animated animate__delay-1s animate__shakeX ";
+             $(".reg").attr("disabled",true);
+            }
+             
+        })
+        $('.approve-rules').change(function(){
+            if ($('.approve-rules').is(':checked')) {
+                console.log("Checkbox is checked..")
+                $(".reg").removeAttr("disabled")
+                document.querySelector('.approve-rules').classList = "approve-rules "
+                 } else {
+                    document.querySelector('.approve-rules').classList = "approve-rules animate__animated animate__delay-1s animate__shakeX ";
+
+                    $(".reg").attr("disabled",true);
+                 }
+        })
+       
+
+                
+             
+    
+       
+        
+   
+      
+               
+        
+            
+            
+            
+         
+        
+        
+        
+  
+        
+
+
+   </script>
   
 
 </body>

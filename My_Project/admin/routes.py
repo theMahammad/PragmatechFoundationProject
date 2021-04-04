@@ -4,7 +4,7 @@ import os
 from app import db
 from app.models import (ContactWays,Details,FAQ,Restaurant,Rules,Subscription,Superiorities,User)
 from app import create_app
-from admin.forms import SuperioritiesForm,RestaurantsForm
+from admin.forms import SuperioritiesForm,RestaurantsForm,FaqForm
 
 
 
@@ -17,20 +17,23 @@ def index():
 @admin_bp.route("/users")
 def users():
     return render_template("admin/users.html",users = User.query.all())
+# ###############################################
+# FAQ CRUD OPERATION
 @admin_bp.route("/faq",methods=["GET","POST"])
 def faq():
     
     allFaq = FAQ.query.all()
+    form = FaqForm()
     if request.method=="POST":
         db.session.add(
-        FAQ(question = request.form['faq-question'],
-        answer = request.form['faq-answer']
+        FAQ(question = form.question.data,
+        answer = form.answer.data
         )
     
         )
         db.session.commit()
         return redirect("/adminside/faq")
-    return render_template("admin/FAQ.html",allFaq = allFaq)
+    return render_template("admin/FAQ.html",allFaq = allFaq,form = form)
 @admin_bp.route("/faq/delete/<int:id>")
 def deleteFaq(id):
    
@@ -40,13 +43,16 @@ def deleteFaq(id):
     return redirect("/adminside/faq")
 @admin_bp.route("/faq/edit/<int:id>",methods = ["GET","POST"])
 def editFaq(id):
+    form = FaqForm()
     selectedFAQ =  FAQ.query.get(id)
     if request.method == "POST":
-        selectedFAQ.question = request.form['faq-question']
-        selectedFAQ.answer = request.form['faq-answer']
+        selectedFAQ.question = form.question.data
+        selectedFAQ.answer = form.answer.data
         db.session.commit()
         return redirect("/adminside/faq")
-    return render_template("admin/update_faq.html",selected = selectedFAQ)
+    return render_template("admin/update_faq.html",selected = selectedFAQ,form = form)
+##############################################
+# SUBSCRIBER OPERATIONS
 @admin_bp.route("/subscribers")
 def subscribers():
     allSubscribers =  Subscription.query.all()
@@ -56,6 +62,8 @@ def deleteSubscriber(id):
     db.session.delete(Subscription.query.get(id))
     db.session.commit()
     return redirect("/adminside/subscribers")
+# #######################################################################
+# RESTAURANTS  CRUD OPERATIONS
 @admin_bp.route("/restaurants", methods = ['GET','POST'])
 def restaurants():
     filename = None
@@ -100,7 +108,8 @@ def updateRestaurant(id):
             db.session.commit()
         return redirect('/adminside/restaurants')
     return render_template("admin/update_restaurant.html",selectedRest = restaurantForUpdate,forms = forms)
-
+# #######################################################################
+# RULES  CRUD OPERATIONS
 @admin_bp.route("/rules",methods = ['GET','POST'])
 def rules():
    
@@ -174,8 +183,8 @@ def editSuperiority(id):
         db.session.commit()
         return redirect("/adminside/superiorities")
     return render_template("admin/update_superiority.html",selectedSup = selectedSup,forms = forms)
-
-# CONTACT WAYS CRUD
+# #######################################################################
+# CONTACT WAYS CRUD OPERATIONS
 @admin_bp.route("/contact_ways",methods = ['GET','POST'])
 def addAndShowcontact():
     contacts = ContactWays.query.all()

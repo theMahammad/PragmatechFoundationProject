@@ -69,6 +69,7 @@ def login():
             else:
                 db.session.add(user)
                 db.session.commit()
+                login_user(user)
                 flash('Qeydiyyat tamamlandı')
                 return redirect("/")
         if log_form.email.data:

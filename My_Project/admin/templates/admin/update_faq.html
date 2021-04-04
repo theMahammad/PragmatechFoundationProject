@@ -6,29 +6,22 @@
 active
 {% endblock %}
 {% block page %}
-<div class="container">
-    <form action="/adminside/faq/edit/{{selected.id}}" method="POST" enctype="multipart/form-data">
-        <textarea name="faq-question" id="" cols="30" rows="10" class="form-control" placeholder="Sualı daxil edin">{{selected.question}}</textarea>
-        <textarea name="faq-answer" id="" cols="30" rows="10" class="form-control" placeholder="Cavabı  daxil edin">{{selected.answer}}</textarea>
-        <button type="submit" class="form-control btn btn-primary">Əlavə et</button>
+<div class="container d-flex justify-content-center align-items-center" style="height: 100vh;flex-direction: column;" >
+  <h1 >Tez-tez soruşulan sualı dəyişdir</h1>
+    <form class="my-5" style="width: 100%;" action="/adminside/faq/edit/{{selected.id}}" method="POST" enctype="multipart/form-data">
+      {{form.question(class="form-control question",placeholder="Sualı daxil edin")}}
+      {{form.answer(class = "form-control answer",placeholder="Cavabı  daxil edin")}}
+      {{form.button(class = "form-control btn-primary btn" ,value = "Təsdiq et")}}
     </form>
 </div>
 
-{% for faq in  allFaq %}
 
-<div class="card">
-    <div class="card-header">
-      {{faq.id}}
-    </div>
-    <div class="card-body">
-      <h5 class="card-title">{{faq.question}}</h5>
-      <p class="card-text">{{faq.answer}}</p>
-      <a href="/adminside/faq/delete/{{faq.id}}" class="btn btn-danger">Sil</a>
-      <a href="/adminside/faq/edit/{{faq.id}}" class="btn btn-primary">Dəyişdir</a>
-      
-      <a href="/sendToWebsite/{{faq.id}}" class=" btn btn-success">Sayta yüklə</a>
-    </div>
-</div>
-{% endfor %}
 
 {% endblock %}
+{% block jsLink %}
+<script>
+$('.question').html("{{selected.question}}")
+$('.answer').html("{{selected.answer}}")
+</script>
+{% endblock %}
+

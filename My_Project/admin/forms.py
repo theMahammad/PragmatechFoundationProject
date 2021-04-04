@@ -11,3 +11,7 @@ class RestaurantsForm(FlaskForm):
     logo = FileField('logo')
     about = TextAreaField('about')
     button = SubmitField('submit')
+class FaqForm(FlaskForm):
+    question = TextAreaField('title')
+    answer = TextAreaField('submit')
+    button = SubmitField('submit')
