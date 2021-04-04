@@ -1,6 +1,6 @@
 from flask import render_template,Blueprint,request,redirect,flash
 from werkzeug.utils import secure_filename
-import os 
+import os,string,random
 from app import db
 from app.models import (ContactWays,Details,FAQ,Restaurant,Rules,Subscription,Superiorities,User)
 from app import create_app
@@ -10,6 +10,26 @@ from admin.forms import SuperioritiesForm,RestaurantsForm,FaqForm
 
 admin_bp = Blueprint('adminPanel',__name__,url_prefix="/adminside",template_folder='templates',static_folder='static',static_url_path='/static/admin')
 app = create_app()
+def getRandomString(length):
+    letters = string.ascii_lowercase
+    result_str = ''.join(random.choice(letters) for i in range(length))
+    return result_str
+def save_file_and_return(file,filename,specialName):
+    end = 10
+    randNum = random.randint(1,end)
+    if os.path.exists(os.path.join(app.config['UPLOAD_PATH'],filename)):
+        while (os.path.exists(os.path.join(app.config['UPLOAD_PATH'],filename))):
+            afterDot = filename[filename.index("."):]
+            beforeDot = filename[:filename.index(".")]
+            filename = specialName +"_"+beforeDot+"_"+str(randNum)+afterDot
+            end+=1
+        file.save(os.path.join(app.config['UPLOAD_PATH'],filename))
+    else:
+        file.save(os.path.join(app.config['UPLOAD_PATH'],filename))
+    return filename
+def deleteFromUploadFolder(element):
+    if(os.path.exists(os.path.join(app.config['UPLOAD_PATH'],element))):
+        os.remove(os.path.join(app.config['UPLOAD_PATH'],element))
 @admin_bp.route("")
 def index():
     
@@ -73,7 +93,7 @@ def restaurants():
         if forms.logo.data:
             file = forms.logo.data
             filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_PATH'],filename))
+            filename = save_file_and_return(specialName=forms.name.data,file = file,filename= filename)
             restaurant = Restaurant(
             name = forms.name.data,
             logo = filename,
@@ -90,6 +110,7 @@ def showRestaurantDetails(id):
 @admin_bp.route("/restaurants/delete/<int:id>")
 def deleteRestaurant(id):
     restaurantForDelete = Restaurant.query.get(id)
+    deleteFromUploadFolder(restaurantForDelete.logo)
     db.session.delete(restaurantForDelete)
     db.session.commit()
     return redirect("/adminside/restaurants")
@@ -101,7 +122,7 @@ def updateRestaurant(id):
         if forms.logo.data:
             file = forms.logo.data
             filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_PATH'],filename))
+            
             restaurantForUpdate.name = forms.name.data
             restaurantForUpdate.logo = filename
             restaurantForUpdate.about = forms.about.data
@@ -149,7 +170,7 @@ def superiority():
         if forms.img.data:
             file = forms.img.data
             filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_PATH'],filename))
+            filename = save_file_and_return( specialName = forms.title.data.split()[0], file=file,filename=filename) 
         super = Superiorities(
             img  = filename,
             title = forms.title.data,
@@ -163,7 +184,9 @@ def superiority():
     return render_template("admin/superiorities.html",supers = supers,restaurants = Restaurant.query.all(),forms = forms)
 @admin_bp.route("/superiorities/delete/<int:id>")
 def deleteSuperiority(id):
-    db.session.delete(Superiorities.query.get(id))
+    supForDeleting = Superiorities.query.get(id)
+    deleteFromUploadFolder(supForDeleting.img)
+    db.session.delete(supForDeleting)
     db.session.commit()
     return redirect("/adminside/superiorities")
 @admin_bp.route("/superiorities/edit/<int:id>",methods = ['GET','POST'])
@@ -175,9 +198,10 @@ def editSuperiority(id):
         if forms.img.data:
             file = forms.img.data
             filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_PATH'],filename))
+            safeFilename = save_file_and_return(specialName = forms.title.data.split()[0],file=file,filename=filename) 
+            file.save(os.path.join(app.config['UPLOAD_PATH']),safeFilename)
        
-        selectedSup.img  = filename
+        selectedSup.img  = safeFilename
         selectedSup.title = forms.title.data
         selectedSup.content = forms.content.data
         db.session.commit()

@@ -1,22 +1,29 @@
 {% extends "admin/base.html" %}
 {% block title %}
-
+Tez-tez soruşulan suallar
 {% endblock %}
 {% block faq %}
 active
 {% endblock %}
 {% block page %}
-<div class="container">
+<div class="container d-flex justify-content-between">
+  <div class="add-question " style="flex-grow: 1;">
+    <h2>Sual əlavə et</h2>
+    <hr>
     <form action="/adminside/faq" method="POST" enctype="multipart/form-data">
-        {{form.question(class="form-control",placeholder="Sualı daxil edin")}}
-        {{form.answer(class = "form-control",placeholder="Cavabı  daxil edin")}}
+        {{form.question(class="form-control",rows="5",placeholder="Sualı daxil edin")}}
+        {{form.answer(class = "form-control",rows="5",placeholder="Cavabı  daxil edin")}}
         {{form.button(class = "form-control btn-primary btn" ,value = "Əlavə et")}}
     </form>
-</div>
+  </div>
 
+
+    <div class="question-list" style="flex-grow: 1;">
+      <h2>Tez-tez soruşulan suallar</h2>
+      <hr>
 {% for faq in  allFaq %}
 
-<div class="card">
+  <div class="card">
     <div class="card-header">
       {{faq.id}}
     </div>
@@ -28,6 +35,10 @@ active
       
     </div>
 </div>
+
+
 {% endfor %}
+</div>
+</div>
 
 {% endblock %}

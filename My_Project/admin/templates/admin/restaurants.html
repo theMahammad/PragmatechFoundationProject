@@ -5,17 +5,40 @@ active
 {% block title %}
 Restoranlar
 {% endblock %}
+
+{% block cssLink %}
+<style>
+  input{
+    margin: 10px 0 !important;
+  }
+</style>
+{% endblock %}
+{% block websiteURL %}
+/restaurants
+{% endblock %}
+{% block activationGoToWebsite %}
+d-inline-block 
+{% endblock %}
+
 {% block page %}
+
+
 <div class="container">
+  <hr>
+  <h2 class="text-center">Restoran əlavə et </h2>
     <form action="/adminside/restaurants" method="POST" enctype="multipart/form-data">
         <label for=""></label>
-      {{forms.name(class="form-control",placeholder = "Restoran adını daxil edin")}}
+      {{forms.name.label("Restoran adını daxil edin",class = "btn btn-light text-start w-100")}}
+      {{forms.name(class="form-control")}}
+      {{forms.logo.label("Restoran loqosunu daxil edin",class = "btn btn-light text-start w-100")}}
       {{forms.logo(class="form-control",placeholder = "Restoran loqosunu daxil edin")}} 
-      {{forms.about(class="form-control",placeholder = "Restoran barədə ətraflı məlumat daxil edin")}}    
+      {{forms.about.label("Restoran barədə ətraflı məlumat daxil edin",class = "btn btn-light text-start w-100")}}
+      {{forms.about(class="form-control ")}}    
       {{forms.button(class="form-control btn btn-primary",placeholder = "Restoran", value = "Əlavə et")}}   
      </form>
-    </div>
-<table class="table">
+     <hr>
+  <h2 class="text-center">Restoranlar</h2>
+<table class="table table-light table-striped">
     <thead>
         
       <tr>
