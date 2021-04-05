@@ -31,7 +31,7 @@ active
             <div class="accordion-item">
               <button id="accordion-button-1" aria-expanded="false"><span class="accordion-title">{{rule.title}}</span><span class="icon" aria-hidden="true"></span></button>
               <div class="accordion-content">
-                <p>{{rule.content}}</p>
+                {{rule.content|safe}}
               </div>
             </div>
             {% endfor %}

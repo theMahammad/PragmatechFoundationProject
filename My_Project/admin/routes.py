@@ -4,7 +4,7 @@ import os,string,random
 from app import db
 from app.models import (ContactWays,Details,FAQ,Restaurant,Rules,Subscription,Superiorities,User)
 from app import create_app
-from admin.forms import SuperioritiesForm,RestaurantsForm,FaqForm
+from admin.forms import SuperioritiesForm,RestaurantsForm,FaqForm,RulesForm
 
 
 
@@ -17,30 +17,31 @@ def getRandomString(length):
 def save_file_and_return(file,filename,specialName):
     end = 10
     randNum = random.randint(1,end)
+    filename= specialName+"_"+filename
     if os.path.exists(os.path.join(app.config['UPLOAD_PATH'],filename)):
         while (os.path.exists(os.path.join(app.config['UPLOAD_PATH'],filename))):
             afterDot = filename[filename.index("."):]
             beforeDot = filename[:filename.index(".")]
-            filename = specialName +"_"+beforeDot+"_"+str(randNum)+afterDot
+            filename = beforeDot+"_"+str(randNum)+afterDot
             end+=1
         file.save(os.path.join(app.config['UPLOAD_PATH'],filename))
     else:
         file.save(os.path.join(app.config['UPLOAD_PATH'],filename))
     return filename
-def secure_and_save_file(data,prefix):
+def secure_and_save_file(data,prefix,class_):
     file = data
     filename = secure_filename(file.filename)
-    filename = save_file_and_return(specialName=prefix.split()[0],file = file,filename= filename)
+    filename = save_file_and_return(specialName=class_.__name__+"_"+prefix.split()[0],file = file,filename= filename)
     return filename
 
 def deleteFromUploadFolder(element):
     if(os.path.exists(os.path.join(app.config['UPLOAD_PATH'],element))):
         os.remove(os.path.join(app.config['UPLOAD_PATH'],element))
-def deleteCompletely(id,class_,*args):
-    obj = class_.query.get(id)
-    for arg in args:
-        deleteFromUploadFolder(arg)
-    db.session.delete(obj)
+def deleteCompletely(object_,*args):
+    if args:
+        for arg in args:
+            deleteFromUploadFolder(arg)
+    db.session.delete(object_)
     db.session.commit()
 
 @admin_bp.route("")
@@ -104,7 +105,7 @@ def restaurants():
     restaurants = Restaurant.query.all()
     if request.method=="POST":
         if forms.logo.data:
-            filename = secure_and_save_file(forms.logo.data,prefix=forms.name.data)
+            filename = secure_and_save_file(class_=Restaurant,data=forms.logo.data,prefix=forms.name.data)
 
         restaurant = Restaurant(
             name = forms.name.data,
@@ -121,50 +122,50 @@ def showRestaurantDetails(id):
     return render_template("admin/see_restaurant_details.html",selectedRest = Restaurant.query.get(id))
 @admin_bp.route("/restaurants/delete/<int:id>")
 def deleteRestaurant(id):
-    restaurantForDelete = Restaurant.query.get(id)
-    deleteFromUploadFolder(restaurantForDelete.logo)
-    db.session.delete(restaurantForDelete)
-    db.session.commit()
+    object_ = Restaurant.query.get(id)
+    deleteCompletely(object_,object_.logo)
     return redirect("/adminside/restaurants")
 @admin_bp.route("/restaurants/edit/<int:id>",methods = ['GET','POST'])
 def updateRestaurant(id):
     restaurantForUpdate = Restaurant.query.get(id)
     forms = RestaurantsForm()
+    filename = None
     if request.method == "POST":
+        restaurantForUpdate.name = forms.name.data
         if forms.logo.data:
-            file = forms.logo.data
-            filename = secure_filename(file.filename)
-            
-            restaurantForUpdate.name = forms.name.data
-            restaurantForUpdate.logo = filename
-            restaurantForUpdate.about = forms.about.data
-            db.session.commit()
+            filename = secure_and_save_file(data = forms.logo.data,prefix=forms.name.data,class_=Restaurant)
+        deleteFromUploadFolder(restaurantForUpdate.logo)
+        restaurantForUpdate.logo = filename
+        restaurantForUpdate.about = forms.about.data
+        db.session.commit()
         return redirect('/adminside/restaurants')
     return render_template("admin/update_restaurant.html",selectedRest = restaurantForUpdate,forms = forms)
 # #######################################################################
 # RULES  CRUD OPERATIONS
 @admin_bp.route("/rules",methods = ['GET','POST'])
 def rules():
-   
+    forms = RulesForm()
     rules = Rules.query.all()
     if request.method=="POST": 
         db.session.add(
             Rules(
-            title = request.form['rule-title'],
-            content = request.form['rule-content']
+            title = forms.title.data,
+            content = forms.content.data
         ))
         db.session.commit()
         return redirect("/adminside/rules")
-    return render_template("admin/rules.html",rules = rules)
+    return render_template("admin/rules.html",rules = rules,forms = forms)
+
 @admin_bp.route("/rules/edit/<int:id>",methods = ['GET','POST'])
 def editRules(id):
     selectedRule = Rules.query.get(id)
+    form = RulesForm()
     if request.method=="POST":
-        selectedRule.title = request.form['rule-title']
-        selectedRule.content = request.form['rule-content']
+        selectedRule.title = form.title.data
+        selectedRule.content = form.content.data
         db.session.commit()
         return redirect("/adminside/rules")
-    return render_template("admin/update_rule.html",selectedRule = selectedRule)
+    return render_template("admin/update_rule.html",selectedRule = selectedRule,content = str(selectedRule.content), form = form)
 @admin_bp.route("/rules/delete/<int:id>")
 def deleteRule(id):
     db.session.delete(Rules.query.get(id))
@@ -180,9 +181,7 @@ def superiority():
     filename = None
     if request.method=="POST":
         if forms.img.data:
-            file = forms.img.data
-            filename = secure_filename(file.filename)
-            filename = save_file_and_return( specialName = forms.title.data.split()[0], file=file,filename=filename) 
+           filename  = secure_and_save_file(data=forms.img.data,prefix=forms.title.data,class_=Superiorities)
         super = Superiorities(
             img  = filename,
             title = forms.title.data,
@@ -196,7 +195,8 @@ def superiority():
     return render_template("admin/superiorities.html",supers = supers,restaurants = Restaurant.query.all(),forms = forms)
 @admin_bp.route("/superiorities/delete/<int:id>")
 def deleteSuperiority(id):
-    deleteCompletely(id,Superiorities,Superiorities.query.get(id).img)
+    object_ =  Superiorities.query.get(id)
+    deleteCompletely(object_,object_.img)
     return redirect("/adminside/superiorities")
 @admin_bp.route("/superiorities/edit/<int:id>",methods = ['GET','POST'])
 def editSuperiority(id):
@@ -205,12 +205,11 @@ def editSuperiority(id):
     filename = None
     if request.method=="POST":
         if forms.img.data:
-            file = forms.img.data
-            filename = secure_filename(file.filename)
-            safeFilename = save_file_and_return(specialName = forms.title.data.split()[0],file=file,filename=filename) 
-            file.save(os.path.join(app.config['UPLOAD_PATH']),safeFilename)
+           filename= secure_and_save_file(forms.img.data,prefix=forms.title.data,class_=Superiorities)
+            
+        deleteFromUploadFolder(selectedSup.img)
+        selectedSup.img  = filename
        
-        selectedSup.img  = safeFilename
         selectedSup.title = forms.title.data
         selectedSup.content = forms.content.data
         db.session.commit()

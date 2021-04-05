@@ -13,5 +13,9 @@ class RestaurantsForm(FlaskForm):
     button = SubmitField('submit')
 class FaqForm(FlaskForm):
     question = TextAreaField('title')
-    answer = TextAreaField('submit')
+    answer = TextAreaField('answer')
+    button = SubmitField('submit')
+class RulesForm(FlaskForm):
+    title = TextAreaField('title')
+    content = TextAreaField('summernote')
     button = SubmitField('submit')
