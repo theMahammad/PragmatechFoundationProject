@@ -14,7 +14,7 @@ Dəyişdir
     <form action="/adminside/restaurants/edit/{{selectedRest.id}}" method="POST" enctype="multipart/form-data">
         {{forms.name(class = "form-control",value=selectedRest.name)}}
          {{forms.logo(class = "form-control ")}}
-        {{forms.about(class = "form-control about")}}
+        {{forms.about(class = "form-control about" ,id ="summernote")}}
         {{forms.button(class = "form-control btn btn-primary",value = "Təsdiq et")}}
     </form>
     </div>
@@ -23,6 +23,12 @@ Dəyişdir
 {% endblock %}
 {% block jsLink %}
 <script>
-    document.querySelector('.about').innerHTML='{{selectedRest.about}}'
-</script>
+
+
+    $("#summernote").summernote("code",'{{selectedRest.about|safe}}')
+    
+    
+    
+    
+    </script>
 {% endblock %}

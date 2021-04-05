@@ -33,7 +33,7 @@ Restoranlar
       {{forms.logo.label("Restoran loqosunu daxil edin",class = "btn btn-light text-start w-100")}}
       {{forms.logo(class="form-control",placeholder = "Restoran loqosunu daxil edin")}} 
       {{forms.about.label("Restoran barədə ətraflı məlumat daxil edin",class = "btn btn-light text-start w-100")}}
-      {{forms.about(class="form-control ")}}    
+      {{forms.about(class="form-control ",id = "summernote")}}    
       {{forms.button(class="form-control btn btn-primary",placeholder = "Restoran", value = "Əlavə et")}}   
      </form>
      <hr>
@@ -66,4 +66,15 @@ Restoranlar
     </tbody>
   </table>
 
+{% endblock %}
+{% block jsLink %}
+<script>
+
+
+  $("#summernote").summernote("code",'{{content|safe}}')
+  
+  
+  
+  
+</script>
 {% endblock %}

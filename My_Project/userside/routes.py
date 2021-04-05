@@ -1,12 +1,12 @@
 from flask import render_template,Blueprint,redirect,request,flash
-from app.models import (ContactWays,Details,FAQ,Restaurant,Rules,Subscription,Superiorities,User)
+
 from .forms import RegistrationForm,LoginForm
 from app import db
 from werkzeug.security import generate_password_hash,check_password_hash
 from flask_login import login_user,current_user,logout_user,login_required
 
-
 user_bp = Blueprint('user',__name__,template_folder='templates',static_folder='static',static_url_path='/static/userside')
+from app import (ContactWays,Details,FAQ,Restaurant,Rules,Subscription,Superiorities,User)
 
 @user_bp.route("/",methods = ["GET","POST"])
 def index():

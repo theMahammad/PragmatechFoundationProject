@@ -2,14 +2,15 @@ from flask import render_template,Blueprint,request,redirect,flash
 from werkzeug.utils import secure_filename
 import os,string,random
 from app import db
-from app.models import (ContactWays,Details,FAQ,Restaurant,Rules,Subscription,Superiorities,User)
-from app import create_app
+from app import app
+from app import (ContactWays,Details,FAQ,Restaurant,Rules,Subscription,Superiorities,User)
+
 from admin.forms import SuperioritiesForm,RestaurantsForm,FaqForm,RulesForm
 
 
 
 admin_bp = Blueprint('adminPanel',__name__,url_prefix="/adminside",template_folder='templates',static_folder='static',static_url_path='/static/admin')
-app = create_app()
+
 def getRandomString(length):
     letters = string.ascii_lowercase
     result_str = ''.join(random.choice(letters) for i in range(length))
@@ -129,12 +130,13 @@ def deleteRestaurant(id):
 def updateRestaurant(id):
     restaurantForUpdate = Restaurant.query.get(id)
     forms = RestaurantsForm()
-    filename = None
+    filename = restaurantForUpdate.logo
     if request.method == "POST":
         restaurantForUpdate.name = forms.name.data
         if forms.logo.data:
             filename = secure_and_save_file(data = forms.logo.data,prefix=forms.name.data,class_=Restaurant)
-        deleteFromUploadFolder(restaurantForUpdate.logo)
+            if restaurantForUpdate.logo:
+                deleteFromUploadFolder(restaurantForUpdate.logo)
         restaurantForUpdate.logo = filename
         restaurantForUpdate.about = forms.about.data
         db.session.commit()

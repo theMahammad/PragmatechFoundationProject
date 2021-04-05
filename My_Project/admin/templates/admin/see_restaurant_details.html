@@ -4,18 +4,23 @@
 {% endblock %}
 {% block page %}
 <div class="container" style="height: 100vh;" >
-    <div class="card mb-3 my-auto mx-auto" style="max-width: 540px;">
-        <div class="row g-0">
-          <div class="col-md-4" style="border-right: 2px solid black; max-height: 250px;">
-            <img style="height: 120px; width: 180px;" src="{{url_for('adminPanel.static',filename = 'admin/uploads/%s' %selectedRest.logo)}}" alt="...">
+  <h1>"{{selectedRest.name}}" restoranının detalları</h1>
+    <div class="card mb-3 my-auto mx-auto" >
+        <div class="row g-0" style="border-bottom: 2px solid black;">
+          <div class="col-md-3" style="border-right: 2px solid black; max-height: 250px;">
+            <img style="height: 220px; width: 280px;" src="{{url_for('adminPanel.static',filename = 'admin/uploads/%s' %selectedRest.logo)}}" alt="...">
           </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h5 class="card-title" style="border-bottom: 2px solid black;">{{selectedRest.name}}</h5>
-              <p class="card-text">{{selectedRest.about}} </p>
+          <div class="col-md-9 d-flex justify-content-center align-items-center">
+            <div class="card-body ">
+              <h5 class="card-title" style="font-size: 3rem;">{{selectedRest.name}}</h5>
             </div>
+
           </div>
         </div>
+          <div class="col-md-12 my-1" style="border: 2px solid black;">
+            <p class="card-text">{{selectedRest.about|safe}} </p>
+          </div>
+        
       </div>
 </div>
 
