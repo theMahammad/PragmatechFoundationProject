@@ -12,49 +12,107 @@ Fikir əlavə et
 {% endblock %}
 {% block page %}
 
+<div class="content" style="border-top: 1px solid black;">
+    <section id="contact" class="my-5 p-4" style="border-radius: 50px;box-shadow: 0px 0px 3px;">
+        <div class="sectionheader" style="">	<h1 style="border-radius: 50px;text-align: center; font-size: 2rem;">Fikir bildir</h1></div>
+        <article>
+        <p style="font-size: 2.5rem;">Təcrübələriniz digər insanlara işıq ola bilər,minnətdarıq!</p>
+            
+                <label for="checkcontact" class="contactbutton"><div class="mail"></div></label><input id="checkcontact" type="checkbox">
         
-<section id="contact">
-	<div class="sectionheader">	<h1>CONTACT</h1></div>
-	<article>
-	<p>Yoda soon you will call me master Governor Tarkin. A new hope Boba Fett bantha forest moon. Tusken raider Master Yoda do or do not never tell me the odds.</p>
-		
-			<label for="checkcontact" class="contactbutton"><div class="mail"></div></label><input id="checkcontact" type="checkbox">
-	
-			<form action="" method="post" class="contactform">
-                <p class="input_wrapper"><input type="text" list="browsers" name="contact_email" value=""  id ="contact_email"><label for="contact_email">Restoran</label>
-                    <datalist id="browsers">
-                        <option value="Edge">
-                        <option value="Firefox">
-                        <option value="Chrome">
-                        <option value="Opera">
-                        <option value="Safari">
-                      </datalist>
-                </p>
+                <form action="" method="post" class="contactform">
+                    <p class="input_wrapper"><input type="text" list="browsers" name="contact_email" value=""  id ="contact_email"><label for="contact_email">Restoran</label>
+                        <datalist id="browsers">
+                            <option value="Edge">
+                            <option value="Firefox">
+                            <option value="Chrome">
+                            <option value="Opera">
+                            <option value="Safari">
+                          </datalist>
+                    </p>
+                    
+                    <p class="input_wrapper"><input type="text" name="topic" value=""  id ="topic"><label for="topic">Başlıq</label></p>
+    
+                    <p class="input_wrapper" id="filed"><input type="file" style="color: transparent;" name="photo" value=""  id ="photo"><label  for="photo">Şəkil yüklə</label></p>
+                    <div class="select-boxes d-flex">
+                        <div class="taste-rating" style="height: 100px;" >
+                            <input type="radio" id="taste-star5" name="taste-rating" value="5" /><label for="taste-star5"></label>
+                            <input type="radio" id="taste-star4" name="taste-rating" value="4" /><label for="taste-star4"></label>
+                            <input type="radio" id="taste-star3" name="taste-rating" value="3" /><label for="taste-star3"></label>
+                            <input type="radio" id="taste-star2" name="taste-rating" value="2" /><label for="taste-star2"></label>
+                            <input type="radio" id="taste-star1" name="taste-rating" value="1" /><label for="taste-star1"></label>
+                            <h3 style="text-align: center; font-family: 'Comfortaa'; font-size: 2rem;">Təamların ləzzəti</h3>
+                        </div>
+                        <div class="service-rating">
+                            
+                            <input type="radio" id="service-star5" name="service-rating" value="5" /><label for="service-star5"></label>
+                            <input type="radio" id="service-star4" name="service-rating" value="4" /><label for="service-star4"></label>
+                            <input type="radio" id="service-star3" name="service-rating" value="3" /><label for="service-star3"></label>
+                            <input type="radio" id="service-star2" name="service-rating" value="2" /><label for="service-star2"></label>
+                            <input type="radio" id="service-star1" name="service-rating" value="1" /><label for="service-star1"></label>
+                            <h3 style="text-align: center; font-family: 'Comfortaa'; font-size: 2rem;">Restoran personalı </h3>
+    
+                        </div>
+                        <div class="atmp-rating">
+                            <input type="radio" id="atmp-star5" name="atmp-rating" value="5" /><label for="atmp-star5"></label>
+                            <input type="radio" id="atmp-star4" name="atmp-rating" value="4" /><label for="atmp-star4"></label>
+                            <input type="radio" id="atmp-star3" name="atmp-rating" value="3" /><label for="atmp-star3"></label>
+                            <input type="radio" id="atmp-star2" name="atmp-rating" value="2" /><label for="atmp-star2"></label>
+                            <input type="radio" id="atmp-star1" name="atmp-rating" value="1" /><label for="atmp-star1"></label>
+                            <h3 style="text-align: center; font-family: 'Comfortaa'; font-size: 2rem;">Restoranın atmosferi</h3>
+    
+                        </div>
+                       
+                           </div>
+                    <p class="textarea_wrapper"><textarea name="contact_message" id="contact_message"></textarea></p>
+                    
+                    <p class="submit_wrapper"><input type="submit" style="font-size: 2rem;" value="Bildir"></p>			
+                </form>
+        </article>
+    </section>
+</div>   
 
-				<p class="input_wrapper"><input type="text" name="contact_sujet" value=""  id ="contact_sujet"><label for="contact_sujet">Başlıq</label></p>
-				<div class="select-boxes"><label for="">Təamların ləzzəti</label> <select name="" id="">
-                    <option value="">1</option>
-                    <option value="">2</option>
-                </select>
-                <label for="">Xidmət keyfiyyəti</label>
-                <select name="" id="">
-                    <option value="">1</option>
-                    <option value="">2</option>
-                </select>
-                <label for="">Restoran atmosferi</label>
-                <select name="" id="">
-                    <option style="color: yellow;" value="fa-align-left">&#xf005; fa-align-left</option>
-                    <option value="">2</option>
-                </select> </div>
-                <p class="textarea_wrapper"><textarea name="contact_message" id="contact_message"></textarea></p>
-                
-				<p class="submit_wrapper"><input type="submit" value="ENVOYER"></p>			
-			</form>
-	</article>
-</section>
 
 
 
 {% endblock %}
 {% block jsLink %}
+<script>
+   
+       $('.taste-rating input[type="radio"]').click(function(){
+        console.log(`Taste : ${$('input[name="taste-rating"]:checked').val()}`)
+       })
+       $('.service-rating input[type="radio"]').click(function(){
+        console.log( `Service : ${$('input[name="service-rating"]:checked').val()}`)
+       })
+       $('.atmp-rating input[type="radio"]').click(function(){
+        console.log(`Atmosphere : ${$('input[name="atmp-rating"]:checked').val()}`)
+       })
+       $(document).on("input","input:file",function(){
+           $('#photo').css('color','orange')
+           $('#photo + label').css('left','85%')
+       })
+       $('input[id="contact_email"]').keyup(function(){
+       $(`label[for="contact_email"]`).css('left','85%')
+       })
+       $('input[id="contact_email"]').focusout(function(){
+           if(!($(this).val())){
+            $(`label[for="contact_email"]`).css('left','0%')
+           }
+       
+       })
+       $('input[id="topic"]').keyup(function(){
+       $(`label[for="topic"]`).css('left','85%')
+       })
+       $('input[id="topic"]').focusout(function(){
+           if(!($(this).val())){
+            $(`label[for="topic"]`).css('left','0%')
+           }
+       
+       })
+          
+       
+   
+
+</script>
 {% endblock %}

@@ -2,9 +2,9 @@ let nav = $('.nav');
 let scroll;
 $(window).scroll(function (e) {
     scroll = $(window).scrollTop();
-    console.log(scroll);
+   
     if (scroll > 130) {
-        console.log(scroll)
+        
 
 
         nav.css('width', '100%');

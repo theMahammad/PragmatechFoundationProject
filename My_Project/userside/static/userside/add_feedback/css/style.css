@@ -556,7 +556,7 @@ html {
   color: #5E5E5E;
 }
 
-.input_wrapper input[type="text"] {
+.input_wrapper input[type="text"], input[type="file"] {
   margin-top: 1em;
   display: block;
   width: 100%;
@@ -570,7 +570,7 @@ html {
   text-indent: 15%;
 }
 
-.input_wrapper input[type="text"]:focus {
+.input_wrapper input[type="text"]:focus, .input_wrapper input[type="file"]:focus {
   background: rgba(242, 56, 90, 0.05);
   box-shadow: inset 2px 2px 5px 0 #DADADA;
   outline: none;
@@ -590,10 +590,10 @@ html {
   text-align: center;
   line-height: 2.8em;
   font-size: 1.4rem;
-  transition: all 250ms ease;
+  transition: all 550ms ease;
 }
 
-.input_wrapper input[type="text"]:focus + label {
+.input_wrapper input[type="text"]:hover + label, input[type="file"]:hover + label {
   left: 85%;
 }
 
@@ -629,7 +629,7 @@ html {
   margin-top: 1em;
   margin-bottom: 6px;
   cursor: pointer;
-  background: #F2385A;
+  background: #f16121;
   color: white;
   font-family: Oswald ,sans-serif;
   font-size: 1em;
@@ -654,5 +654,48 @@ html {
     line-height: 3.5em;
     font-size: 0.8em;
   }
+}
+
+.taste-rating, .atmp-rating, .service-rating {
+  width: 208px;
+  height: 40px;
+  margin: 0 auto;
+}
+
+.taste-rating label, .atmp-rating label, .service-rating label {
+  float: right;
+  position: relative;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+
+.taste-rating label:not(:first-of-type), .atmp-rating label:not(:first-of-type), .service-rating label:not(:first-of-type) {
+  padding-right: 2px;
+}
+
+.taste-rating label:before, .atmp-rating label:before, .service-rating label:before {
+  content: "\2605";
+  font-size: 42px;
+  color: #CCCCCC;
+  line-height: 1;
+}
+
+.taste-rating input, .atmp-rating input, .service-rating input {
+  display: none;
+}
+
+.taste-rating input:checked ~ label:before,
+.taste-rating:not(:checked) > label:hover:before,
+.taste-rating:not(:checked) > label:hover ~ label:before, .atmp-rating input:checked ~ label:before,
+.atmp-rating:not(:checked) > label:hover:before,
+.atmp-rating:not(:checked) > label:hover ~ label:before, .service-rating input:checked ~ label:before,
+.service-rating:not(:checked) > label:hover:before,
+.service-rating:not(:checked) > label:hover ~ label:before {
+  color: #F9DF4A;
+}
+
+input[type="file"]::-webkit-file-upload-button {
+  visibility: hidden;
 }
 /*# sourceMappingURL=style.css.map */

@@ -132,7 +132,7 @@ padding: 1em;
 transition: all 250ms ease;
 color: #5E5E5E;
 }
-.input_wrapper input[type="text"] {
+.input_wrapper input[type="text"],input[type="file"] {
 margin-top: 1em;
 
 display: block;
@@ -152,7 +152,7 @@ transition: all 250ms ease;
 color: #5E5E5E;
 text-indent: 15%;
 }
-.input_wrapper input[type="text"]:focus {
+.input_wrapper input[type="text"]:focus,.input_wrapper input[type="file"]:focus {
 background: rgba(242, 56, 90, 0.05);
 box-shadow: inset 2px 2px 5px 0 #DADADA;
 outline: none;
@@ -171,13 +171,13 @@ width: 15%;
 text-align: center;
 line-height: 2.8em;
 font-size: 1.4rem;
--webkit-transition: all 250ms ease;
--moz-transition: all 250ms ease;
--ms-transition: all 250ms ease;
--o-transition: all 250ms ease;
-transition: all 250ms ease;
+-webkit-transition: all 550ms ease;
+-moz-transition: all 550ms ease;
+-ms-transition: all 550ms ease;
+-o-transition: all 550ms ease;
+transition: all 550ms ease;
 }
-.input_wrapper input[type="text"]:focus + label {
+.input_wrapper input[type="text"]:hover + label,input[type="file"]:hover + label {
 left: 85%;
 }
 .textarea_wrapper textarea {
@@ -215,7 +215,7 @@ height: 50px;
 margin-top: 1em;
 margin-bottom: 6px;
 cursor: pointer;
-background: #F2385A;
+background: $orange;
 color: white;
 font-family: Oswald ,sans-serif;
 font-size: 1em;
@@ -246,3 +246,52 @@ line-height: 3.5em;
 font-size: 0.8em;
 }
 }
+
+
+$stars: 5;
+$star-size: 40px;
+$star-spacing: 2px;
+$star-on-color: #F9DF4A;
+$star-off-color: #CCCCCC;
+
+.taste-rating,.atmp-rating,.service-rating{
+	width: ($star-size * $stars) + ($star-spacing * ($stars - 1));
+	height: $star-size;
+	margin: 0 auto;
+
+
+	label {
+		float: right;
+		position: relative;
+		width: $star-size;
+		height: $star-size;
+		cursor: pointer;
+		
+		&:not(:first-of-type) {
+			padding-right: $star-spacing;
+		}
+		
+		&:before {
+			content: "\2605";
+			font-size: $star-size + 2px;
+			color: $star-off-color;
+			line-height: 1;
+		}
+	}
+	
+	input {
+		display: none;
+	}
+	
+	input:checked ~ label:before,
+	&:not(:checked) > label:hover:before,
+	&:not(:checked) > label:hover ~ label:before {
+		color: $star-on-color;
+	}
+}
+input[type="file"]::-webkit-file-upload-button {
+  visibility: hidden;
+}
+
+
+
