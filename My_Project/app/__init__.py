@@ -8,6 +8,7 @@ import os
 from flask_login import LoginManager,login_user,current_user,logout_user,login_required
 
 
+
 naming_convention = {
     "ix": 'ix_%(column_0_label)s',
     "uq": "uq_%(table_name)s_%(column_0_name)s",
@@ -72,6 +73,8 @@ class User(UserMixin,db.Model):
 class AboutUs(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     content = db.Column(db.Text)
+    verified = db.Column(db.Boolean,default = False)
+
 
 
 login_manager = LoginManager()

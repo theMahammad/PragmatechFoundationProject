@@ -6,7 +6,7 @@ from werkzeug.security import generate_password_hash,check_password_hash
 from flask_login import login_user,current_user,logout_user,login_required
 
 user_bp = Blueprint('user',__name__,template_folder='templates',static_folder='static',static_url_path='/static/userside')
-from app import (ContactWays,Details,FAQ,Restaurant,Rules,Subscription,Superiorities,User)
+from app import (ContactWays,Details,FAQ,Restaurant,Rules,Subscription,Superiorities,User,AboutUs)
 
 @user_bp.route("/",methods = ["GET","POST"])
 def index():
@@ -35,7 +35,9 @@ def restaurants():
     return render_template("userside/restaurants.html",restaurants = restaurants)
 @user_bp.route("/about_us")
 def about():
-   return render_template("userside/about_us.html")
+    verifiedAboutUs = AboutUs.query.filter_by(verified=True)
+    
+    return render_template("userside/about_us.html",allAboutUs = verifiedAboutUs)
 @user_bp.route("/rules")
 def rules():
     

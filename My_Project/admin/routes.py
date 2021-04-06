@@ -3,9 +3,9 @@ from werkzeug.utils import secure_filename
 import os,string,random
 from app import db
 from app import app
-from app import (ContactWays,Details,FAQ,Restaurant,Rules,Subscription,Superiorities,User)
+from app import (ContactWays,Details,FAQ,Restaurant,Rules,Subscription,Superiorities,User,AboutUs)
 
-from admin.forms import SuperioritiesForm,RestaurantsForm,FaqForm,RulesForm
+from admin.forms import SuperioritiesForm,RestaurantsForm,FaqForm,RulesForm,AboutUsForm
 
 
 
@@ -49,6 +49,46 @@ def deleteCompletely(object_,*args):
 def index():
     
     return render_template("admin/index.html")
+@admin_bp.route("/about_us",methods = ["GET","POST"])
+def aboutUs():
+    form = AboutUsForm()
+    allAboutUs = AboutUs.query.all()
+    if request.method=="POST":
+        db.session.add(
+            AboutUs(content = form.content.data)
+            )
+        db.session.commit()
+        return redirect("/adminside/about_us")
+    return render_template("admin/about_us.html",form = form,allAboutUs = allAboutUs)
+@admin_bp.route("/about_us/edit/<int:id>",methods = ["GET",'POST'])
+def editAboutContent(id):
+    selectedContent = AboutUs.query.get(id)
+    form = AboutUsForm()
+    if request.method=="POST":
+        selectedContent.content = form.content.data
+        db.session.commit()
+        return redirect("/adminside/about_us")
+    return render_template("admin/edit_about_content.html",selected = selectedContent,form = form)
+    
+
+@admin_bp.route("/about_us/delete/<int:id>")
+def deleteAboutContent(id):
+    deleteCompletely(AboutUs.query.get(id))
+    return redirect("/adminside/about_us")
+
+@admin_bp.route("/about_us/verify/<int:id>")
+def  verifyAboutContent(id):
+    selected = AboutUs.query.get(id)
+    selected.verified = True
+    db.session.commit()
+    return redirect("/adminside/about_us")
+@admin_bp.route("/about_us/unverify/<int:id>")
+def  unverifyAboutContent(id):
+    selected = AboutUs.query.get(id)
+    selected.verified = False
+    db.session.commit()
+    return redirect("/adminside/about_us")
+
 @admin_bp.route("/users")
 def users():
     return render_template("admin/users.html",users = User.query.all())

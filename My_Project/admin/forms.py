@@ -19,3 +19,6 @@ class RulesForm(FlaskForm):
     title = TextAreaField('title')
     content = TextAreaField('summernote')
     button = SubmitField('submit')
+class AboutUsForm(FlaskForm):
+    content = TextAreaField('content')
+    button=SubmitField('submit')

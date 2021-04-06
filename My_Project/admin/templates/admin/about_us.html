@@ -1,0 +1,73 @@
+{% extends "admin/base.html" %}
+{% block title %}
+Haqqımızda
+{% endblock %}
+{% block aboutUs %}
+active
+{% endblock %}
+{% block cssLink %}
+<style>
+    h2{
+        text-align: center;
+    }
+</style>
+{% endblock %}
+{% block websiteURL %}
+/about_us
+{% endblock %}
+{% block activationGoToWebsite %}
+
+{% endblock %}
+{% block page %}
+<hr>
+<div class="container">
+    <div class="add-content">
+        <h2>Haqqınızda yazın</h2>
+        <hr>
+        <form action="/adminside/about_us" method="POST">
+        {{form.content(id = "summernote",placeholder = "Haqqınızda məlumat daxil edin")}}
+        {{form.button(value="Daxil et",class = "form-control btn btn-primary")}}
+        </form>
+    </div>
+   <h2>Yazdıqlarınız</h2>
+   <hr>
+    {% for about_us in allAboutUs %}
+    
+   
+    <div class="card">
+        <div class="card-header d-flex justify-content-between">
+            <div class="id">
+                ID : {{about_us.id}}
+            </div>
+         
+         <h5 class="card-title">Haqqımızda</h5>
+         <div class="delete-or-edit">
+            <a href="/adminside//about_us/delete/{{about_us.id}}" class="btn btn-danger">Sil</a>
+            <a href="/adminside//about_us/edit/{{about_us.id}}" class="btn btn-primary">Dəyişdir</a>
+            {% if about_us.verified %}
+            <a href="/adminside//about_us/unverify/{{about_us.id}}" class="btn btn-warning">Saytdan geri çək</a>
+
+            {% else %}
+            <a href="/adminside//about_us/verify/{{about_us.id}}" class="btn btn-success">Sayta göndər</a>
+
+            {% endif %}
+
+         </div>
+        </div>
+        <div class="card-body">
+          
+          <p class="card-text">{{about_us.content|safe}}</p>
+         
+        </div>
+      </div>
+   
+    {% endfor %}
+</div>
+{% endblock %}
+{% block jsLink %}
+<script>
+    $(document).ready(function(){
+        $('#summernote').summernote()
+    })
+</script>
+{% endblock %}

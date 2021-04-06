@@ -17,6 +17,7 @@ active
         <th scope="col">Ad</th>
         <th scope="col">E-mail</th>
         <th scope="col">Şifrə</th>
+        <th scope ="col">Əməliyyat</th>
       </tr>
     </thead>
     <tbody>
@@ -26,6 +27,10 @@ active
             <td>{{user.fullname}}</td>
             <td>{{user.email}}</td>
             <td>{{user.password}}</td>
+            <td style="font-size: 1.5rem;">
+              <a style="color: white;" href="/adminside/users/delete_user/{{user.id}}"><i class="bi bi-trash"></i></a>
+              <a style="color: white;" href="/adminside/users/show_user_details/{{user.id}}"><i class="bi bi-info-circle-fill"></i></a>
+            </td>
           </tr>
         {% endfor %}
       
