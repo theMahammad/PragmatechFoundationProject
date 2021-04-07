@@ -6,20 +6,41 @@ active
 Ana səhifə
 {% endblock %}
 {% block page %}
-<h1>Salam</h1>
-<div class="accordion" id="accordionExample">
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="headingOne">
-      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-      <i class="fab fa-facebook">Facebook</i> 
-      </button>
-    </h2>
-    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-      <div class="accordion-body">
-        <strong>This is the first item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-      </div>
-    </div>
-  </div>
- 
+<div class="container">
+  <h2 style="text-align: center;">Təsdiq gözləyən fikirlər</h2>
+  <div class="scrollit" style="height: 300px; overflow: scroll;">
+
+
+  <table  class="table" style="height: 300px; overflow: scroll; background-color: orange; border-radius: 10px; box-shadow: 1px 0px 3px;">
+    <thead>
+      <tr>
+        <th scope="col">Vaxt</th>
+        <th scope="col">Başlıq</th>
+        <th scope="col">Restoran</th>
+        <th scope="col">İstifadəçi</th>
+        <th scope="col">Əməliyyat</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for unverifiedFB in unverifiedFBS %}
+      
+   
+      <tr>
+        <th scope="row">{{unverifiedFB.time}}</th>
+        <td>{{unverifiedFB.topic}}</td>
+        <td>{{unverifiedFB.restaurant_name_from_user}}
+          {% if unverifiedFB.restaurant_id %}
+          ({{unverifiedFB.restaurant_id}})
+          {% endif %}</td>
+        <td>{{User.query.filter_by(id=unverifiedFB.user_id).first().fullname}}</td>
+      </tr>
+      {% endfor %}
+      
+    </tbody>
+  </table>
 </div>
+</div>
+{% endblock %}
+{% block jsLink %}
+
 {% endblock %}

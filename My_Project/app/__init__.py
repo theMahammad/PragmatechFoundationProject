@@ -32,10 +32,10 @@ from flask_sqlalchemy import SQLAlchemy
 
 class Restaurant(db.Model):
     id=db.Column(db.Integer,primary_key=True)
-    name = db.Column(db.String(50))
+    name = db.Column(db.String(50),unique=True)
     logo = db.Column(db.String(50))
     about = db.Column(db.Text)
-    # feedbacks = db.relationship('Restaurant',backref = 'restaurant', lazy = True)
+    feedbacks = db.relationship('Feedback',backref = 'restaurant',lazy = True)
 class FAQ(db.Model):
     id=db.Column(db.Integer,primary_key=True)
     question = db.Column(db.String(150))
@@ -70,10 +70,28 @@ class User(UserMixin,db.Model):
     fullname = db.Column(db.String(50))
     email  = db.Column(db.String(50),unique = True )
     password = db.Column(db.String(50))
+    feedbacks = db.relationship('Feedback',backref = 'user',lazy = True)
 class AboutUs(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     content = db.Column(db.Text)
     verified = db.Column(db.Boolean,default = False)
+class Feedback(db.Model):
+    id = db.Column(db.Integer,primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'),
+        nullable=False)
+    restaurant_name_from_user = db.Column(db.String(100))
+    restaurant_id = db.Column(db.Integer, db.ForeignKey('restaurant.id'))
+    tasteRating = db.Column(db.Integer,nullable = False)
+    serviceRating = db.Column(db.Integer,nullable = False)
+    atmosphereRating = db.Column(db.Integer,nullable = False)
+    topic = db.Column(db.String(100),nullable = False)
+    content = db.Column(db.Text(),nullable = False)
+    photo = db.Column(db.String(250))
+    verified = db.Column(db.Boolean,default=False)
+    time = db.Column(db.String(250))
+
+
+    
 
 
 

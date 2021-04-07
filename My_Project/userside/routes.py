@@ -1,12 +1,52 @@
 from flask import render_template,Blueprint,redirect,request,flash
 
-from .forms import RegistrationForm,LoginForm
-from app import db
+from datetime import datetime
+import pytz
+from werkzeug.utils import secure_filename
+from app import db,app
+import os,string,random
+from .forms import RegistrationForm,LoginForm,FeedbackForm
+
 from werkzeug.security import generate_password_hash,check_password_hash
 from flask_login import login_user,current_user,logout_user,login_required
 
+
 user_bp = Blueprint('user',__name__,template_folder='templates',static_folder='static',static_url_path='/static/userside')
-from app import (ContactWays,Details,FAQ,Restaurant,Rules,Subscription,Superiorities,User,AboutUs)
+from app import (ContactWays,Details,FAQ,Restaurant,Rules,Subscription,Superiorities,User,AboutUs,Feedback)
+time_zone_Baku = pytz.timezone('Asia/Baku')
+def getRandomString(length):
+    letters = string.ascii_lowercase
+    result_str = ''.join(random.choice(letters) for i in range(length))
+    return result_str
+def save_file_and_return(file,filename,specialName):
+    end = 10
+    randNum = random.randint(1,end)
+    filename= specialName+"_"+filename
+    if os.path.exists(os.path.join(app.config['UPLOAD_PATH'],filename)):
+        while (os.path.exists(os.path.join(app.config['UPLOAD_PATH'],filename))):
+            afterDot = filename[filename.index("."):]
+            beforeDot = filename[:filename.index(".")]
+            filename = beforeDot+"_"+str(randNum)+afterDot
+            end+=1
+        file.save(os.path.join(app.config['UPLOAD_PATH'],filename))
+    else:
+        file.save(os.path.join(app.config['UPLOAD_PATH'],filename))
+    return filename
+def secure_and_save_file(data,prefix,class_):
+    file = data
+    filename_ = secure_filename(file.filename)
+    filename = save_file_and_return(specialName=class_.__name__+"_"+prefix.split()[0],file = file,filename= filename_)
+    return filename
+
+def deleteFromUploadFolder(element):
+    if(os.path.exists(os.path.join(app.config['UPLOAD_PATH'],element))):
+        os.remove(os.path.join(app.config['UPLOAD_PATH'],element))
+def deleteCompletely(object_,*args):
+    if args:
+        for arg in args:
+            deleteFromUploadFolder(arg)
+    db.session.delete(object_)
+    db.session.commit()
 
 @user_bp.route("/",methods = ["GET","POST"])
 def index():
@@ -101,10 +141,36 @@ def login():
 def logout():
     logout_user()
     return redirect("/")
-@user_bp.route("/add_feedback")
+@user_bp.route("/add_feedback",methods = ['GET','POST'])
 @login_required
 def addFeedback():
-    return render_template("userside/add_feedback.html")
+    form = FeedbackForm()
+    filename = None 
+    restaurants_ = Restaurant.query.all()
+    if request.method == "POST":
+        if form.photo.data:
+            filename= secure_and_save_file(data=form.photo.data,class_=Feedback,prefix=form.restaurant.data)
+        if bool(Restaurant.query.filter_by(name = form.restaurant.data).first()):
+            _restaurant_id=Restaurant.query.filter_by(name = form.restaurant.data).first().id
+        else:
+            _restaurant_id=None
+        feedback = Feedback(
+            user_id = current_user.get_id(),
+            restaurant_name_from_user = form.restaurant.data,
+            restaurant_id = _restaurant_id,
+            topic = form.topic.data,
+            content = form.content.data,
+            photo = filename,
+            tasteRating  = request.form['taste-rating'],
+            serviceRating  = request.form['service-rating'],
+            atmosphereRating  = request.form['atmp-rating'],
+            time = datetime.now(time_zone_Baku).strftime('%Y-%m-%d | %H:%M:%S')
+
+        )
+        db.session.add(feedback)
+        db.session.commit()
+        return redirect("/")
+    return render_template("userside/add_feedback.html",form = form,restaurants = restaurants_)
 @user_bp.route("/feedback_details")
 def showFeedbackDetails():
     return render_template("userside/detailed_feedback.html")

@@ -3,7 +3,7 @@ from werkzeug.utils import secure_filename
 import os,string,random
 from app import db
 from app import app
-from app import (ContactWays,Details,FAQ,Restaurant,Rules,Subscription,Superiorities,User,AboutUs)
+from app import (ContactWays,Details,FAQ,Restaurant,Rules,Subscription,Superiorities,User,AboutUs,Feedback)
 
 from admin.forms import SuperioritiesForm,RestaurantsForm,FaqForm,RulesForm,AboutUsForm
 
@@ -47,8 +47,9 @@ def deleteCompletely(object_,*args):
 
 @admin_bp.route("")
 def index():
-    
-    return render_template("admin/index.html")
+    feedbacksStillUnverified = Feedback.query.filter_by(verified = False)
+    users = User.query.all()
+    return render_template("admin/index.html",unverifiedFBS = feedbacksStillUnverified,User = User)
 @admin_bp.route("/about_us",methods = ["GET","POST"])
 def aboutUs():
     form = AboutUsForm()
