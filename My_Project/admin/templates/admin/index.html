@@ -8,10 +8,11 @@ Ana səhifə
 {% block page %}
 <div class="container">
   <h2 style="text-align: center;">Təsdiq gözləyən fikirlər</h2>
+  <hr>
   <div class="scrollit" style="height: 300px; overflow: scroll;">
 
 
-  <table  class="table" style="height: 300px; overflow: scroll; background-color: orange; border-radius: 10px; box-shadow: 1px 0px 3px;">
+  <table  class="table" style="height: 300px; overflow: scroll; background-color: rgb(179, 176, 170); border-radius: 10px; box-shadow: 1px 0px 3px;">
     <thead>
       <tr>
         <th scope="col">Vaxt</th>
@@ -30,9 +31,15 @@ Ana səhifə
         <td>{{unverifiedFB.topic}}</td>
         <td>{{unverifiedFB.restaurant_name_from_user}}
           {% if unverifiedFB.restaurant_id %}
-          ({{unverifiedFB.restaurant_id}})
+         <a href="/adminside/restaurants/seeDetails/{{unverifiedFB.restaurant_id}}">({{unverifiedFB.restaurant_id}})</a> 
           {% endif %}</td>
         <td>{{User.query.filter_by(id=unverifiedFB.user_id).first().fullname}}</td>
+        <td>
+          
+          <a style="color: red;" href="/adminside/delete_feedback/{{unverifiedFB.id}}" ><i data-toggle="tooltip" data-placement="top" title="Geri çevir"  class="fas fa-times-circle"></i></a>
+          <a data-toggle="tooltip"  title="Qəbul et" style="color: green;" href="/adminside/verify_feedback/{{unverifiedFB.id}}"><i  class="fas fa-check-circle"></i></a>
+          <a style="color: yellow;" data-toggle="tooltip"  title="Ətraflı bax"  href="/adminside/see_feedback_details/{{unverifiedFB.id}}"><i class="fas fa-info-circle"></i></a>
+        </td>
       </tr>
       {% endfor %}
       
@@ -42,5 +49,10 @@ Ana səhifə
 </div>
 {% endblock %}
 {% block jsLink %}
-
+<script>
+ 
+  $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+</script>
 {% endblock %}

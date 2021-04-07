@@ -590,7 +590,7 @@ html {
   text-align: center;
   line-height: 2.8em;
   font-size: 1.4rem;
-  transition: all 550ms ease;
+  transition: all 750ms linear;
 }
 
 .input_wrapper input[type="text"]:hover + label, input[type="file"]:hover + label {

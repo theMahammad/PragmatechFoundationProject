@@ -34,8 +34,9 @@ def save_file_and_return(file,filename,specialName):
     return filename
 def secure_and_save_file(data,prefix,class_):
     file = data
-    filename_ = secure_filename(file.filename)
-    filename = save_file_and_return(specialName=class_.__name__+"_"+prefix.split()[0],file = file,filename= filename_)
+    filename = secure_filename(file.filename)
+    filename = save_file_and_return(specialName=class_.__name__+"_"+prefix.split()[0],file = file,filename= filename)
+    print(filename)
     return filename
 
 def deleteFromUploadFolder(element):

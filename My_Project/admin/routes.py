@@ -41,7 +41,8 @@ def deleteFromUploadFolder(element):
 def deleteCompletely(object_,*args):
     if args:
         for arg in args:
-            deleteFromUploadFolder(arg)
+            if arg is not None:
+                deleteFromUploadFolder(arg)
     db.session.delete(object_)
     db.session.commit()
 
@@ -50,6 +51,11 @@ def index():
     feedbacksStillUnverified = Feedback.query.filter_by(verified = False)
     users = User.query.all()
     return render_template("admin/index.html",unverifiedFBS = feedbacksStillUnverified,User = User)
+@admin_bp.route("/delete_feedback/<int:id>")
+def delete_feedback(id):
+    feedback = Feedback.query.get(id)
+    deleteCompletely(feedback,feedback.photo)
+    return redirect("/adminside")
 @admin_bp.route("/about_us",methods = ["GET","POST"])
 def aboutUs():
     form = AboutUsForm()
