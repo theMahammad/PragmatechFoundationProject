@@ -29,7 +29,15 @@ Restoranlar
     <form action="/adminside/restaurants" method="POST" enctype="multipart/form-data">
         <label for=""></label>
       {{forms.name.label("Restoran adını daxil edin",class = "btn btn-light text-start w-100")}}
+      {% if rest_name %}
+      {{forms.name(class="form-control",value = rest_name)}}
+    
+      {% else %}
       {{forms.name(class="form-control")}}
+      {% endif %}
+
+
+      
       {{forms.logo.label("Restoran loqosunu daxil edin",class = "btn btn-light text-start w-100")}}
       {{forms.logo(class="form-control",placeholder = "Restoran loqosunu daxil edin")}} 
       {{forms.about.label("Restoran barədə ətraflı məlumat daxil edin",class = "btn btn-light text-start w-100")}}

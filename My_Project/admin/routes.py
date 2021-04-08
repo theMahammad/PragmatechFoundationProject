@@ -10,7 +10,7 @@ from admin.forms import SuperioritiesForm,RestaurantsForm,FaqForm,RulesForm,Abou
 
 
 admin_bp = Blueprint('adminPanel',__name__,url_prefix="/adminside",template_folder='templates',static_folder='static',static_url_path='/static/admin')
-
+rest_name_from_user=None
 def getRandomString(length):
     letters = string.ascii_lowercase
     result_str = ''.join(random.choice(letters) for i in range(length))
@@ -50,12 +50,29 @@ def deleteCompletely(object_,*args):
 def index():
     feedbacksStillUnverified = Feedback.query.filter_by(verified = False)
     users = User.query.all()
+    
     return render_template("admin/index.html",unverifiedFBS = feedbacksStillUnverified,User = User)
 @admin_bp.route("/delete_feedback/<int:id>")
 def delete_feedback(id):
     feedback = Feedback.query.get(id)
     deleteCompletely(feedback,feedback.photo)
     return redirect("/adminside")
+@admin_bp.route("/verify_feedback/<int:id>")
+def verify_feedback(id):
+    Feedback.query.get(id).verified=True
+    db.session.commit()
+    return redirect("/adminside")
+@admin_bp.route("/see_feedback_details/<int:id>")
+def seeFeedbackDetails(id):
+    selectedFB = Feedback.query.get(id)
+    selectedFB_user_name = User.query.filter_by(id=selectedFB.user_id).first().fullname
+    return render_template("admin/see_feedback_details.html",selected = selectedFB,selected_user_name = selectedFB_user_name)
+@admin_bp.route("/add_restaurant/<string:rest_name>")
+def addRestaurantFromFeedback(rest_name):
+    forms = RestaurantsForm()
+    restaurants = Restaurant.query.all()
+    rest_name_from_user = rest_name
+    return render_template("admin/restaurants.html",forms = forms,restaurants = restaurants,rest_name = rest_name_from_user)
 @admin_bp.route("/about_us",methods = ["GET","POST"])
 def aboutUs():
     form = AboutUsForm()
@@ -151,6 +168,7 @@ def restaurants():
     filename = None
     forms = RestaurantsForm()
     restaurants = Restaurant.query.all()
+  
     if request.method=="POST":
         if forms.logo.data:
             filename = secure_and_save_file(class_=Restaurant,data=forms.logo.data,prefix=forms.name.data)

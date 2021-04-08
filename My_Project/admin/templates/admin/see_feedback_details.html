@@ -1,0 +1,118 @@
+{% extends "admin/base.html" %}
+{% block title %}
+{{selected.topic}}
+{% endblock %}
+{% block cssLink %}
+<style>
+    .ratings span{
+        border:1px solid black;
+        display: inline-block;
+        padding: 5px;
+        margin: 2px;
+    }
+</style>
+{% endblock %}
+{% block page %}
+<div class="show-operations d-flex "  style="z-index: 100;position: fixed; bottom: 10px;right:5px;">
+    <div    class="operations my-3 ml-5" style="z-index: 100; align-self:  center;transition: all 0.5s linear; opacity: 0;">
+        <a href="/adminside/verify_feedback/{{selected.id}}" class="btn btn-success">Qəbul et</a>
+        <a href="/adminside/delete_feedback/{{selected.id}}"  class="btn btn-danger">Sil</a>
+        <a href="/adminside/resend_user_feedback_for_edit/{{selected.id}}" class="btn btn-warning">Təkrar yazılma üçün göndər</a>
+        </div>
+        <button class="btn btn-light ml-3" style="background-color: rgb(184, 173, 173);border:none ;font-size:20px ;width: fit-content; align-self: center;  box-shadow: 2px 2px 3px;letter-spacing: 0.2cm;padding: 15px;border-radius: 50%;"><b>...</b></button>
+
+</div>
+
+<div class="container">
+    
+    <div class="card">
+        <h5 style="text-align: center;" class="card-header">{{selected_user_name}}</h5>
+        <img  style="height: 300px;" src="{{url_for('adminPanel.static',filename = 'admin/uploads/%s' %selected.photo)}}"  class="card-img" alt="">
+        <div class="card-body">
+          <h5 class="card-title">{{selected.topic}}</h5>
+          <p class="card-text">{{selected.content}}</p>
+          <hr>
+          <div class="ratings d-flex justify-content-between" style="font-size: 2rem;">
+            <span> Dad:
+                {% for i in range(selected.tasteRating) %}
+                <i class="fas fa-star"></i>
+                {% endfor %}
+
+
+            </span>   
+         
+               <span>
+                Personal :
+                {% for i in range(selected.serviceRating) %}
+                <i class="fas fa-star"></i>
+                {% endfor %}
+             </span> 
+           
+             <span>
+                 Atmosfer :
+                 {% for i in range(selected.atmosphereRating) %}
+                 <i class="fas fa-star"></i>
+                 {% endfor %}
+                </span>
+          </div>
+          
+        </div>
+        <div class="card-footer">
+            <table class="table table-light table-striped" style="border-radius:10px;">
+        
+                <thead style="text-align: center; font-size: 50px; " >
+                    <th style="height: 100px;  position: relative; " colspan="5">Restoran</th>
+                </thead>
+                <tbody>
+                    <tr>
+                    <th>Adı</th>
+                    <td>{{selected.restaurant_name_from_user}}</td>
+                    </tr>
+                    <tr>
+                    <th>Sistemdə vəziyyəti</th>
+                    {% if selected.restaurant_id %}
+                    <td><i data-toggle="tooltip" data-placement="top" title="Var" style="color: green;" class="fas fa-check-circle"></i></td>
+                    {% else %}
+                
+                    
+                    <td><i data-toggle="tooltip" data-placement="top" title="Yoxdur" style="color: red;"  class="fas fa-times-circle"></i></td>
+                    {% endif %}
+                    </tr>
+                        <tr>
+                    <th>Əməliyyat</th>
+                    {% if selected.restaurant_id %}
+                        <td><a href="/adminside/restaurants/seeDetails/{{selected.restaurant_id}}">Profilə bax</a></td>
+                    {% else %}
+                     <td><a href="/adminside/add_restaurant/{{selected.restaurant_name_from_user}}">Əlavə et</a></td>
+                     {% endif %}
+                            </tr>
+                </tbody>
+            </table>
+        </div>
+      </div>
+   
+    </div>
+
+{% endblock %}
+{% block jsLink %}
+<script>
+ 
+  $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+
+$('.show-operations button').click(function(){
+    if($('.operations').css('opacity')=="1"){
+        $('.operations').css('opacity','0'); 
+    }
+    else{
+$('.operations').css('opacity','1'); 
+    }
+    
+})
+
+
+
+
+</script>
+{% endblock %}
