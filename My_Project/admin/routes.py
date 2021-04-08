@@ -56,12 +56,12 @@ def index():
 def delete_feedback(id):
     feedback = Feedback.query.get(id)
     deleteCompletely(feedback,feedback.photo)
-    return redirect("/adminside")
+    return redirect("/adminside/feedbacks")
 @admin_bp.route("/verify_feedback/<int:id>")
 def verify_feedback(id):
     Feedback.query.get(id).verified=True
     db.session.commit()
-    return redirect("/adminside")
+    return redirect("/adminside/feedbacks")
 @admin_bp.route("/see_feedback_details/<int:id>")
 def seeFeedbackDetails(id):
     selectedFB = Feedback.query.get(id)
@@ -73,6 +73,9 @@ def addRestaurantFromFeedback(rest_name):
     restaurants = Restaurant.query.all()
     rest_name_from_user = rest_name
     return render_template("admin/restaurants.html",forms = forms,restaurants = restaurants,rest_name = rest_name_from_user)
+@admin_bp.route("/feedbacks")
+def showAllFeedbacks():
+    return render_template("admin/feedbacks.html",Feedback = Feedback,User = User)
 @admin_bp.route("/about_us",methods = ["GET","POST"])
 def aboutUs():
     form = AboutUsForm()
@@ -182,6 +185,11 @@ def restaurants():
         db.session.add(restaurant)
         db.session.commit()
         return redirect("/adminside/restaurants")
+    feedbacks_non_with_rest_id = Feedback.query.filter_by(restaurant_id=None)
+    for feedback in feedbacks_non_with_rest_id:
+            if Restaurant.query.filter_by(name = feedback.restaurant_name_from_user).first():
+                feedback.restaurant_id = Restaurant.query.filter_by(name = feedback.restaurant_name_from_user).first().id
+    db.session.commit()
     return render_template("admin/restaurants.html",restaurants = restaurants,forms = forms)
 @admin_bp.route("/restaurants/seeDetails/<int:id>")
 def showRestaurantDetails(id):

@@ -6,9 +6,11 @@ Qaydalar
 active
 {% endblock %}
 {% block cssLink %}
-<!-- include libraries(jQuery, bootstrap) -->
-
-<!-- include summernote css/js -->
+<style>
+  form *{
+    margin-top: 10px;
+  }
+</style>
 {% endblock %}
 {% block websiteURL %}
 /rules
@@ -26,7 +28,7 @@ active
     <form action="/adminside/rules" method="POST" enctype="multipart/form-data">
       {{forms.title(class="form-control" ,placeholder = "Başlığı daxil edin")}}  
       {{forms.content(id="summernote" ,placeholder = "Kontenti daxil  edin")}}
-      {{forms.button(class="form-control",value = "Əlavə et", placeholder = "Daxil edin")}}
+      {{forms.button(class="btn btn-primary btn-block",value = "Əlavə et", placeholder = "Daxil edin")}}
     </form>
   </div>
   <div class="rules" style="flex-grow: 1;">

@@ -1,0 +1,99 @@
+{% extends "admin/base.html" %}
+{% block Home %}
+active
+{% endblock %}
+{% block title %}
+Fikirlər 
+{% endblock %}
+{% block page %}
+<div class="container">
+  <h2 style="text-align: center;">Yoxlanış gözləyən fikirlər({{ Feedback.query.filter_by(verified=False).count() }})</h2>
+  <hr>
+  <div class="scrollit" style="height: 300px; overflow: scroll;">
+
+
+    <table  class="table" style="height: 300px; overflow: scroll; background-color: rgb(179, 176, 170); border-radius: 10px; box-shadow: 1px 0px 3px;">
+      <thead>
+        <tr>
+          <th scope="col">Vaxt</th>
+          <th scope="col">Başlıq</th>
+          <th scope="col">Restoran</th>
+          <th scope="col">İstifadəçi</th>
+          <th scope="col">Əməliyyat</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for unverifiedFB in Feedback.query.filter_by(verified=False) %}
+        
+     
+        <tr>
+          <th scope="row">{{unverifiedFB.time}}</th>
+          <td>{{unverifiedFB.topic}}</td>
+          <td>{{unverifiedFB.restaurant_name_from_user}}
+            {% if unverifiedFB.restaurant_id %}
+           <a href="/adminside/restaurants/seeDetails/{{unverifiedFB.restaurant_id}}">({{unverifiedFB.restaurant_id}})</a> 
+            {% endif %}</td>
+          <td>{{User.query.filter_by(id=unverifiedFB.user_id).first().fullname}}</td>
+          <td>
+            
+            <a style="color: red;" href="/adminside/delete_feedback/{{unverifiedFB.id}}" ><i data-toggle="tooltip" data-placement="top" title="Geri çevir"  class="fas fa-times-circle"></i></a>
+            <a data-toggle="tooltip"  title="Qəbul et" style="color: green;" href="/adminside/verify_feedback/{{unverifiedFB.id}}"><i  class="fas fa-check-circle"></i></a>
+            <a style="color: yellow;" data-toggle="tooltip"  title="Ətraflı bax"  href="/adminside/see_feedback_details/{{unverifiedFB.id}}"><i class="fas fa-info-circle"></i></a>
+          </td>
+        </tr>
+        {% endfor %}
+        
+      </tbody>
+    </table>
+  </div>
+<hr>
+<h2 style="text-align: center;">Təsdiqlənmiş fikirlər</h2>
+<hr>
+<div class="scrollit" style="height: 300px; overflow: scroll;">
+
+
+    <table  class="table" style="height: 300px; overflow: scroll; background-color: rgb(179, 176, 170); border-radius: 10px; box-shadow: 1px 0px 3px;">
+      <thead>
+        <tr>
+          <th scope="col">Vaxt</th>
+          <th scope="col">Başlıq</th>
+          <th scope="col">Restoran</th>
+          <th scope="col">İstifadəçi</th>
+          <th scope="col">Əməliyyat</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for verifiedFB in Feedback.query.filter_by(verified=True) %}
+        
+     
+        <tr>
+          <th scope="row">{{verifiedFB.time}}</th>
+          <td>{{verifiedFB.topic}}</td>
+          <td>{{verifiedFB.restaurant_name_from_user}}
+            {% if verifiedFB.restaurant_id %}
+           <a href="/adminside/restaurants/seeDetails/{{verifiedFB.restaurant_id}}">({{verifiedFB.restaurant_id}})</a> 
+            {% endif %}</td>
+          <td>{{User.query.filter_by(id=verifiedFB.user_id).first().fullname}}</td>
+          <td>
+            
+            <a style="color: red;" href="/adminside/delete_feedback/{{verifiedFB.id}}" ><i data-toggle="tooltip" data-placement="top" title="Geri çevir"  class="fas fa-times-circle"></i></a>
+            <a data-toggle="tooltip"  title="Qəbul et" style="color: green;" href="/adminside/verify_feedback/{{verifiedFB.id}}"><i  class="fas fa-check-circle"></i></a>
+            <a style="color: yellow;" data-toggle="tooltip"  title="Ətraflı bax"  href="/adminside/see_feedback_details/{{verifiedFB.id}}"><i class="fas fa-info-circle"></i></a>
+          </td>
+        </tr>
+        {% endfor %}
+        
+      </tbody>
+    </table>
+  </div>
+
+</div>
+{% endblock %}
+{% block jsLink %}
+<script>
+ 
+  $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+</script>
+{% endblock %}

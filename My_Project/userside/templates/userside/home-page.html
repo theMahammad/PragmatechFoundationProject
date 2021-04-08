@@ -205,7 +205,7 @@ active
 {% block jsLink %}
 {% if get_flashed_messages() %}
 {% for message in get_flashed_messages() %}
-<p class="alert alert-success d-none" id="subscriber-message" >{{ message}}</p>
+<p class="alert alert-success d-none" id="subscriber-message" >{{ message}} {{current_user.fullname}}</p>
 {% endfor %}
 <script>
 alert($('#subscriber-message').html())
