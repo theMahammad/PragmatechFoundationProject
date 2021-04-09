@@ -13,7 +13,22 @@
 </head>
 <body>
    
+    {% if get_flashed_messages() %}
+    {% for message in get_flashed_messages() %}
+    
+    <div class="animate__animated animate__flash " >
+       
+           <p class="alert alert-info">{{message}}</p>
+        </div>
+ 
+
+       
+
+        
    
+
+   {% endfor %}
+   {% endif %}
     <div class="container" id="container">
         <div class="form-container sign-up-container">
             <form action="/login" method="POST">
@@ -76,15 +91,12 @@
 
    
     <script src="{{url_for('user.static', filename='userside/login/js/script.js')}}"></script>
-    {% if get_flashed_messages() %}
-    {% for message in get_flashed_messages() %}
-   <p class="alert alert-success d-none" id="subscriber-message" >{{ message}}</p>
-   {% endfor %}
+   
    <script>
-    alert($('#subscriber-message').html())
+    
     
   </script>
-   {% endif %}
+  
    <script>
        $('#confirm').focusout(function(){
         if( $("#confirm").val()!=$('#password').val()){

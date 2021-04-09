@@ -4,15 +4,90 @@ Bələdçiniz
 {% endblock %}
 {% block cssLink %}
 <link rel="stylesheet" href="{{url_for('user.static', filename='userside/home_page/css/style.css' % folderName)}}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css" integrity="sha512-wR4oNhLBHf7smjy0K4oqzdWumd+r5/+6QO/vDda76MW5iug4PT7v86FoEkySIJft3XA0Ae6axhIvHrqwm793Nw==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
 
+<style>
+    .info {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 9999999;
+  margin: 1.5rem;
+}
+@import url(https://fonts.googleapis.com/css?family=Montserrat:700);
+*, *::before, *::after {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+	border: 0;
+}
+
+body {
+	font-family: 'Comfortaa', sans-serif;
+  font-weight: 700;
+	
+}
+a {
+  text-decoration: none;
+  color: rgba(225, 255, 255, .8);
+}
+
+
+
+.review{
+    font-size: 1.7rem;
+}
+.card-text{
+    height: 130px;
+}
+
+.gallery {
+  background: #EEE;
+    height: 600px;
+}
+
+.gallery-cell {
+  width: 50%;
+  height: 400px;
+  margin-right: 10px;
+
+
+  counter-increment: gallery-cell;
+}
+
+/* cell number */
+.gallery-cell:before {
+  display: block;
+  text-align: center;
+  line-height: 200px;
+  font-size: 80px;
+  color: white;
+}
+.gallery-cell .card{height: 350px;}
+
+.gallery-cell .card-body{
+    height: 200px;
+}
+</style>
+
+
+<!-- JavaScript -->
+<script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
 {% endblock %}
 {% block homePage %}
 active
 {% endblock %}
 {% block page %}
-<section class="loading-screen">
+<!-- <section class="loading-screen">
     <div class="body animate__animated animate__delay-2s ">
     <div id="container">
+        {% if get_flashed_messages() %}
+        {% for message in get_flashed_messages() %}
+        <p class="" style="font-family  : 'Comfortaa';font-size: inherit;" id="subscriber-message" >{{ message}}, {{current_user.fullname}}! <span  class="wave">👋</span></p>
+        {% endfor %}
+        
+        {% endif %}
     <div class="load-screen-logo animate__animated animate__delay-1s animate__flash">
         <img src="{{url_for('user.static', filename='userside/generals/img/brand-logo.png')}}"  alt="">
     </div>
@@ -28,189 +103,339 @@ active
     <span class="letter" aria-hidden="true">R</span>
     
   </p>
+ 
 </div>
 </div>
-</section>
-
-<div class="intro">
-
-
-    <div class="intro-item">
-        <ul class="intro-item-list">
-            <li class="intro-item-list-item ">
-                <div class="logo">
-                    <div class="logo-icon">
-                        <img src="{{url_for('user.static', filename='userside/home_page/img/logo-icon.png')}}" alt="">
-                    </div>
-                    <div class="logo-text">
-                        <span>Bələdçi</span>
-                    </div>
-                </div>
-            </li>
-            <li class="intro-item-list-item ">
-
-                <h3>Qərarsız qalmısan?</h3>
-            </li>
-            <li class="intro-item-list-item ">
-                <p class="list-paragraph">
-                    Qərarsız qaldığınız anlarda sizə yardım üçün varıq!
-                </p>
-            </li>
-            <li class="intro-item-list-item  ">
-
-                <a class="get-Idea btn btn-secondary" href="/feedbacks">
-                    Fikir sahibi ol
-                </a>
-                <a class="set-Idea btn btn-secondary" href="/add_feedback">
-                    Fikir bildir
-                </a>
-
-            </li>
-        </ul>
+</section> -->
+<div class="introes " style="box-shadow: 0px -1px 2px ;">
+    <!-- ' -->
+        <div class="intro " >
+    
+    
+            <div class="intro-item ">
+                <ul class="intro-item-list">
+                    <li class="intro-item-list-item ">
+                        <div class="logo">
+                            <div class="logo-icon">
+                                <img src="{{url_for('user.static', filename='userside/home_page/img/logo-icon.png')}}" alt="">
+                            </div>
+                            <div class="logo-text">
+                                <span>Bələdçi</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="intro-item-list-item ">
+        
+                        <h3>Qərarsız qalmısan?</h3>
+                    </li>
+                    <li class="intro-item-list-item ">
+                        <p class="list-paragraph">
+                            Qərarsız qaldığınız anlarda sizə yardım üçün varıq!
+                        </p>
+                    </li>
+                    <li class="intro-item-list-item  ">
+        
+                        <a class="get-Idea btn btn-secondary" href="/feedbacks">
+                            Fikir sahibi ol
+                        </a>
+                        <a class="set-Idea btn btn-secondary" href="/add_feedback">
+                            Fikir bildir
+                        </a>
+        
+                    </li>
+                </ul>
+            </div>
+        
+        
+        
+        
+        </div>
     </div>
-
-
-
-
-</div>
-
-
-
-
-<section class="review" id="salam">
-<h2 class="review-header">Ən son əlavə olunan fikirlər</h2>
-<div class="container">
-<div class="row">
-<div class="card">
-  
-<h3 class="title">Restoran adı</h3>
-
-<div class="user">
-    <div class="user-icon"> 
-    <i class="fas fa-user"></i>
-</div>
-<div class="user-name">
-    <span >Məhəmməd Sadıqzadə</span>
-</div>
-</div>
-
-<div class="bar"> <hr>
-  
-  
-</div>
-<div class="content-review">
-   <div class="icon-quote">
-       <i class="fas fa-quote-left"></i>
-   </div>
-    <p class="review-paragraph">Çox razı qaldım</p>
     
 </div>
-<div class="card-footer">
-   <div class="date">
-    <span>Fikrin yazılma tarixi</span>
-</div>
-    <div class="read-more">
-    <a href="#">Davamını oxu</a>
-</div>
-
-</div>
 
 
-</div>
 
 
-<div class="card">
+<div class="container my-5">
   
-<h3 class="title">Card 1</h3>
+    <section class="review" id="salam">
+       
+            <hr  class="our-hr-style" style="margin: 5px auto;">
 
-<div class="user">
-    <div class="user-icon"> 
-    <i class="fas fa-user"></i>
-</div>
-<div class="user-name">
-    <span >Məhəmməd Sadıqzadə</span>
-</div>
-</div>
-
-<div class="bar"> <hr>
-  
-  
-</div>
-<div class="content-review">
-   <div class="icon-quote">
-       <i class="fas fa-quote-left"></i>
-   </div>
-    <p class="review-paragraph">Çox razı qaldım</p>
-    
-</div>
-<div class="card-footer">
-   <div class="date">
-    <span>Fikrin yazılma tarixi</span>
-</div>
-    <div class="read-more">
-    <a href="#">Davamını oxu</a>
-</div>
-
-</div>
-
-
-</div>
-
-<div class="card">
-  
-<h3 class="title">Card 1</h3>
-
-<div class="user">
-    <div class="user-icon"> 
-    <i class="fas fa-user"></i>
-</div>
-<div class="user-name">
-    <span >Məhəmməd Sadıqzadə</span>
-</div>
-</div>
-
-<div class="bar"> <hr>
-  
-  
-</div>
-<div class="content-review">
-   <div class="icon-quote">
-       <i class="fas fa-quote-left"></i>
-   </div>
-    <p class="review-paragraph">Çox razı qaldım</p>
-    
-</div>
-<div class="card-footer">
-   <div class="date">
-    <span>Fikrin yazılma tarixi</span>
-</div>
-    <div class="read-more">
-    <a href="#">Davamını oxu</a>
-</div>
-
-</div>
-
-
-</div>
-
-
-</div>
+        
+        <h2 class="review-header " style="margin-bottom:20px ;">Ən son əlavə olunan fikirlər</h2>
+        <p><code>wrapAround: true</code></p>
 
 
 
+<!-- Flickity HTML init -->
+<div class="gallery js-flickity"
+data-flickity-options='{ "freeScroll":true,"wrapAround":true,"autoPlay": 3500,"pauseAutoPlayOnHover": false }'>
+ 
+ 
+<div class="gallery-cell">
+    <div class="card">
+        <div class="card-header" >
+          <div class="feedback-title">Fikir başlığı</div>
+          <div class="restaurant-name text-muted" > Restoran adı</div>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Istifadəçi adı</h5>
+          <p class="card-text">Fikir</p>
+          <hr>
+          <h5>Qiymətləndirmə</h5>
+          <div class="ratings d-flex justify-content-between">
+              <div class="taste-rating">5</div>
+              <div class="service-rating">5</div>
+              <div class="atmp-rating">5 </div>
+          </div>
+        </div>
+        <div class="card-footer d-flex justify-content-between">
+            <div class="date">
+                Fikrin yazılma tarixi
+            </div>
+            <div class="read-more">
+                <a href="" class="btn btn-primary">Davamını oxu </a>
+            </div>
+            
+        </div>
+      </div>
+  </div>
+  <div class="gallery-cell">
+    <div class="card">
+        <div class="card-header" >
+          <div class="feedback-title">Fikir başlığı</div>
+          <div class="restaurant-name text-muted" > Restoran adı</div>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Istifadəçi adı</h5>
+          <p class="card-text">Fikir</p>
+          <hr>
+          <h5>Qiymətləndirmə</h5>
+          <div class="ratings d-flex justify-content-between">
+              <div class="taste-rating">5</div>
+              <div class="service-rating">5</div>
+              <div class="atmp-rating">5 </div>
+          </div>
+        </div>
+        <div class="card-footer d-flex justify-content-between">
+            <div class="date">
+                Fikrin yazılma tarixi
+            </div>
+            <div class="read-more">
+                <a href="" class="btn btn-primary">Davamını oxu </a>
+            </div>
+            
+        </div>
+      </div>
+  </div>
 </div>
-</section>
+
+
+        </section>
+</div>
+
+
+
+
+       <!-- Content Source: https://www.farmflavor.com/at-home/cooking/10-fun-facts-about-apples/  -->
+     <div class="container">
+
+         <hr style="margin: 5px auto;" class="our-hr-style">
+         <h3 style="font-size: 3rem; color: rgb(241, 97, 33);text-align: center;">Partnyorlarlardan son kompaniyalar</h3>
+<div class="news-from-partners">
+    <section class="cd-slider">
+        <ul>
+          <li >
+            <div class="content"  style="background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.8)),
+            url(https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg);">
+              <blockquote>
+                <p>I got my red dress on tonight dancing in the dark in the pale moonlight.</p>
+                <span>Summertime Sadness - Lana Del Rey</span>
+              </blockquote>
+            </div>
+          </li>
+          <li >
+              <div class="content"  style="background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.8)),
+              url(https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg);">
+                <blockquote>
+                  <p>I got my red dress on tonight dancing in the dark in the pale moonlight.</p>
+                  <span>Summertime Sadness - Lana Del Rey</span>
+                 <div class="links">
+                  <a href="">Profilə bax</a>
+                  <a href="">Xəbəri oxu</a>
+                 </div> 
+                </blockquote>
+              </div>
+            </li>
+            <li >
+              <div class="content"  style="background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.8)),
+              url(https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg);">
+                <blockquote>
+                  <p>I got my red dress on tonight dancing in the dark in the pale moonlight.</p>
+                  <span>Summertime Sadness - Lana Del Rey</span>
+                </blockquote>
+              </div>
+            </li>
+            <li >
+              <div class="content"  style="background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.8)),
+              url(https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg);">
+                <blockquote>
+                  <p>I got my red dress on tonight dancing in the dark in the pale moonlight.</p>
+                  <span>Summertime Sadness - Lana Del Rey</span>
+                </blockquote>
+              </div>
+            </li>
+         
+          
+        </ul>
+        <nav>
+          <div><a class="prev" href="#"></a></div>
+          <div><a class="next" href="#"></a></div>
+        </nav>
+      </section>
+</div>
+        
+     </div>
+       
+	
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.js" integrity="sha512-WNZwVebQjhSxEzwbettGuQgWxbpYdoLf7mH+25A7sfQbbxKeS5SQ9QBf97zOY4nOlwtksgDA/czSTmfj4DUEiQ==" crossorigin="anonymous"></script>
 
 {% endblock %}
 {% block jsLink %}
-{% if get_flashed_messages() %}
-{% for message in get_flashed_messages() %}
-<p class="alert alert-success d-none" id="subscriber-message" >{{ message}} {{current_user.fullname}}</p>
-{% endfor %}
+
 <script>
-alert($('#subscriber-message').html())
+    
+  (function() {
+  
+  var autoUpdate = false,
+      timeTrans = 4000;
+  
+	var cdSlider = document.querySelector('.cd-slider'),
+		item = cdSlider.querySelectorAll("li"),
+		nav = cdSlider.querySelector("nav");
 
+	item[0].className = "current_slide";
+
+	for (var i = 0, len = item.length; i < len; i++) {
+		var color = item[i].getAttribute("data-color");
+		item[i].style.backgroundColor=color;
+	}
+
+	// Detect IE
+	// hide ripple effect on IE9
+	var ua = window.navigator.userAgent;
+		var msie = ua.indexOf("MSIE");
+		if ( msie > 0 ) {
+			var version = parseInt(ua.substring(msie+ 5, ua.indexOf(".", msie)));
+			if (version === 9) { cdSlider.className = "cd-slider ie9";}
+	}
+
+	if (item.length <= 1) {
+		nav.style.display = "none";
+	}
+
+	function prevSlide() {
+		var currentSlide = cdSlider.querySelector("li.current_slide"),
+			prevElement = currentSlide.previousElementSibling,
+			prevSlide = ( prevElement !== null) ? prevElement : item[item.length-1],
+			prevColor = "rgb(241, 97, 33)",
+			el = document.createElement('span');
+
+		currentSlide.className = "";
+		prevSlide.className = "current_slide";
+
+		nav.children[0].appendChild(el);
+
+		var size = ( cdSlider.clientWidth >= cdSlider.clientHeight ) ? cdSlider.clientWidth*2 : cdSlider.clientHeight*2,
+		    ripple = nav.children[0].querySelector("span");
+
+		ripple.style.height = size + 'px';
+		ripple.style.width = size + 'px';
+		ripple.style.backgroundColor = prevColor;
+
+		ripple.addEventListener("webkitTransitionEnd", function() {
+			if (this.parentNode) {
+				this.parentNode.removeChild(this);
+			}
+		});
+
+		ripple.addEventListener("transitionend", function() {
+			if (this.parentNode) {
+				this.parentNode.removeChild(this);
+			}
+		});
+
+	}
+
+	function nextSlide() {
+		var currentSlide = cdSlider.querySelector("li.current_slide"),
+			nextElement = currentSlide.nextElementSibling,
+			nextSlide = ( nextElement !== null ) ? nextElement : item[0],
+			nextColor = "rgb(241, 97, 33)",
+			el = document.createElement('span');
+
+		currentSlide.className = "";
+		nextSlide.className = "current_slide";
+
+		nav.children[1].appendChild(el);
+
+		var size = ( cdSlider.clientWidth >= cdSlider.clientHeight ) ? cdSlider.clientWidth*2 : cdSlider.clientHeight*2,
+			  ripple = nav.children[1].querySelector("span");
+
+		ripple.style.height = size + 'px';
+		ripple.style.width = size + 'px';
+		ripple.style.backgroundColor = nextColor;
+
+		ripple.addEventListener("webkitTransitionEnd", function() {
+			if (this.parentNode) {
+				this.parentNode.removeChild(this);
+			}
+		});
+
+		ripple.addEventListener("transitionend", function() {
+			if (this.parentNode) {
+				this.parentNode.removeChild(this);
+			}
+		});
+
+	}
+
+	updateNavColor();
+
+	function updateNavColor () {
+		var currentSlide = cdSlider.querySelector("li.current_slide");
+
+		var nextColor = ( currentSlide.nextElementSibling !== null ) ? currentSlide.nextElementSibling.getAttribute("data-color") : item[0].getAttribute("data-color");
+		var	prevColor = ( currentSlide.previousElementSibling !== null ) ? currentSlide.previousElementSibling.getAttribute("data-color") : item[item.length-1].getAttribute("data-color");
+
+		if (item.length > 2) {
+			nav.querySelector(".prev").style.backgroundColor = prevColor;
+			nav.querySelector(".next").style.backgroundColor = nextColor;
+		}
+	}
+
+	nav.querySelector(".next").addEventListener('click', function(event) {
+		event.preventDefault();
+		nextSlide();
+		updateNavColor();
+	});
+
+	nav.querySelector(".prev").addEventListener("click", function(event) {
+		event.preventDefault();
+		prevSlide();
+		updateNavColor();
+	});
+  
+  //autoUpdate
+  setInterval(function() {
+    if (autoUpdate) {
+      nextSlide();
+      updateNavColor();
+    };
+	},timeTrans);
+
+})();
 </script>
-{% endif %}
-
 {% endblock %}

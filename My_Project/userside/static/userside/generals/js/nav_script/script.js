@@ -1,5 +1,12 @@
-let nav = $('.nav');
-let scroll;
+
+
+    let nav = $('.nav');
+    let scroll;
+    if($(window).scrollTop()>130){
+        nav.css('width', '100%');
+        nav.css("border-radius", "0px")
+    }
+
 $(window).scroll(function (e) {
     scroll = $(window).scrollTop();
    
@@ -19,3 +26,6 @@ $(window).scroll(function (e) {
 
 
 })
+
+
+   

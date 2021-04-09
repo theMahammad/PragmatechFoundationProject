@@ -872,12 +872,16 @@ section.header {
 /*Design of top div*/
 /*Design of slider*/
 .intro {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.8)), url("../img/header.jpg");
   display: flex;
   justify-content: center;
   align-items: center;
   height: 860px;
   color: white;
+}
+
+.intro-item {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.8)), url("../img/header.jpg");
+  width: 900px;
 }
 
 .intro-item-list {
@@ -936,144 +940,6 @@ section.header {
 }
 
 /*Design of last reviews*/
-.review {
-  background-color: white;
-  font-family: 'Open Sans', sans-serif;
-  position: relative;
-  width: 100%;
-  height: 400px;
-}
-
-.review-header {
-  color: #f16121;
-  text-align: center;
-  font-size: 3rem !important;
-  font-family: "Comfortaa";
-}
-
-.review .container {
-  position: absolute;
-  height: 300px;
-  width: 100%;
-  top: 60px;
-  left: calc(30% - 300px);
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.review .card {
-  display: flex;
-  height: 280px;
-  width: 400px;
-  background-color: #f16121;
-  border-radius: 10px;
-  box-shadow: -1rem 0 3rem #000;
-  /*   margin-left: -50px; */
-  transition: 0.4s ease-out;
-  position: relative;
-  left: 0px;
-}
-
-.review .card:not(:first-child) {
-  margin-left: -50px;
-}
-
-.review .card:hover {
-  transform: translateY(-20px);
-  transition: 0.4s ease-out;
-}
-
-.review .card:hover ~ .card {
-  position: relative;
-  left: 50px;
-  transition: 0.4s ease-out;
-}
-
-.review .title {
-  color: white;
-  font-weight: 300;
-  position: absolute;
-  left: 20px;
-  top: 15px;
-}
-
-.review .user {
-  width: 60%;
-  font-size: 2rem;
-  position: absolute;
-  top: 55px;
-  left: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.review .user-icon {
-  color: white;
-  align-self: center;
-  font-size: 3rem;
-}
-
-.review .user-name {
-  color: white;
-}
-
-.review .bar {
-  position: absolute;
-  top: 100px;
-  left: 20px;
-  height: 5px;
-  width: 90%;
-}
-
-.review .bar hr {
-  background-color: gray;
-}
-
-.review .content-review {
-  position: absolute;
-  left: 20px;
-  top: 40%;
-  background-color: transparent;
-  width: 90%;
-  display: flex;
-  border: none;
-}
-
-.review .content-review i {
-  color: white;
-  font-size: 3rem;
-}
-
-.review .content-review p {
-  font-size: 2rem;
-  color: white;
-  margin-left: 5px;
-}
-
-.review .card-footer {
-  width: 90%;
-  position: absolute;
-  bottom: 10px;
-  color: white;
-  display: flex;
-  justify-content: space-between;
-  background-color: transparent;
-  font-size: 1.5rem;
-}
-
-.review .card-footer .read-more a {
-  text-decoration: none;
-  color: white;
-  opacity: 0;
-  animation: border-progress;
-}
-
-.review .card:hover a {
-  opacity: 1;
-  text-decoration: underline;
-}
-
 .intro-item-list-item:nth-child(1) {
   opacity: 0;
   animation-name: fadeIn;
@@ -1104,5 +970,439 @@ section.header {
   animation-duration: 2s;
   animation-delay: 11s;
   animation-fill-mode: forwards;
+}
+
+.wave {
+  animation-name: wave-animation;
+  /* Refers to the name of your @keyframes element below */
+  animation-duration: 5.5s;
+  /* Change to speed up or slow down */
+  animation-iteration-count: infinite;
+  /* Never stop waving :) */
+  transform-origin: 70% 70%;
+  /* Pivot around the bottom-left palm */
+  display: inline-block;
+}
+
+@keyframes wave-animation {
+  0% {
+    transform: rotate(0deg);
+  }
+  10% {
+    transform: rotate(14deg);
+  }
+  /* The following five values can be played with to make the waving more or less extreme */
+  20% {
+    transform: rotate(-8deg);
+  }
+  30% {
+    transform: rotate(14deg);
+  }
+  40% {
+    transform: rotate(-4deg);
+  }
+  50% {
+    transform: rotate(10deg);
+  }
+  60% {
+    transform: rotate(0deg);
+  }
+  /* Reset for the last half to pause */
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.slides-nav {
+  z-index: 99;
+  position: fixed;
+  right: -5%;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  color: #111;
+}
+
+@media (min-width: 54em) {
+  .slides-nav {
+    right: 2%;
+  }
+}
+
+.slides-nav__nav {
+  position: relative;
+  right: 0;
+  display: block;
+  font-size: 1em;
+  transform: rotate(90deg);
+  transform-origin: center;
+}
+
+.slides-nav button {
+  position: relative;
+  display: inline-block;
+  padding: 0.35em;
+  margin: 0;
+  font-family: "Space Mono", monospace;
+  appearance: none;
+  background: transparent;
+  border: 0;
+  overflow-x: hidden;
+  transition: color 0.5s ease;
+}
+
+.slides-nav button:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  height: 1px;
+  width: 0;
+  background: #111;
+  transition: width 0.4s ease;
+}
+
+.slides-nav button:hover {
+  cursor: pointer;
+  color: rgba(17, 17, 17, 0.75);
+  transition: color 0.5s ease;
+}
+
+.slides-nav button:hover:after {
+  width: 100%;
+  transition: width 0.4s ease;
+}
+
+.slides-nav button:focus {
+  outline: 0;
+}
+
+.is-sliding .slides-nav {
+  pointer-events: none;
+}
+
+.slides {
+  position: relative;
+  display: block;
+  height: 100vh;
+  width: 100%;
+  background: #fff;
+  transition: background 1s cubic-bezier(0.99, 1, 0.92, 1);
+}
+
+.is-sliding .slides {
+  background: #ededed;
+  transition: background 0.3s cubic-bezier(0.99, 1, 0.92, 1);
+}
+
+.slide {
+  z-index: -1;
+  padding: 0;
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  transition: z-index 1s ease;
+}
+
+.slide.is-active {
+  z-index: 19;
+  transition: z-index 1s ease;
+}
+
+.slide__content {
+  position: relative;
+  margin: 0 auto;
+  height: 95%;
+  width: 95%;
+  top: 2.5%;
+}
+
+@media (min-width: 54em) {
+  .slide__content {
+    height: 80%;
+    width: 80%;
+    top: 10%;
+  }
+}
+
+.slide__header {
+  z-index: 9;
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  overflow-y: hidden;
+  transform: translateX(5%);
+}
+
+@media (min-width: 54em) {
+  .slide__header {
+    transform: translateX(-5%);
+  }
+}
+
+.slide__title {
+  font-family: Montserrat, helvetica;
+  font-size: 2.5em;
+  font-weight: 700;
+  color: #111;
+  overflow-y: hidden;
+}
+
+@media (min-width: 54em) {
+  .slide__title {
+    font-size: 5em;
+  }
+}
+
+.slide__title .title-line {
+  display: block;
+  overflow-y: hidden;
+}
+
+.slide__title .title-line span {
+  display: inline-block;
+  transform: translate3d(0, 140%, 0);
+  opacity: 0;
+  transition: transform 0.4s ease, opacity 0.8s ease;
+}
+
+.slide__title .title-line span:nth-child(1) {
+  transition-delay: 0.15s;
+}
+
+.slide__title .title-line span:nth-child(2) {
+  transition-delay: 0.3s;
+}
+
+.is-active .slide__title .title-line span {
+  transform: translate3d(0, 0%, 0);
+  opacity: 1;
+  transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.1s ease;
+}
+
+.is-active .slide__title .title-line:nth-of-type(2n) span {
+  transition-delay: 0.2s;
+}
+
+.slide__figure {
+  z-index: 7;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  height: 100%;
+  width: 100%;
+  transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.is-sliding .slide__figure {
+  transform: scale(0.8);
+  transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.slide__img {
+  position: relative;
+  display: block;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: 50%;
+  -webkit-backface-visibility: hidden;
+  height: 0%;
+  width: 100%;
+  filter: grayscale(0%);
+  transition: height 1s 1.4s cubic-bezier(0.19, 1, 0.22, 1), filter 0.4s 0.1s ease;
+}
+
+.is-active .slide__img {
+  height: 100%;
+  opacity: 1;
+  transition: height 0.5s 0.3s cubic-bezier(0.77, 0, 0.175, 1), filter 0.4s 0.1s ease;
+}
+
+.is-sliding .slide__img {
+  filter: grayscale(100%);
+}
+
+.news-from-partners {
+  /* current slide
+    ---------------------------------*/
+  /* nav
+    ---------------------------------*/
+}
+
+.news-from-partners .cd-slider {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  overflow: hidden;
+}
+
+.news-from-partners .cd-slider.ie9 nav div span {
+  display: none;
+}
+
+.news-from-partners .cd-slider ul li {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  visibility: hidden;
+  transition: visibility 0s .6s;
+  color: white;
+}
+
+.news-from-partners .content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-position: 50% 100%;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  mix-blend-mode: darken;
+  opacity: 0;
+  transform: scale(1.2);
+  transition: opacity .4s .6s, transform .4s .6s;
+  background-color: red;
+}
+
+.news-from-partners .content blockquote {
+  position: absolute;
+  bottom: 5%;
+  left: 4%;
+  z-index: 200;
+  max-width: 45%;
+}
+
+.news-from-partners blockquote p {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.news-from-partners blockquote span {
+  font-size: 1.4rem;
+}
+
+.news-from-partners .cd-slider li.current_slide {
+  visibility: visible;
+}
+
+.news-from-partners .cd-slider li.current_slide::before {
+  border-width: 16rem;
+}
+
+.news-from-partners .cd-slider li.current_slide .content {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.news-from-partners nav div {
+  position: absolute;
+  top: 50%;
+  left: 4%;
+  width: 5rem;
+  height: 5rem;
+  margin-top: -2.5rem;
+  list-style: none;
+}
+
+.news-from-partners nav div:last-of-type {
+  left: auto;
+  right: 4%;
+}
+
+.news-from-partners .prev, .news-from-partners .next {
+  position: relative;
+  z-index: 100;
+  width: 100%;
+  height: 100%;
+  display: block;
+  border-radius: 100%;
+  transition: box-shadow .3s;
+  background-color: black;
+}
+
+.news-from-partners .prev::before, .news-from-partners .prev::after, .news-from-partners .next::before, .news-from-partners .next::after {
+  content: '';
+  position: absolute;
+  left: 43%;
+  background: #fff;
+  width: .4rem;
+  min-width: 3px;
+  border-radius: 3px;
+  height: 34%;
+}
+
+.news-from-partners .prev::before {
+  transform: rotate(45deg);
+  top: 24%;
+}
+
+.news-from-partners .prev::after {
+  transform: rotate(-45deg);
+  bottom: 24%;
+}
+
+.news-from-partners .next::before, .news-from-partners .next::after {
+  left: auto;
+  right: 43%;
+}
+
+.news-from-partners .next::before {
+  transform: rotate(-45deg);
+  top: 24%;
+}
+
+.news-from-partners .next::after {
+  transform: rotate(45deg);
+  bottom: 24%;
+}
+
+.news-from-partners .prev:hover, .news-from-partners .next:hover {
+  box-shadow: 0 0 0 1rem rgba(0, 0, 0, 0.15);
+}
+
+.news-from-partners nav > div > span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 100%;
+  z-index: 5;
+  pointer-events: none;
+  will-change: width, height;
+  transform: translate(-50%, -50%);
+  transition: width .6s, height .6s;
+}
+
+.news-from-partners .links {
+  width: 400px;
+  display: flex;
+  justify-content: flex-start;
+  height: fit-content;
+  margin-top: 15px;
+}
+
+.news-from-partners .links a {
+  display: inline-block;
+  border-radius: 5px;
+  background-color: transparent;
+  border: 1px solid orangered;
+  padding: 5px;
+  margin-right: 5px;
+  font-size: 1.3rem;
+  z-index: 100;
+  transition: all 0.3s linear;
+  width: 100px;
+}
+
+.news-from-partners .links a:hover {
+  background-color: orangered;
+  text-decoration: none;
+  color: white;
 }
 /*# sourceMappingURL=style.css.map */

@@ -125,7 +125,7 @@ def login():
                     else:
                         remember = False
                     login_user(searchedUser,remember = remember)
-                    flash("Təkrar xoş gəldiniz!")
+                    flash("Təkrar xoş gəldiniz")
                     return redirect("/")
                     
                 else:
