@@ -62,6 +62,11 @@ def verify_feedback(id):
     Feedback.query.get(id).verified=True
     db.session.commit()
     return redirect("/adminside/feedbacks")
+@admin_bp.route("/unverify_feedback/<int:id>")
+def unverify_feedback(id):
+    Feedback.query.get(id).verified=False
+    db.session.commit()
+    return redirect("/adminside/feedbacks")
 @admin_bp.route("/see_feedback_details/<int:id>")
 def seeFeedbackDetails(id):
     selectedFB = Feedback.query.get(id)

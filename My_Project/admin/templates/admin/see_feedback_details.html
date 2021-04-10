@@ -88,7 +88,7 @@
       </div>
 </div>
 <div class="show-operations d-flex "  style="z-index: 100;position: fixed; bottom: 10px;right:5px;">
-    <div    class="operations my-3 ml-5" style="z-index: 100; align-self:  center;transition: all 0.5s linear; opacity: 0;">
+    <div    class="operations my-3 ml-5" style="z-index: 100; align-self:  center;transition: all 0.5s linear; display: none;">
         <a href="/adminside/verify_feedback/{{selected.id}}" class="btn btn-success">Qəbul et</a>
         <a href="/adminside/delete_feedback/{{selected.id}}"  class="btn btn-danger">Sil</a>
         <button  class="openModal btn btn-warning">Təkrar yazılma üçün göndər</button>
@@ -211,11 +211,11 @@
 })
 
 $('.show-operations button').click(function(){
-    if($('.operations').css('opacity')=="1"){
-        $('.operations').css('opacity','0'); 
+    if($('.operations').css('display')=="none"){
+        $('.operations').css('display','block')
     }
     else{
-$('.operations').css('opacity','1'); 
+        $('.operations').css('display','none')
     }
     
 })

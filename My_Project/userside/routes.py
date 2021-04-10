@@ -14,6 +14,21 @@ from flask_login import login_user,current_user,logout_user,login_required
 user_bp = Blueprint('user',__name__,template_folder='templates',static_folder='static',static_url_path='/static/userside')
 from app import (ContactWays,Details,FAQ,Restaurant,Rules,Subscription,Superiorities,User,AboutUs,Feedback)
 time_zone_Baku = pytz.timezone('Asia/Baku')
+month_in_azeri = {
+    "01":"Yanvar",
+    "02":"Fevral",
+    "03" : "Mart",
+    "04" : "Aprel",
+    "05" : "May",
+    "06": "İyun",
+    "07": "İyul",
+    "08": "Avqust",
+    "09" : "Sentyabr",
+    "10": "Oktyabr",
+    "11" : "Noyabr",
+    "12" : "Dekabr"
+}
+
 def getRandomString(length):
     letters = string.ascii_lowercase
     result_str = ''.join(random.choice(letters) for i in range(length))
@@ -51,7 +66,8 @@ def deleteCompletely(object_,*args):
 
 @user_bp.route("/",methods = ["GET","POST"])
 def index():
-    
+    verifiedFeedbacks = Feedback.query.filter_by(verified=True)
+
     count = 0
     if request.method == "POST":
         allSubscribers = Subscription.query.all()
@@ -69,11 +85,14 @@ def index():
             flash("Siz abunə olmusunuz")
         return redirect("/FAQ")
       
-    return render_template("userside/home-page.html")
+    return render_template("userside/home-page.html",feedbacks = verifiedFeedbacks,Restaurant = Restaurant,User=User,month = month_in_azeri)
 @user_bp.route("/restaurants")
 def restaurants():
     restaurants = Restaurant.query.all()
     return render_template("userside/restaurants.html",restaurants = restaurants)
+@user_bp.route("/restaurants/profile/<string:rest_slug>")
+def restaurantsProfile(rest_slug):
+    selected = profile
 @user_bp.route("/about_us")
 def about():
     verifiedAboutUs = AboutUs.query.filter_by(verified=True)
@@ -93,7 +112,14 @@ def partnering():
     return render_template("userside/partnering.html",supers = Superiorities.query.all())
 @user_bp.route("/feedbacks")
 def feedbacks():
-    return render_template("userside/feedbacks.html")
+    verifiedFeedbacks  = Feedback.query.filter_by(verified =True)
+
+    return render_template("userside/feedbacks.html",feedbacks  = verifiedFeedbacks,Restaurant = Restaurant,User = User,month = month_in_azeri)
+@user_bp.route("/feedbacks/see_all_content/<int:id>")
+def showFeedbackDetails(id):
+    selectedFeedback = Feedback.query.get(id)
+
+    return render_template("userside/detailed_feedback.html",selected = selectedFeedback,User = User,Restaurant =Restaurant,month = month_in_azeri)
 @user_bp.route("/login",methods = ['GET','POST'])
 def login():
     reg_form = RegistrationForm()
@@ -172,9 +198,7 @@ def addFeedback():
         db.session.commit()
         return redirect("/")
     return render_template("userside/add_feedback.html",form = form,restaurants = restaurants_)
-@user_bp.route("/feedback_details")
-def showFeedbackDetails():
-    return render_template("userside/detailed_feedback.html")
+
 
    
       

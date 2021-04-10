@@ -57,35 +57,79 @@ Detallı Feedback
     <div class="blockquote-wrapper">
       <div class="blockquote">
         <h1>
-         İstifadəçinin daxil etdiyi başlıq
+        {{selected.topic}}
          </h1>
         
       </div>
     </div>
         <hr class="our-hr-style my-4">
+       <div class="container">
+        <h2 style="text-align: center;font-size: 2.6rem; color: #f16121;">
+            Qiymətləndirmə
+        </h2>
+        <div class="ratings d-flex  mx-auto" style="flex-direction: column; width: 50%;font-size: 2rem; ">
+            <div class="taste-rating d-flex justify-content-between" style="border-bottom: 2px solid orangered;" > 
+                <div class="taste-rating-header">Dad </div>
+                <div class="taste-rating-score">
+                    {% for i in range(selected.tasteRating) %}
+                    ⭐
+                    {% endfor %}
+              </div>
+              </div>
+              
+            <div class="service-rating d-flex justify-content-between" style="border-bottom: 2px solid orangered;">
+              <div class="service-rating-header" >Xidmət </div>
+              <div class="service-rating-score">
+                  {% for i in range(selected.serviceRating) %}
+                    ⭐
+                    {% endfor %}
+              </div>
+            </div>
+
+            <div class="atmp-rating d-flex justify-content-between" >
+              <div class="atmp-rating-header">Atmosfer </div>
+              <div class="atmp-rating-score"> 
+                  {% for i in range(selected.atmosphereRating) %}
+                    ⭐
+                    {% endfor %}
+                   </div>
+           </div>
+        </div>
+
+        
+        
+       </div>
+       <hr class="our-hr-style mb-5">
        
       <div class="container">
-          <div class="row">
+          
+              {% if selected.photo %}
+              <div class="row">
               <div class="photo col-xs-12 col-sm-12 col-md-12">
-                  <img src="https://cdn.downtoearth.org.in/library/large/2019-05-31/0.68487000_1559290735_70-20190615-dte-english.jpg" class="review-photo" alt=""> 
-                            </div>
-          </div>
+                <img src="{{url_for('adminPanel.static',filename ='admin/uploads/%s' %selected.photo)}}" class="review-photo" alt=""> 
+                          </div>
+                        </div>
+              {% endif %}
+             
+        
         
           <div class="cardam ">
            
-              <div class="name-and-rating" style="border-bottom: 1px solid white;" >
-                  <h3 class="rest-name">Restoran adı</h3><span class="rating-section">Reytinqi</span>
+              <div class="name-and-rating" >
+                  <h3 class="rest-name">{{Restaurant.query.filter_by(id=selected.restaurant_id).first().name}}</h3><span class="rating-section">Reytinqi</span>
               </div>
               
           
-          <div class="user">
+          <div class="user d-flex justify-content-center" style=" width: 100%;background-color: #fff;color: #f16121 !important;">
           
            
-               <div class="user-icon"> 
-               <i class="fas fa-user"></i>
+               <div class="user-icon mr-5"> 
+               <i class="fas fa-user" style="color:#f16121">
+                   
+               </i>
            </div>
            <div class="user-name">
-               <span style="">Məhəmməd Sadıqzadə</span>
+               <span style="color:#f16121 ;">{{User.query.filter_by(id=selected.user_id).first().fullname}}</span>
            </div>
            </div>
            
@@ -93,24 +137,22 @@ Detallı Feedback
              
              
            </div>
-          <div class="content-review">
-              <div class="real-content">
+          <div class="content-review" style="background-color: #fff;">
+              <div class="real-content" >
                   <div class="icon-quote">
-                      <i class="fas fa-quote-left"></i>
+                      <i class="fas fa-quote-left" style=" color: #f16121 !important;"></i>
                   </div>
-                   <p class="review-paragraph">
-                       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur error molestiae sit quam temporibus. Dolor tempore non dolore cumque beatae, est earum, modi sint esse, asperiores ipsam magnam quas veniam!
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius quo alias vel quasi voluptatum sunt incidunt voluptas dolore. Molestias totam suscipit voluptatum. Ut magni rerum voluptatem nihil minima harum officia!
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed officiis nulla quo, asperiores delectus ut, aliquam repellat impedit deleniti, reprehenderit distinctio accusantium voluptatum? Adipisci est delectus sequi consequuntur at maxime.  
-                  </p>
+                   <p class="review-paragraph" style=" color: #f16121 !important;">
+                       {{selected.content}}
+                </p>
                   <i class="fas fa-quote-right" ></i>
                 
               </div>
                  
            </div>
-           <div class="cardam-footer">
-              <div class="date">
-               <span>Fikrin yazılma tarixi</span>
+           <div class="card-footer cardam-footer text-center    ">
+              <div class="date " >
+               <span>{{((selected.time.split(" ")[0].split("-")[2])|int)|string +" "+ month[selected.time.split(" ")[0].split("-")[1]]+" " +selected.time.split(" ")[0].split("-")[0]}}</span>
            </div>
               
            

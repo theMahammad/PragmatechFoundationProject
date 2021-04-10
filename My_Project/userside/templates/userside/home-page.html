@@ -25,7 +25,7 @@ Bələdçiniz
 
 body {
 	font-family: 'Comfortaa', sans-serif;
-  font-weight: 700;
+  
 	
 }
 a {
@@ -35,40 +35,7 @@ a {
 
 
 
-.review{
-    font-size: 1.7rem;
-}
-.card-text{
-    height: 130px;
-}
 
-.gallery {
-  background: #EEE;
-    height: 600px;
-}
-
-.gallery-cell {
-  width: 50%;
-  height: 400px;
-  margin-right: 10px;
-
-
-  counter-increment: gallery-cell;
-}
-
-/* cell number */
-.gallery-cell:before {
-  display: block;
-  text-align: center;
-  line-height: 200px;
-  font-size: 80px;
-  color: white;
-}
-.gallery-cell .card{height: 350px;}
-
-.gallery-cell .card-body{
-    height: 200px;
-}
 </style>
 
 
@@ -79,7 +46,7 @@ a {
 active
 {% endblock %}
 {% block page %}
-<!-- <section class="loading-screen">
+<section class="loading-screen">
     <div class="body animate__animated animate__delay-2s ">
     <div id="container">
         {% if get_flashed_messages() %}
@@ -106,7 +73,7 @@ active
  
 </div>
 </div>
-</section> -->
+</section>
 <div class="introes " style="box-shadow: 0px -1px 2px ;">
     <!-- ' -->
         <div class="intro " >
@@ -164,8 +131,8 @@ active
             <hr  class="our-hr-style" style="margin: 5px auto;">
 
         
-        <h2 class="review-header " style="margin-bottom:20px ;">Ən son əlavə olunan fikirlər</h2>
-        <p><code>wrapAround: true</code></p>
+        <h2 class="review-header mt-5" style="margin-bottom:20px ;font-size: 3rem; text-align: center;color: orangered;">Ən son əlavə olunan fikirlər</h2>
+       
 
 
 
@@ -173,55 +140,64 @@ active
 <div class="gallery js-flickity"
 data-flickity-options='{ "freeScroll":true,"wrapAround":true,"autoPlay": 3500,"pauseAutoPlayOnHover": false }'>
  
- 
-<div class="gallery-cell">
-    <div class="card">
-        <div class="card-header" >
-          <div class="feedback-title">Fikir başlığı</div>
-          <div class="restaurant-name text-muted" > Restoran adı</div>
-        </div>
-        <div class="card-body">
-          <h5 class="card-title">Istifadəçi adı</h5>
-          <p class="card-text">Fikir</p>
-          <hr>
-          <h5>Qiymətləndirmə</h5>
-          <div class="ratings d-flex justify-content-between">
-              <div class="taste-rating">5</div>
-              <div class="service-rating">5</div>
-              <div class="atmp-rating">5 </div>
-          </div>
-        </div>
-        <div class="card-footer d-flex justify-content-between">
-            <div class="date">
-                Fikrin yazılma tarixi
-            </div>
-            <div class="read-more">
-                <a href="" class="btn btn-primary">Davamını oxu </a>
-            </div>
-            
-        </div>
-      </div>
-  </div>
+
+  {% for feedback in feedbacks %}
+  
+  
   <div class="gallery-cell">
     <div class="card">
-        <div class="card-header" >
-          <div class="feedback-title">Fikir başlığı</div>
-          <div class="restaurant-name text-muted" > Restoran adı</div>
+        <div class="card-header" style="position: relative;background-color: #f16121;color: #fff !important;">
+          <div class="feedback-title">{{feedback.topic}}</div>
+          <div class="restaurant-name text-light" > {{Restaurant.query.filter_by(id=feedback.restaurant_id).first().name}}</div>
+          <div class="restaurant-logo" style="position: absolute;right: 3px;top: 0%;">
+            <img src="{{url_for('adminPanel.static',filename = 'admin/uploads/%s' %Restaurant.query.filter_by(id=feedback.restaurant_id).first().logo)}}" style="object-fit: cover; height: 64px;width: 64px;border-radius: 50%;" alt="">    
+        </div>
         </div>
         <div class="card-body">
-          <h5 class="card-title">Istifadəçi adı</h5>
-          <p class="card-text">Fikir</p>
+          <h5 class="card-title">{{User.query.filter_by(id=feedback.user_id).first().fullname}}</h5>
+            {% if feedback.content|length > 50 %}
+            <p class="card-text">{{feedback.content[:50]}}</p>
+         
+            {% else %}
+            <p class="card-text">{{feedback.content}}</p>
+            {% endif %}
+
+          
           <hr>
-          <h5>Qiymətləndirmə</h5>
+          
           <div class="ratings d-flex justify-content-between">
-              <div class="taste-rating">5</div>
-              <div class="service-rating">5</div>
-              <div class="atmp-rating">5 </div>
+              <div class="taste-rating" style="text-align: center;"> 
+                  <div class="taste-rating-header">Dad </div>
+                  <div class="taste-rating-score">
+                      {% for i in range(feedback.tasteRating) %}
+                      ⭐
+                      {% endfor %}
+                </div>
+                </div>
+              <div class="service-rating">
+                <div class="service-rating-header" style="text-align: center;">Xidmət </div>
+                <div class="service-rating-score">
+                    {% for i in range(feedback.serviceRating) %}
+                      ⭐
+                      {% endfor %}
+                </div>
+              </div>
+
+              <div class="atmp-rating" style="text-align: center;">
+                <div class="atmp-rating-header">Atmosfer </div>
+                <div class="atmp-rating-score"> 
+                    {% for i in range(feedback.atmosphereRating) %}
+                      ⭐
+                      {% endfor %}
+                     </div>
+             </div>
           </div>
         </div>
-        <div class="card-footer d-flex justify-content-between">
+        <div class="card-footer d-flex justify-content-between" style="background-color: #f16121;color: #fff !important;">
             <div class="date">
-                Fikrin yazılma tarixi
+
+                {{((feedback.time.split(" ")[0].split("-")[2])|int)|string +" "+ month[feedback.time.split(" ")[0].split("-")[1]]+" " +feedback.time.split(" ")[0].split("-")[0]}}
+             
             </div>
             <div class="read-more">
                 <a href="" class="btn btn-primary">Davamını oxu </a>
@@ -230,6 +206,8 @@ data-flickity-options='{ "freeScroll":true,"wrapAround":true,"autoPlay": 3500,"p
         </div>
       </div>
   </div>
+  {% endfor %}
+  
 </div>
 
 
@@ -437,5 +415,6 @@ data-flickity-options='{ "freeScroll":true,"wrapAround":true,"autoPlay": 3500,"p
 	},timeTrans);
 
 })();
+
 </script>
 {% endblock %}

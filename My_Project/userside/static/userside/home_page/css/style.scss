@@ -513,15 +513,15 @@ section.header {
 /*Design of slider*/
 .intro {
 
-    
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.8)),
+       url('../img/header.jpg');
     display: flex;
     justify-content: center;
     align-items: center;
     height: 860px;
     color: white;
 &-item{
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.8)),
-       url('../img/header.jpg');
+    
        width: 900px;
 }
     &-item-list {
@@ -1037,5 +1037,39 @@ $slide-content-size: 80%;
     }
 
     
+}
+.review{
+    font-size: 1.7rem;
+}
+.card-text{
+    height: 130px;
+}
+
+.gallery {
+  background: #EEE;
+    height: 350px;
+}
+
+.gallery-cell {
+  width: 50%;
+  height: 350px;
+  margin-right: 10px;
+
+
+  counter-increment: gallery-cell;
+}
+
+/* cell number */
+.gallery-cell:before {
+  display: block;
+  text-align: center;
+  line-height: 200px;
+  font-size: 80px;
+  color: white;
+}
+.gallery-cell .card{height: 350px;}
+
+.gallery-cell .card-body{
+    height: 200px;
 }
 

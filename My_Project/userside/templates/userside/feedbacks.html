@@ -4,7 +4,19 @@ active
 {% endblock %}
    {% block cssLink %}
    <link rel="stylesheet" href="{{url_for('user.static', filename='userside/feedbacks/css/style.css')}}">
+    <style>
+        .card{
+            font-size: 1.7rem;
+           
+        }
+        *, *::before, *::after {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+	border: 0;
+}
 
+    </style>
    {% endblock %}
 
 
@@ -15,51 +27,76 @@ active
   {% block page %}
   <section class="review">
     <h1 style="text-align: center;" class="review-header">Fikirlər</h1>
-    <hr class="our-hr-style my-4">
+    <hr class="our-hr-style my-4 mx-auto">
  
  <div class="container review-list">
  <div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-6">
-        <div class="card ">
-         <div class="name-and-rating" style="border-bottom: 1px solid white;" >
-            <h3 class="rest-name">Restoran adı <span class="rating-section">Reytinqi</span></h3>
-        </div>
-        
-             <div class="user">
-        
-         
-             <div class="user-icon"> 
-             <i class="fas fa-user"></i>
-         </div>
-         <div class="user-name">
-             <span style="">Məhəmməd Sadıqzadə</span>
-         </div>
-         </div>
-         
-         <div class="bar"> <hr>
-           
-           
-         </div>
-        <div class="content-review">
-            <div class="icon-quote">
-                <i class="fas fa-quote-left"></i>
+     {% for feedback in feedbacks %}
+    <div class="card-element col-xs-12 col-md-5 col-lg-6">
+        <div class="card " style="box-shadow: 1px 2px 3px;">
+            <div class="card-header" style="position: relative;background-color: #f16121;color: #fff !important;">
+              <div class="feedback-title">{{feedback.topic}}</div>
+              <div class="restaurant-name text-light" > {{Restaurant.query.filter_by(id=feedback.restaurant_id).first().name}}</div>
+              <div class="restaurant-logo" style="position: absolute;right: 3px;top: 0%;">
+                <img src="{{url_for('adminPanel.static',filename = 'admin/uploads/%s' %Restaurant.query.filter_by(id=feedback.restaurant_id).first().logo)}}" style="object-fit: cover; height: 64px;width: 64px;border-radius: 50%;" alt="">    
             </div>
-             <p class="review-paragraph">Çox razı qaldım</p>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title" style="font-size:2rem ;">{{User.query.filter_by(id=feedback.user_id).first().fullname}}</h5>
+                {% if feedback.content|length > 50 %}
+                <p class="card-text">{{feedback.content[:50]}}</p>
              
-         </div>
-         <div class="card-footer">
-            <div class="date">
-             <span>Fikrin yazılma tarixi</span>
-         </div>
-             <div class="read-more">
-             <a href="/feedback_details">Davamını oxu</a>
-         </div>
-         
-     </div>
-         
-         
-       </div>
-     </div>
+                {% else %}
+                <p class="card-text" style="height: 100px; overflow: hidden; "> {{feedback.content}}</p>
+                {% endif %}
+    
+              
+              <hr>
+              
+              <div class="ratings d-flex justify-content-between">
+                  <div class="taste-rating" style="text-align: center;"> 
+                      <div class="taste-rating-header">Dad </div>
+                      <div class="taste-rating-score">
+                          {% for i in range(feedback.tasteRating) %}
+                          ⭐
+                          {% endfor %}
+                    </div>
+                    </div>
+                  <div class="service-rating">
+                    <div class="service-rating-header" style="text-align: center;">Xidmət </div>
+                    <div class="service-rating-score">
+                        {% for i in range(feedback.serviceRating) %}
+                          ⭐
+                          {% endfor %}
+                    </div>
+                  </div>
+    
+                  <div class="atmp-rating" style="text-align: center;">
+                    <div class="atmp-rating-header">Atmosfer </div>
+                    <div class="atmp-rating-score"> 
+                        {% for i in range(feedback.atmosphereRating) %}
+                          ⭐
+                          {% endfor %}
+                         </div>
+                 </div>
+              </div>
+            </div>
+            <div class="card-footer  d-flex justify-content-between" style="height: 40px;background-color: #f16121;color: #fff !important;">
+                <div class="date">
+    
+                    {{((feedback.time.split(" ")[0].split("-")[2])|int)|string +" "+ month[feedback.time.split(" ")[0].split("-")[1]]+" " +feedback.time.split(" ")[0].split("-")[0]}}
+                 
+                </div>
+                <div class="read-more d-none">
+                    <a href="/feedbacks/see_all_content/{{feedback.id}}" class="btn btn-primary">Davamını oxu </a>
+                </div>
+                
+            </div>
+          </div>
+    </div>
+   
+           
+     {% endfor %}
     
 
 </div>
@@ -72,6 +109,24 @@ active
 
 
 </section>
+  {% endblock %}
+  {% block jsLink %}
+  <script>
+      $('.card').hover(function(){
+         let rest =  jQuery(this).find(".restaurant-logo")
+         rest.attr('class','animate__animated animate__flash')
+         let read_more =  jQuery(this).find(".read-more")
+         read_more.attr('class','d-inline-block animate__animated animate__tada')
+         let stars =  jQuery(this).find(".taste-rating-score")
+         stars.addClass('animate__animated animate__flip')
+         let srv_stars =  jQuery(this).find(".service-rating-score")
+         srv_stars.addClass('animate__animated animate__flip')
+         let atmp_stars =  jQuery(this).find(".atmp-rating-score")
+         atmp_stars.addClass('animate__animated animate__flip')
+      })
+      
+    
+  </script>
   {% endblock %}
    
 

@@ -55,7 +55,10 @@
                 
                 {{log_form.email(placeholder= "E-mail adresinizi daxil edin")}}
                 {{log_form.password(class ="password" ,placeholder="Şifrənizi daxil edin")}}
-                {{log_form.remember(class="form-control")}}
+               
+               <div class="remember-me">
+                {{log_form.remember(style="width:fit-content;")}} {{log_form.remember.label("Məni xatırla")}}
+               </div>
                 <a href="#">Şifrənizi unutdunuz?</a>
                 {{log_form.button(class="submitButton" ,value="Daxil ol")}}
                 

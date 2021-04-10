@@ -3,11 +3,40 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from werkzeug.utils import secure_filename
 from flask_login import UserMixin
-from sqlalchemy import MetaData
+from sqlalchemy import MetaData,event
+from slugify import slugify
 import os
 from flask_login import LoginManager,login_user,current_user,logout_user,login_required
 
+fromAzeriToEnglish = {
+    'ə':"e",
+    "ş" :"sh",
+    "ı": "i",
+    "ü" : "u",
+    "ç" : "ch",
+    "ğ" : "gh",
+    "ö" : "o"
 
+}
+def convertation(text,class_):
+    
+    newText = ''
+   
+    for letter in text:
+        for dict_letter in fromAzeriToEnglish.keys():
+            if(dict_letter==letter):
+                letter = fromAzeriToEnglish[dict_letter]
+        newText +=letter  
+    
+    if class_.query.filter_by(slug=newText).first():
+        count=1 
+        while class_.query.filter_by(slug=newText).first():
+            if class_.query.filter_by(slug=(newText+"_"+str(count))):
+               newText+="_"+str(count)
+            count+=1     
+    return newText
+
+    
 
 naming_convention = {
     "ix": 'ix_%(column_0_label)s',
@@ -33,13 +62,22 @@ from flask_sqlalchemy import SQLAlchemy
 class Restaurant(db.Model):
     id=db.Column(db.Integer,primary_key=True)
     name = db.Column(db.String(50),unique=True)
-    logo = db.Column(db.String(50))
+    slug = db.Column(db.String(50),unique=True)
+    logo = db.Column(db.String(50),default = "default_rest_logo.png")
     about = db.Column(db.Text)
     feedbacks = db.relationship('Feedback',backref = 'restaurant',lazy = True)
+    @staticmethod
+    def generate_slug(target,value,oldvalue,initiator):
+        
+        if value and (not target.slug or value!=oldvalue):
+            target.slug=convertation(slugify(value),Restaurant)
+db.event.listen(Restaurant.name, 'set', Restaurant.generate_slug, retval=False)
 class FAQ(db.Model):
     id=db.Column(db.Integer,primary_key=True)
     question = db.Column(db.String(150))
     answer = db.Column(db.String(250))
+   
+   
 class Rules(db.Model):
      id=db.Column(db.Integer,primary_key=True)
      title = db.Column(db.String(150))
@@ -89,6 +127,13 @@ class Feedback(db.Model):
     photo = db.Column(db.String(250))
     verified = db.Column(db.Boolean,default=False)
     time = db.Column(db.String(250))
+class PromotionsAboutPartners(db.Model):
+    id = db.Column(db.Integer,primary_key=True)
+    title = db.Column(db.String(100))
+    restaurant_id = db.Column(db.Integer, db.ForeignKey('restaurant.id'))
+    content = db.Column(db.String(100))
+    read_more_url = db.Column(db.String(200))
+
 
 
     
