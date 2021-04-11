@@ -45,7 +45,7 @@ active
               <h5 class="card-title" style="font-size:2rem ;">{{User.query.filter_by(id=feedback.user_id).first().fullname}}</h5>
                 {% if feedback.content|length > 50 %}
                 <p class="card-text">{{feedback.content[:50]}}</p>
-             
+                
                 {% else %}
                 <p class="card-text" style="height: 100px; overflow: hidden; "> {{feedback.content}}</p>
                 {% endif %}
@@ -87,6 +87,42 @@ active
                     {{((feedback.time.split(" ")[0].split("-")[2])|int)|string +" "+ month[feedback.time.split(" ")[0].split("-")[1]]+" " +feedback.time.split(" ")[0].split("-")[0]}}
                  
                 </div>
+                <div class="like-or-dislike " >
+                {% if current_user.id %}
+                    {% if Like.query.filter_by(feedback_id=feedback.id,user_id=current_user.id).first() %}
+                    <a href="/feedbacks/like/{{feedback.id}}"  >
+                        
+                    <i class="fas fa-thumbs-up mr-3"  style="color: blue;"></i>
+                </a>
+                    
+                    {{Like.query.filter_by(feedback_id=feedback.id).count()}}
+                    <a href=""><i class="fas fa-thumbs-down mt-2" style="color: gray;" ></i></a>
+                    {{Dislike.query.filter_by(feedback_id=feedback.id).count()}}
+                    {% elif Dislike.query.filter_by(feedback_id=feedback.id,user_id=current_user.id).first() %}
+                    <a href=""  >
+                        <i class="fas fa-thumbs-up mr-3"  style="color:gray"></i></a>
+                        {{Like.query.filter_by(feedback_id=feedback.id).count()}}
+                        <a href="/feedbacks/dislike/{{feedback.id}}"><i class="fas fa-thumbs-down mt-2" style="color: blue;" ></i></a>
+                    
+                        {{Dislike.query.filter_by(feedback_id=feedback.id).count()}}
+                    {% else %}
+                    <a href="/feedbacks/like/{{feedback.id}}"  >
+                    <i class="fas fa-thumbs-up mr-3"  style="color: white;"></i></a>
+                    {{Like.query.filter_by(feedback_id=feedback.id).count()}}
+                    <a href="/feedbacks/dislike/{{feedback.id}}"><i class="fas fa-thumbs-down mt-2" style="color: white;" ></i></a>
+                    {{Dislike.query.filter_by(feedback_id=feedback.id).count()}}
+                    {% endif %}
+                {% else %}
+                    <a href=""   class="like">
+                        <i class="fas fa-thumbs-up mr-3"  style="color: white;"></i></a>
+                        {{Like.query.filter_by(feedback_id=feedback.id).count()}}
+                        <a href="" class="dislike"><i class="fas fa-thumbs-down mt-2" style="color: white;" ></i></a>
+                        {{Dislike.query.filter_by(feedback_id=feedback.id).count()}}
+                {% endif %}
+                    
+                   
+                   
+                </div>
                 <div class="read-more d-none">
                     <a href="/feedbacks/see_all_content/{{feedback.slug}}" class="btn btn-primary">Davamını oxu </a>
                 </div>
@@ -111,6 +147,18 @@ active
 </section>
   {% endblock %}
   {% block jsLink %}
+  {% if current_user.id %}
+     
+     {% else %}
+     <script>
+        $('.like-or-dislike a').click(function(e){
+            e.preventDefault()
+            alert("Reaksiya vermək üçün daxil olun")
+        })
+    </script>
+  
+  {%endif%}
+  
   <script>
       $('.card').hover(function(){
          let rest =  jQuery(this).find(".restaurant-logo")
@@ -124,7 +172,7 @@ active
          let atmp_stars =  jQuery(this).find(".atmp-rating-score")
          atmp_stars.addClass('animate__animated animate__flip')
       })
-      
+     
     
   </script>
   {% endblock %}

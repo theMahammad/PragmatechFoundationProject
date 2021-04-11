@@ -112,6 +112,8 @@ class User(UserMixin,db.Model):
     email  = db.Column(db.String(50),unique = True )
     password = db.Column(db.String(50))
     feedbacks = db.relationship('Feedback',backref = 'user',lazy = True)
+    likes = db.relationship('Like',backref = 'user',lazy = True)
+    dislikes = db.relationship('Dislike',backref = 'user',lazy = True)
 class AboutUs(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     content = db.Column(db.Text)
@@ -131,6 +133,8 @@ class Feedback(db.Model):
     photo = db.Column(db.String(250))
     verified = db.Column(db.Boolean,default=False)
     time = db.Column(db.String(250))
+    likes = db.relationship('Like',backref = 'feedback',lazy = True)
+    dislikes = db.relationship('Dislike',backref = 'feedback',lazy = True)
     @staticmethod
     def generate_slug(target,value,oldvalue,initiator):
         
@@ -143,6 +147,19 @@ class PromotionsAboutPartners(db.Model):
     restaurant_id = db.Column(db.Integer, db.ForeignKey('restaurant.id'))
     content = db.Column(db.String(100))
     read_more_url = db.Column(db.String(200))
+class Like(db.Model):
+    id = db.Column(db.Integer,primary_key=True)
+    feedback_id = db.Column(db.Integer, db.ForeignKey('feedback.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'),
+        nullable=False)
+class Dislike(db.Model):
+    id = db.Column(db.Integer,primary_key=True)
+    title = db.Column(db.String(100))
+    feedback_id = db.Column(db.Integer, db.ForeignKey('feedback.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'),
+        nullable=False)
+
+    
 
 
 

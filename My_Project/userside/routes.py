@@ -12,7 +12,7 @@ from flask_login import login_user,current_user,logout_user,login_required
 
 
 user_bp = Blueprint('user',__name__,template_folder='templates',static_folder='static',static_url_path='/static/userside')
-from app import (ContactWays,Details,FAQ,Restaurant,Rules,Subscription,Superiorities,User,AboutUs,Feedback)
+from app import (ContactWays,Details,FAQ,Restaurant,Rules,Subscription,Superiorities,User,AboutUs,Feedback,Like,Dislike)
 time_zone_Baku = pytz.timezone('Asia/Baku')
 month_in_azeri = {
     "01":"Yanvar",
@@ -113,8 +113,8 @@ def partnering():
 @user_bp.route("/feedbacks")
 def feedbacks():
     verifiedFeedbacks  = Feedback.query.filter_by(verified =True)
-
-    return render_template("userside/feedbacks.html",feedbacks  = verifiedFeedbacks,Restaurant = Restaurant,User = User,month = month_in_azeri)
+    
+    return render_template("userside/feedbacks.html",feedbacks  = verifiedFeedbacks,Restaurant = Restaurant,User = User,month = month_in_azeri,Like = Like,Dislike = Dislike )
 @user_bp.route("/feedbacks/see_all_content/<string:feedback_slug>")
 def showFeedbackDetails(feedback_slug):
     selectedFeedback = Feedback.query.filter_by(slug = feedback_slug).first()
@@ -198,7 +198,35 @@ def addFeedback():
         db.session.commit()
         return redirect("/")
     return render_template("userside/add_feedback.html",form = form,restaurants = restaurants_)
+@user_bp.route("/feedbacks/like/<int:id>")
+def likeFeedback(id):
+    if Like.query.filter_by(feedback_id=id,user_id=current_user.get_id()).first():
+        db.session.delete(Like.query.filter_by(feedback_id=id,user_id=current_user.get_id()).first())
+        db.session.commit()
+    else:
+        db.session.add(
+            Like(
+            feedback_id=id,
+            user_id = current_user.get_id()
+        )
+        )
+        db.session.commit()
+    return redirect("/feedbacks")
+@user_bp.route("/feedbacks/dislike/<int:id>")
+def dislikeFeedback(id):
+    if Dislike.query.filter_by(feedback_id=id,user_id=current_user.get_id()).first():
+        db.session.delete(Dislike.query.filter_by(feedback_id=id,user_id=current_user.get_id()).first())
+        db.session.commit()
+    else:
+        db.session.add(
+            Dislike(
+            feedback_id=id,
+            user_id = current_user.get_id()
+        )
+        )
+        db.session.commit()
+    return redirect("/feedbacks")
 
-
+    
    
       
