@@ -502,11 +502,21 @@ section .section-title {
 }
 
 .card {
-  background-color: #f16121;
+  background-color: white;
   box-shadow: 3px 4px 3px gray;
   font-family: "Comfortaa";
-  color: white !important;
+  color: #f16121 !important;
   transition: all 0.2s linear;
+}
+
+.card-header {
+  background-color: #f16121;
+  color: white;
+}
+
+.card-footer {
+  background-color: #f16121;
+  color: white;
 }
 
 .card button {
@@ -531,6 +541,19 @@ section .section-title {
 .btn-see-profile:hover {
   bottom: 10%;
   box-shadow: 2px 3px 2px;
+}
+
+.see-profile-link {
+  color: #f16121;
+  border: 1px solid #f16121;
+  border-radius: 15px;
+  font-size: 1.3rem;
+}
+
+.see-profile-link:hover {
+  background-color: #f16121;
+  color: white;
+  border: none;
 }
 
 .backside .card a {
@@ -580,5 +603,13 @@ section .section-title {
   .restaurants .page-content {
     grid-template-columns: repeat(4, 1fr);
   }
+}
+
+.rating-types {
+  font-size: 1rem;
+}
+
+.rating-types label {
+  margin-left: 10px;
 }
 /*# sourceMappingURL=style.css.map */

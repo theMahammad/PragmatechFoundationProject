@@ -20,14 +20,34 @@ active
           <h1 style="text-align: center;">Restoranlar</h1>
           <div class="filtering d-flex justify-content-center ">
             <div class="form-check mr-3">
-              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+              <input class="form-check-input" type="radio" name="order-by-rating" id="order-by-alphabet" checked>
              
-                Əlifba sırasına görə
+                <label for="order-by-alphabet">Əlifba sırasına görə</label>
             </div>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+            <div class="form-check" >
+              <label for="">Reytinqə görə sırala</label>
+              <div class="rating-types " >
+               
+                <div class="taste " >
+
+              
+                  <input class="form-check-input d-block  " type="radio" name="order-by-rating" id="order-by-taste" >
+               
+                  <label for="order-by-taste" >Dada görə</label>
+                </div>
+               <div class="service">
+                <input class="form-check-input" type="radio" name="order-by-rating" id="order-by-service" >
+                <label for="order-by-service">Xidmətə görə</label>
+               </div>
+                <div class="atmp">
+                  <input class="form-check-input" type="radio" name="order-by-rating" id="order-by-atmp" >
+                  <label for="order-by-atmp">Atmosferə görə</label>
+                </div>
+               
+              </div>
+            
+
              
-               Reytinqə görə
            
             </div>
           </div>
@@ -37,21 +57,90 @@ active
           <main class="rest-list row">
            {% for restaurant in restaurants %}
            <div class="col-xs-12 col-sm-6 col-md-3">
+             
             <div class="image-flip" >
                 <div class="mainflip flip-0">
                     <div class="frontside">
                         <div class="card">
+                          <div class="card-header" > {{restaurant.name}}</div>
                             <div class="card-body text-center">
                                 <p><img class=" img-fluid" src="{{url_for('adminPanel.static',filename = 'admin/uploads/%s' %restaurant.logo)}}" alt="card image"></p>
-                                <h4 class="card-title">{{restaurant.name}}</h4>
-                                <span class="card-rating">Reytinq <i class="fas fa-star"></i></span>
+                                <h4 class="card-title">
+                                  <a href="/restaurants/profile/{{restaurant.slug}}"  class="btn btn-outline-primary see-profile-link" >Profilə bax</a>
+                                </h4>
+                                 
+                                  <div class="ratings d-flex  " style="flex-direction: column; ">
+                                    <div class="taste-rating d-flex justify-content-between " style="text-align: center;border-bottom: 1px dotted orangered;"> 
+                                        <div class="taste-rating-header">
+                                          Dad </div>
+                                        <div class="taste-rating-score">
+                                            
+                                         
+                                             {%- set taste_list = [] %}
+                                             {%- for feedback in Feedback.query.filter_by(restaurant_id = restaurant.id,verified = True) %}
+                                             {%-       set taste_list = taste_list.append( feedback.tasteRating ) %}
+                                             {%- endfor %}
+                                             {% if taste_list %}
+                                             {{- '%0.1f'  % (taste_list|sum / taste_list |count)|float -}}
+                                             {% else %}
+                                             0
+                                             {% endif %}
+                                            
+                                           
+                                         
+                                           
+                                      </div>
+                                      <span>⭐</span> 
+                                      </div>
+                                   
+                                    <div class="service-rating d-flex justify-content-between" style="text-align: center;border-bottom: 1px dotted orangered;">
+                                      <div class="service-rating-header" >Xidmət </div>
+                                      <div class="service-rating-score">
+                                         
+                                        {%- set serv_list = [] %}
+                                        {%- for feedback in Feedback.query.filter_by(restaurant_id = restaurant.id,verified = True) %}
+                                        {%-       set serv_list = serv_list.append( feedback.serviceRating ) %}
+                                        {%- endfor %}
+                                        {% if serv_list %}
+                                        {{- '%0.1f'  % (serv_list|sum / serv_list |count)|float -}}
+                                        {% else %}
+                                        0
+                                        {% endif %}
+                                           
+                                         
+                                      </div>
+                                      
+                                    </div>
+                      
+                                    <div class="atmp-rating d-flex justify-content-between" style="text-align: center;border-bottom: 1px dotted orangered;">
+                                      <div class="atmp-rating-header">Atmosfer </div>
+                                      <div class="atmp-rating-score"> 
+                                        {%- set atmp_list = [] %}
+                                        {%- for feedback in Feedback.query.filter_by(restaurant_id = restaurant.id,verified = True) %}
+                                        {%-       set atmp_list = atmp_list.append( feedback.atmosphereRating ) %}
+                                        {%- endfor %}
+                                        {% if atmp_list %}
+                                        {{- '%0.1f'  % (atmp_list|sum / atmp_list |count)|float -}}
+                                        {% else %}
+                                        0
+                                        {% endif %}                                  
+                                               
+                                       
+                                        
+                                           </div>
+                                   </div>
+                                </div>
                                
-                                <span class="count-feedbacks"><i class="fas fa-comments">{{(restaurant.feedbacks)|length}}</i></span>
-
+                               
+                                <!-- <span class="count-feedbacks"><i class="fas fa-comments">{{(restaurant.feedbacks)|length}}</i></span> -->
+                               
                                 
 
                             </div>
-                            <a href="/restaurants/profile/{{restaurant.slug}}" class="btn-see-profile btn " >Profilə bax</a>
+                            <div class="card-footer">
+                              
+                            </div>
+                            <!-- <a href="/restaurants/profile/{{restaurant.slug}}" class="btn-see-profile btn " >Profilə bax</a> -->
                           </div>
                     </div>
                   
@@ -69,5 +158,78 @@ active
        
          
       </section>
+    {% endblock %}
+    {% block jsLink %}
+    <script>
+      var default_items= $(".rest-list").children()
+      $(document).ready(function() {
+        
+    var $sections = $(".rest-list").children().detach();
+    $sections.sort(function(a, b) {
+      if ($(a).find(".card-header").text().toLocaleLowerCase('tr') > $(b).find(".card-header").text().toLocaleLowerCase('tr')) return 1;
+      if ($(a).find(".card-header").text().toLocaleLowerCase('tr') < $(b).find(".card-header").text().toLocaleLowerCase('tr')) return -1;
+      return 0;
+    });
+    $(".rest-list").append($sections);
+    $('#order-by-alphabet').click(function(){
+     
+      let aph = $(".rest-list").children().detach();
+    aph.sort(function(a, b) {
+      if ($(a).find(".card-header").text().toLocaleLowerCase('tr') > $(b).find(".card-header").text().toLocaleLowerCase('tr')) return 1;
+      if ($(a).find(".card-header").text().toLocaleLowerCase('tr') < $(b).find(".card-header").text().toLocaleLowerCase('tr')) return -1;
+      return 0;
+    });
+    $(".rest-list").append(aph);
+
+  })
+  $('#order-by-taste ').click(function(){
+ 
+      let tst = $(".rest-list").children().detach();
+    tst.sort(function(a, b) {
+      a_text = $(a).find(".taste-rating-score").html()
+      b_text = $(b).find(".taste-rating-score").html()
+      if (parseInt(a_text) > parseInt(b_text)) return -1;
+      if (parseInt(a_text) < parseInt(b_text)) return 1;
+    return 0;
+    });
+    $(".rest-list").append(tst);
+  
+
+  })
+  $('#order-by-service ').click(function(){
+    
+      let srv = $(".rest-list").children().detach();
+    srv.sort(function(a, b) {
+      a_text = $(a).find(".service-rating-score").html()
+      b_text = $(b).find(".service-rating-score").html()
+      if (parseInt(a_text) > parseInt(b_text)) return -1;
+      if (parseInt(a_text) < parseInt(b_text)) return 1;
+    return 0;
+    });
+    $(".rest-list").append(srv);
+  
+
+  })
+ 
+  $('#order-by-atmp').click(function(){
+   
+    let atmp = $(".rest-list").children().detach();
+    atmp.sort(function(a, b) {
+      a_text = $(a).find(".atmp-rating-score").html()
+      b_text = $(b).find(".atmp-rating-score").html()
+      if (parseInt(a_text) > parseInt(b_text)) return -1;
+      if (parseInt(a_text) < parseInt(b_text)) return 1;
+      return 0;
+    });
+    $(".rest-list").append(atmp);
+
+  })
+  });
+  
+ 
+
+
+    </script>
+     
     {% endblock %}
    

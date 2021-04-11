@@ -91,11 +91,22 @@ section .section-title {
     min-width: 250px;
 }
 .card{
-  background-color: $orange;
+  background-color: white;
   box-shadow: 3px 4px 3px gray;
   font-family: "Comfortaa";
-  color: white !important;
+  color: $orange !important;
   transition: all 0.2s linear;
+  &-header{
+    background-color: $orange;
+    color: white;
+  }
+  .ratings{
+
+  }
+  &-footer{
+    background-color: $orange;
+    color: white;
+  }
   button{
     font-size: 1.5rem !important;
   }
@@ -119,7 +130,17 @@ section .section-title {
     }
 
 }
-
+.see-profile-link{
+  color: $orange;
+  border: 1px solid $orange;
+  border-radius: 15px;
+  font-size: 1.3rem;
+  &:hover{
+    background-color: $orange;
+    color: white;
+    border: none;
+  }
+}
 
 .backside .card a {
     font-size: 18px;
@@ -169,4 +190,9 @@ h1{
   }
 }
 }
-
+.rating-types{
+  font-size: 1rem;
+  label{
+  margin-left: 10px;
+  }
+}

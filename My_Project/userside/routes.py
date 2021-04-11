@@ -89,10 +89,10 @@ def index():
 @user_bp.route("/restaurants")
 def restaurants():
     restaurants = Restaurant.query.all()
-    return render_template("userside/restaurants.html",restaurants = restaurants)
+    return render_template("userside/restaurants.html",restaurants = restaurants,Feedback = Feedback )
 @user_bp.route("/restaurants/profile/<string:rest_slug>")
 def restaurantsProfile(rest_slug):
-    selected = profile
+   pass
 @user_bp.route("/about_us")
 def about():
     verifiedAboutUs = AboutUs.query.filter_by(verified=True)
@@ -115,9 +115,9 @@ def feedbacks():
     verifiedFeedbacks  = Feedback.query.filter_by(verified =True)
 
     return render_template("userside/feedbacks.html",feedbacks  = verifiedFeedbacks,Restaurant = Restaurant,User = User,month = month_in_azeri)
-@user_bp.route("/feedbacks/see_all_content/<int:id>")
-def showFeedbackDetails(id):
-    selectedFeedback = Feedback.query.get(id)
+@user_bp.route("/feedbacks/see_all_content/<string:feedback_slug>")
+def showFeedbackDetails(feedback_slug):
+    selectedFeedback = Feedback.query.filter_by(slug = feedback_slug).first()
 
     return render_template("userside/detailed_feedback.html",selected = selectedFeedback,User = User,Restaurant =Restaurant,month = month_in_azeri)
 @user_bp.route("/login",methods = ['GET','POST'])

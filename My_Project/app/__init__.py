@@ -18,22 +18,25 @@ fromAzeriToEnglish = {
     "ö" : "o"
 
 }
-def convertation(text,class_):
+def convertation(text,obj):
     
     newText = ''
-   
+    text = text.lower()
+    temp_text = ''
+    class_ = obj.__class__
     for letter in text:
-        for dict_letter in fromAzeriToEnglish.keys():
-            if(dict_letter==letter):
-                letter = fromAzeriToEnglish[dict_letter]
+        for key,value in fromAzeriToEnglish.items():
+            if(key==letter):
+                letter = value
         newText +=letter  
-    
-    if class_.query.filter_by(slug=newText).first():
-        count=1 
-        while class_.query.filter_by(slug=newText).first():
-            if class_.query.filter_by(slug=(newText+"_"+str(count))):
-               newText+="_"+str(count)
-            count+=1     
+    if class_.query.filter_by(slug = newText).first():
+        count = 1
+        temp_text  = newText
+        while class_.query.filter_by(slug = temp_text).first():
+            temp_text = ''
+            temp_text = newText+"_"+str(count)
+            count+=1
+    newText = temp_text
     return newText
 
     
@@ -70,7 +73,7 @@ class Restaurant(db.Model):
     def generate_slug(target,value,oldvalue,initiator):
         
         if value and (not target.slug or value!=oldvalue):
-            target.slug=convertation(slugify(value),Restaurant)
+            target.slug=convertation(slugify(value),Restaurant())
 db.event.listen(Restaurant.name, 'set', Restaurant.generate_slug, retval=False)
 class FAQ(db.Model):
     id=db.Column(db.Integer,primary_key=True)
@@ -123,10 +126,17 @@ class Feedback(db.Model):
     serviceRating = db.Column(db.Integer,nullable = False)
     atmosphereRating = db.Column(db.Integer,nullable = False)
     topic = db.Column(db.String(100),nullable = False)
+    slug = db.Column(db.String(100))
     content = db.Column(db.Text(),nullable = False)
     photo = db.Column(db.String(250))
     verified = db.Column(db.Boolean,default=False)
     time = db.Column(db.String(250))
+    @staticmethod
+    def generate_slug(target,value,oldvalue,initiator):
+        
+        if value and (not target.slug or value!=oldvalue):
+            target.slug=convertation(slugify(value),Feedback())
+db.event.listen(Feedback.topic, 'set', Feedback.generate_slug, retval=False)
 class PromotionsAboutPartners(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     title = db.Column(db.String(100))
