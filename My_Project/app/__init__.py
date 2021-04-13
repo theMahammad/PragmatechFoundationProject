@@ -5,6 +5,7 @@ from werkzeug.utils import secure_filename
 from flask_login import UserMixin
 from sqlalchemy import MetaData,event
 from slugify import slugify
+from math import *
 import os
 from flask_login import LoginManager,login_user,current_user,logout_user,login_required
 
@@ -177,6 +178,7 @@ from admin.routes import admin_bp
 app.register_blueprint(admin_bp)
 from userside.routes import user_bp
 app.register_blueprint(user_bp)
+
 
 
 

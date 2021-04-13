@@ -1,0 +1,252 @@
+{% extends "userside/base.html" %}
+{% block restaurants %}
+active
+{% endblock %}
+
+{% block title %}
+{{selected.name}}
+{% endblock %}
+{% block cssLink %}
+<link rel="stylesheet" href="{{url_for('user.static', filename='userside/restaurant_profile/css/style.css')}}">
+
+{% endblock %}
+
+{% block page %}
+<!-- METHODS WHICH IS USED OFTENLY -->
+{%- set ceil,floor,round,modf = myList        -%}}
+<section class="restaurant-profile" >
+    <div class="container mt-5"  style=" padding: 20px; border-radius: 20px;">
+        <div class="header d-flex" style="background-color: #433E3D;border-radius: 20px;color: white;">
+            
+            <div class="restaurant-logo mx-auto">
+                <img src="{{url_for('adminPanel.static',filename='admin/uploads/%s' %selected.logo)}}" style="height: 220px;width: 220px;border-radius: 50%;" alt="">
+            </div>
+            <div class="restaurant-name">
+               <h1 style="font-size:6rem ;font-family: 'Comfortaa';">
+                {{selected.name}}
+               </h1> 
+            </div>
+            <hr class="our-hr-style">
+            <h3 style="font-size: 3rem;text-align: center;" >
+                Ortalama qiymətləndirmə
+            </h3>
+            <div class="average-ratings d-flex justify-content-around">
+                
+               
+                    <div class="taste-rating" style="text-align: center; "> 
+                        <div class="taste-rating-header" >
+                       
+                            Dad 
+                     
+                        </div>
+                        <div class="taste-rating-score">
+                           {{avg_taste}}/5 
+                           <div class="taste-rating-score-with-stars d-flex" >
+                         
+                            {%- set remainderOfTaste,integerOfTaste = modf(avg_taste)|list-%}
+                            {% for star in range(integerOfTaste|int) %}
+                            <i class="fas fa-star"></i>
+                           
+                            {% endfor %}
+                            {% if remainderOfTaste>=0.5 %}
+                            <i class="fas fa-star"></i>
+                            {% elif remainderOfTaste==0 %}
+   
+                            {% else %}
+                            <i class="fas fa-star-half"></i>
+                            
+   
+                            {% endif %}
+                           </div>
+                              
+                          </div>
+                      </div>
+                      
+                    <div class="service-rating" style="text-align: center;">
+                      <div class="service-rating-header" >Xidmət </div>
+                      <div class="service-rating-score">
+                          {{avg_service}}/5
+                          <div class="service-rating-score-with-stars">
+                            {%- set remainderOfServ,integerOfServ = modf(avg_service)|list-%}
+                            {% for star in range(integerOfServ|int) %}
+                            <i class="fas fa-star"></i>
+                            {% endfor %}
+                            {% if remainderOfServ>=0.5 %}
+                            <i class="fas fa-star"></i>
+                            {% elif remainderOfServ==0 %}
+   
+                            {% else %}
+                            <i class="fas fa-star-half"></i>
+                            
+   
+                            {% endif %}
+                          </div>
+                          
+                         
+                         
+                         
+                          
+                         
+                          
+                          
+                          
+                          
+                      </div>
+                    </div>
+      
+                    <div class="atmp-rating" style="text-align: center;">
+                      <div class="atmp-rating-header">Atmosfer </div>
+                      <div class="atmp-rating-score"> 
+                         {{avg_atmp}}/5
+                         <div class="atmp-rating-score-with-stars">
+                            {%- set remainderOfAtmp,integerOfAtmp = modf(avg_atmp)|list-%}
+                            {% for star in range(integerOfAtmp|int) %}
+                            <i class="fas fa-star"></i>
+                           
+                            {% endfor %}
+                            {% if remainderOfAtmp>=0.5 %}
+                            <i class="fas fa-star"></i>
+                            {% elif remainderOfAtmp==0 %}
+   
+                            {% else %}
+                            <i class="fas fa-star-half"></i>
+                            
+   
+                            {% endif %}
+                          </div>
+                         
+                           </div>
+                   </div>
+                </div>
+            </div>
+           
+        </div>
+        
+        
+   
+</section>
+<hr class="our-hr-style" style="width: 500px;">
+<section class="feedback-about-here">
+    
+
+
+</section>
+<section class="restaurant-info">
+    <h2 style="font-size: 3.5rem; text-align: center;" >
+        Bu restoran barədə yazılan şərhlər
+    </h2>
+    <hr class="our-hr-style" style="width: 500px;">
+    <div class="container review-list">
+        <div class="row">
+            {% for feedback in Feedback.query.filter_by(verified=True,restaurant_id=selected.id) %}
+           <div class="card-element col-xs-12 col-md-5 col-lg-6" id="{{feedback.id}}">
+               <div class="card " style="box-shadow: 1px 2px 3px;">
+                   <div class="card-header" style="position: relative;background-color: #f16121;color: #fff !important;">
+                     <div class="feedback-title">{{feedback.topic}}</div>
+                     <div class="restaurant-name text-light" > {{Restaurant.query.filter_by(id=feedback.restaurant_id).first().name}}</div>
+                     <div class="restaurant-logo" style="position: absolute;right: 3px;top: 0%;">
+                       <img src="{{url_for('adminPanel.static',filename = 'admin/uploads/%s' %Restaurant.query.filter_by(id=feedback.restaurant_id).first().logo)}}" style="object-fit: cover; height: 64px;width: 64px;border-radius: 50%;" alt="">    
+                   </div>
+                   </div>
+                   <div class="card-body">
+                     <h5 class="card-title" style="font-size:2rem ;">{{User.query.filter_by(id=feedback.user_id).first().fullname}}</h5>
+                       {% if feedback.content|length > 50 %}
+                       <p class="card-text">{{feedback.content[:50]}}</p>
+                       
+                       {% else %}
+                       <p class="card-text" style="height: 100px; overflow: hidden; "> {{feedback.content}}</p>
+                       {% endif %}
+           
+                     
+                     <hr>
+                     
+                     <div class="ratings d-flex justify-content-between">
+                         <div class="taste-rating" style="text-align: center;"> 
+                             <div class="taste-rating-header">Dad </div>
+                             <div class="taste-rating-score">
+                                 {% for i in range(feedback.tasteRating) %}
+                                 ⭐
+                                 {% endfor %}
+                           </div>
+                           </div>
+                         <div class="service-rating">
+                           <div class="service-rating-header" style="text-align: center;">Xidmət </div>
+                           <div class="service-rating-score">
+                               {% for i in range(feedback.serviceRating) %}
+                                 ⭐
+                                 {% endfor %}
+                           </div>
+                         </div>
+           
+                         <div class="atmp-rating" style="text-align: center;">
+                           <div class="atmp-rating-header">Atmosfer </div>
+                           <div class="atmp-rating-score"> 
+                               {% for i in range(feedback.atmosphereRating) %}
+                                 ⭐
+                                 {% endfor %}
+                                </div>
+                        </div>
+                     </div>
+                   </div>
+                   <div class="card-footer  d-flex justify-content-between" style="height: 40px;background-color: #f16121;color: #fff !important;">
+                       <div class="date">
+           
+                           {{((feedback.time.split(" ")[0].split("-")[2])|int)|string +" "+ month[feedback.time.split(" ")[0].split("-")[1]]+" " +feedback.time.split(" ")[0].split("-")[0]}}
+                        
+                       </div>
+                       <div class="like-or-dislike " >
+                       {% if current_user.id %}
+                           {% if Like.query.filter_by(feedback_id=feedback.id,user_id=current_user.id).first() %}
+                           <a href="/feedbacks/like/{{feedback.id}}"  class="like">
+                               
+                           <i class="fas fa-thumbs-up mr-3"  style="color: blue;"></i>
+                       </a>
+                           
+                           {{Like.query.filter_by(feedback_id=feedback.id).count()}}
+                           <a href="" class="dislike"><i class="fas fa-thumbs-down mt-2" style="color: gray;" ></i></a>
+                           {{Dislike.query.filter_by(feedback_id=feedback.id).count()}}
+                           {% elif Dislike.query.filter_by(feedback_id=feedback.id,user_id=current_user.id).first() %}
+                           <a href=""  class="like" >
+                               <i class="fas fa-thumbs-up mr-3"  style="color:gray"></i></a>
+                               {{Like.query.filter_by(feedback_id=feedback.id).count()}}
+                               <a href="/feedbacks/dislike/{{feedback.id}}" class="dislike"><i class="fas fa-thumbs-down mt-2" style="color: blue;" ></i></a>
+                           
+                               {{Dislike.query.filter_by(feedback_id=feedback.id).count()}}
+                           {% else %}
+                           <a href="/feedbacks/like/{{feedback.id}}"  class="like">
+                           <i class="fas fa-thumbs-up mr-3"  style="color: white;"></i></a>
+                           {{Like.query.filter_by(feedback_id=feedback.id).count()}}
+                           <a href="/feedbacks/dislike/{{feedback.id}}" class="dislike"><i class="fas fa-thumbs-down mt-2" style="color: white;" ></i></a>
+                           {{Dislike.query.filter_by(feedback_id=feedback.id).count()}}
+                           {% endif %}
+                       {% else %}
+                           <a href=""   class="like">
+                               <i class="fas fa-thumbs-up mr-3"  style="color: white;"></i></a>
+                               {{Like.query.filter_by(feedback_id=feedback.id).count()}}
+                               <a href="" class="dislike"><i class="fas fa-thumbs-down mt-2" style="color: white;" ></i></a>
+                               {{Dislike.query.filter_by(feedback_id=feedback.id).count()}}
+                       {% endif %}
+                           
+                          
+                          
+                       </div>
+                       <div class="read-more d-none">
+                           <a href="/feedbacks/see_all_content/{{feedback.slug}}" class="btn btn-primary">Davamını oxu </a>
+                       </div>
+                       
+                   </div>
+                 </div>
+           </div>
+          
+                  
+            {% endfor %}
+           
+       
+       </div>
+        
+          
+         </div>
+</section>
+
+
+{% endblock %}

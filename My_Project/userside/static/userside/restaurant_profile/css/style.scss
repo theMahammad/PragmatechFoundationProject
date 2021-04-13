@@ -1,0 +1,54 @@
+@import '../../generals/sass/variables';
+@import '../../generals/sass/scrollbar';
+@import '../../generals/sass/header';
+@import '../../generals/sass/footer';
+html{
+    font-size: 10px;
+}
+.restaurant-profile{
+    padding: 25px;
+    box-shadow: 10px -2px 2px;
+    min-height: 500px;
+    font-family:"Comfortaa";
+   .container{
+       background-color: $orange;
+       z-index: -2;
+      
+   }
+    .header{
+        flex-direction: column;
+        z-index: -2;
+
+    }
+    h1{
+        text-align: center;
+    }
+    .average-ratings{
+        font-size: 2.6rem;
+    }
+    
+}
+div[]
+div[class*="with-stars"]
+{
+    display: flex;
+position: relative;
+
+z-index: 1;
+i{
+    z-index: 2;
+    color: $orange;
+    margin-bottom: 15px;
+}
+&::after{
+    
+    font-family: "Font Awesome 5 Free"; font-weight: 900; content: "\f005\f005\f005\f005\f005";
+    color: rgb(180, 176, 176);
+    position: absolute;
+    font-size: inherit;
+    z-index: -1;
+    top: -6px;
+    left:0px ;
+  
+  }
+}

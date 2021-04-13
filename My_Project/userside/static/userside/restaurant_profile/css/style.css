@@ -1,0 +1,484 @@
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@600&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Source+Code+Pro");
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@600&display=swap");
+.our-hr-style {
+  border: 2px dashed orange;
+  width: 50px;
+}
+
+.our-hr-style {
+  border: 2px dashed orange;
+  width: 50px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: gray;
+  border-radius: 10px;
+}
+
+::selection {
+  color: white;
+  background-color: #f16121;
+}
+
+.our-hr-style {
+  border: 2px dashed orange;
+  width: 50px;
+}
+
+body {
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box !important;
+}
+
+.register {
+  background-color: #f16121;
+  height: 50px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.register .buttons {
+  width: 300px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.register .buttons a {
+  font-size: 2rem;
+  color: white;
+  border: 1px solid white;
+  padding: 5px;
+  border-radius: 10px;
+  transition: all 0.2s linear;
+}
+
+.register .buttons a:hover {
+  border: none;
+  border-bottom: 1px solid white;
+}
+
+.top {
+  width: 100%;
+  height: 130px;
+}
+
+.brand-logo {
+  width: 300px;
+  object-fit: cover;
+}
+
+.top-item:nth-child(2) {
+  /* Animation */
+  /* text animation */
+  /* cursor animations */
+}
+
+.top-item:nth-child(2) span {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  font-family: 'Artful Beauty', monospace;
+  font-size: 5rem;
+  color: black;
+  margin: 0 auto;
+}
+
+.top-item:nth-child(2) span {
+  animation: animated-text 2s steps(29, end) 2s 1 normal both;
+}
+
+@keyframes animated-text {
+  from {
+    width: 0;
+  }
+  to {
+    width: 400px;
+  }
+}
+
+#social-media {
+  display: flex;
+  justify-content: space-between;
+  width: 200px;
+}
+
+#social-media a {
+  width: 40px;
+}
+
+#social-media a i {
+  font-size: 2.7rem;
+  background-color: #f16121;
+  border-radius: 10px;
+  color: white;
+  padding: 12px;
+  transition: all 0.3s linear;
+}
+
+#social-media a i:hover {
+  color: #f16121;
+  background-color: transparent;
+  transform: scale(1.5);
+}
+
+.active {
+  border: 1px solid white;
+  border-radius: 10px;
+  color: #000 !important;
+  border-top: none;
+  border-bottom: none;
+}
+
+.nav {
+  width: 1000px;
+  margin: 10px auto -30px;
+  background-color: #f16121;
+  border: 1px solid #F16121;
+  display: flex;
+  justify-content: center;
+  border-radius: 50px;
+  padding: 15px;
+  position: sticky;
+  top: 0px;
+  z-index: 100;
+  transition: all 0.5s linear;
+}
+
+.nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.nav ul li {
+  display: inline-block;
+  transition: all 0.2s linear;
+}
+
+.nav ul li:hover {
+  transform: rotate(2deg);
+}
+
+.nav ul li a {
+  padding: 5px;
+  color: white;
+  text-decoration: none;
+  font-family: "Comfortaa";
+  font-size: 20px;
+  transition: all 0.2s linear;
+}
+
+.nav ul li a:hover {
+  border: 1px solid white;
+  border-radius: 10px;
+  color: #000 !important;
+  border-top: none;
+  border-bottom: none;
+}
+
+.our-hr-style {
+  border: 2px dashed orange;
+  width: 50px;
+}
+
+.footer {
+  background-color: #433E3D;
+  width: 100%;
+  height: 250px;
+  margin-top: 2px;
+  position: relative;
+}
+
+.footer .container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.footer .row:first-child .col-4 {
+  text-align: center;
+}
+
+.footer .col-4 {
+  color: white;
+}
+
+.footer .col-4 h4 {
+  font-size: 3rem;
+}
+
+.footer .col-4 .footer-span {
+  font-size: 1.5rem;
+}
+
+.footer .gate {
+  display: inline-block;
+  width: 215px;
+  padding: 10px 0 10px 15px;
+  font-family: "Open Sans", sans;
+  font-weight: 400;
+  font-size: 1.5rem;
+  color: #f16121;
+  background: #efefef;
+  border: 0;
+  border-radius: 3px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  outline: 0;
+  text-indent: 65px;
+  transition: all .3s ease-in-out;
+}
+
+.footer .gate::-webkit-input-placeholder {
+  color: #efefef;
+  text-indent: 0;
+  font-weight: 300;
+}
+
+.footer .gate + label {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 15px;
+  padding: 13.6px 15px;
+  text-shadow: 0 1px 0 rgba(19, 74, 70, 0.4);
+  background-color: #333 !important;
+  transition: all .4s ease-in-out;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+  transform-origin: left bottom;
+  z-index: 99;
+}
+
+.footer .gate + label:before, .footer .gate + label:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: 3px;
+  background: #333;
+  transform-origin: left bottom;
+  transition: all .4s ease-in-out;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.footer .gate + label:before {
+  background: #333;
+  z-index: -1;
+  right: 20%;
+}
+
+.footer span .gate {
+  text-indent: 5px;
+}
+
+.footer span .gate:focus,
+.footer span .gate:active {
+  text-indent: 0;
+}
+
+.footer .gate:focus,
+.footer .gate:active {
+  text-indent: 0px;
+  background: #fff;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+.footer .gate:focus::-webkit-input-placeholder,
+.footer .gate:active::-webkit-input-placeholder {
+  color: #aaa;
+}
+
+.footer .gate:focus + label,
+.footer .gate:active + label {
+  transform: rotate(-66deg);
+  border-radius: 3px;
+}
+
+.footer .gate:focus + label:before,
+.footer .gate:active + label:before {
+  transform: rotate(10deg);
+}
+
+.footer .sub-button {
+  position: relative;
+  bottom: 1px;
+  right: 2.5px;
+  color: #fff;
+  background-color: #333;
+  padding: 14px 15px;
+  border: none;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+.footer .social ul {
+  padding: 0;
+  display: flex;
+  justify-content: space-around;
+}
+
+.footer .social ul li {
+  list-style: none;
+  display: flex;
+}
+
+.footer .social ul li a {
+  position: relative;
+  display: block;
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  line-height: 63px;
+  background: #333;
+  border-radius: 50%;
+  font-size: 30px;
+  color: #666;
+  transition: .5s;
+}
+
+.footer .social ul li a::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: #f16121;
+  transition: .5s;
+  transform: scale(0.9);
+  z-index: -1;
+}
+
+.footer .social ul li a:hover::before {
+  transform: scale(1.1);
+  color: red;
+  box-shadow: 0 0 15px #f16121;
+}
+
+.footer .social ul li a:hover {
+  color: #ffee10;
+  box-shadow: 0 0 5px #f16121;
+  text-shadow: 0 0 5px #f16121;
+}
+
+.footer .phone-number {
+  text-align: center;
+}
+
+.footer .phone-number-link {
+  font-size: 3rem;
+  border-radius: 5px;
+  background-color: #333;
+}
+
+.footer .phone-number-link::before {
+  content: 'salam';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  background: #f16121;
+  transition: .5s;
+  transform: scale(0.9);
+  z-index: -1;
+}
+
+.footer .phone-number-link:hover::before {
+  transform: scale(1.1);
+  color: red;
+}
+
+.footer .phone-number-link:hover {
+  color: #ffee10;
+  box-shadow: 0 0 5px #f16121;
+  text-shadow: 0 0 5px #f16121;
+}
+
+.footer .copyright {
+  color: white;
+  text-align: center;
+  font-size: 3rem;
+}
+
+html {
+  font-size: 10px;
+}
+
+.restaurant-profile {
+  padding: 25px;
+  box-shadow: 10px -2px 2px;
+  min-height: 500px;
+  font-family: "Comfortaa";
+}
+
+.restaurant-profile .container {
+  background-color: #f16121;
+  z-index: -2;
+}
+
+.restaurant-profile .header {
+  flex-direction: column;
+  z-index: -2;
+}
+
+.restaurant-profile h1 {
+  text-align: center;
+}
+
+.restaurant-profile .average-ratings {
+  font-size: 2.6rem;
+}
+
+div[class*="with-stars"] {
+  display: flex;
+  position: relative;
+  z-index: 1;
+}
+
+div[class*="with-stars"] i {
+  z-index: 2;
+  color: #f16121;
+  margin-bottom: 15px;
+}
+
+div[class*="with-stars"]::after {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f005\f005\f005\f005\f005";
+  color: #b4b0b0;
+  position: absolute;
+  font-size: inherit;
+  z-index: -1;
+  top: -6px;
+  left: 0px;
+}
+/*# sourceMappingURL=style.css.map */

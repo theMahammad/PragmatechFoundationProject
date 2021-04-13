@@ -32,7 +32,7 @@ active
  <div class="container review-list">
  <div class="row">
      {% for feedback in feedbacks %}
-    <div class="card-element col-xs-12 col-md-5 col-lg-6">
+    <div class="card-element col-xs-12 col-md-5 col-lg-6" id="{{feedback.id}}">
         <div class="card " style="box-shadow: 1px 2px 3px;">
             <div class="card-header" style="position: relative;background-color: #f16121;color: #fff !important;">
               <div class="feedback-title">{{feedback.topic}}</div>
@@ -90,26 +90,26 @@ active
                 <div class="like-or-dislike " >
                 {% if current_user.id %}
                     {% if Like.query.filter_by(feedback_id=feedback.id,user_id=current_user.id).first() %}
-                    <a href="/feedbacks/like/{{feedback.id}}"  >
+                    <a href="/feedbacks/like/{{feedback.id}}"  class="like">
                         
                     <i class="fas fa-thumbs-up mr-3"  style="color: blue;"></i>
                 </a>
                     
                     {{Like.query.filter_by(feedback_id=feedback.id).count()}}
-                    <a href=""><i class="fas fa-thumbs-down mt-2" style="color: gray;" ></i></a>
+                    <a href="" class="dislike"><i class="fas fa-thumbs-down mt-2" style="color: gray;" ></i></a>
                     {{Dislike.query.filter_by(feedback_id=feedback.id).count()}}
                     {% elif Dislike.query.filter_by(feedback_id=feedback.id,user_id=current_user.id).first() %}
-                    <a href=""  >
+                    <a href=""  class="like" >
                         <i class="fas fa-thumbs-up mr-3"  style="color:gray"></i></a>
                         {{Like.query.filter_by(feedback_id=feedback.id).count()}}
-                        <a href="/feedbacks/dislike/{{feedback.id}}"><i class="fas fa-thumbs-down mt-2" style="color: blue;" ></i></a>
+                        <a href="/feedbacks/dislike/{{feedback.id}}" class="dislike"><i class="fas fa-thumbs-down mt-2" style="color: blue;" ></i></a>
                     
                         {{Dislike.query.filter_by(feedback_id=feedback.id).count()}}
                     {% else %}
-                    <a href="/feedbacks/like/{{feedback.id}}"  >
+                    <a href="/feedbacks/like/{{feedback.id}}"  class="like">
                     <i class="fas fa-thumbs-up mr-3"  style="color: white;"></i></a>
                     {{Like.query.filter_by(feedback_id=feedback.id).count()}}
-                    <a href="/feedbacks/dislike/{{feedback.id}}"><i class="fas fa-thumbs-down mt-2" style="color: white;" ></i></a>
+                    <a href="/feedbacks/dislike/{{feedback.id}}" class="dislike"><i class="fas fa-thumbs-down mt-2" style="color: white;" ></i></a>
                     {{Dislike.query.filter_by(feedback_id=feedback.id).count()}}
                     {% endif %}
                 {% else %}
@@ -147,34 +147,20 @@ active
 </section>
   {% endblock %}
   {% block jsLink %}
-  {% if current_user.id %}
-     
-     {% else %}
-     <script>
-        $('.like-or-dislike a').click(function(e){
-            e.preventDefault()
-            alert("Reaksiya vermək üçün daxil olun")
-        })
-    </script>
-  
-  {%endif%}
-  
   <script>
-      $('.card').hover(function(){
-         let rest =  jQuery(this).find(".restaurant-logo")
-         rest.attr('class','animate__animated animate__flash')
-         let read_more =  jQuery(this).find(".read-more")
-         read_more.attr('class','d-inline-block animate__animated animate__tada')
-         let stars =  jQuery(this).find(".taste-rating-score")
-         stars.addClass('animate__animated animate__flip')
-         let srv_stars =  jQuery(this).find(".service-rating-score")
-         srv_stars.addClass('animate__animated animate__flip')
-         let atmp_stars =  jQuery(this).find(".atmp-rating-score")
-         atmp_stars.addClass('animate__animated animate__flip')
-      })
+      {% if current_user.id %}
+        $bool =  true
+     {% else %}
+        $bool = false
+     {% endif %}
      
-    
   </script>
+  <script>
+     $('.like-or-dislike .like').click(
+         $.ajax()
+     )
+  </script>
+  <script type="text/javascript" src="{{url_for('user.static',filename='userside/feedbacks/js/script.js')}}"></script>
   {% endblock %}
    
 

@@ -9,10 +9,13 @@ from .forms import RegistrationForm,LoginForm,FeedbackForm
 
 from werkzeug.security import generate_password_hash,check_password_hash
 from flask_login import login_user,current_user,logout_user,login_required
+from math import ceil,floor,modf
 
 
 user_bp = Blueprint('user',__name__,template_folder='templates',static_folder='static',static_url_path='/static/userside')
 from app import (ContactWays,Details,FAQ,Restaurant,Rules,Subscription,Superiorities,User,AboutUs,Feedback,Like,Dislike)
+def usually_used_method():
+    return [ceil ,floor,round,modf]
 time_zone_Baku = pytz.timezone('Asia/Baku')
 month_in_azeri = {
     "01":"Yanvar",
@@ -28,7 +31,26 @@ month_in_azeri = {
     "11" : "Noyabr",
     "12" : "Dekabr"
 }
+def findAverageRatings(feedback_list):
+    sum_taste_rating = 0
+    sum_service_rating = 0
+    sum_atmp_rating = 0
+    averages = [0,0,0]
+   
+    for feedback in feedback_list:
+        if feedback.tasteRating:
+            sum_taste_rating+=feedback.tasteRating
+        if feedback.serviceRating:
+            sum_service_rating+=feedback.serviceRating
+        if feedback.atmosphereRating:
+            sum_atmp_rating+=feedback.atmosphereRating
+    sums = [sum_taste_rating,sum_service_rating,sum_atmp_rating]
+    if len(feedback_list):
+        averages = [sum /len(feedback_list) for sum in sums]
+    averages = [float('%.1f' % average) for average in averages ]
+    return averages
 
+        
 def getRandomString(length):
     letters = string.ascii_lowercase
     result_str = ''.join(random.choice(letters) for i in range(length))
@@ -91,8 +113,16 @@ def restaurants():
     restaurants = Restaurant.query.all()
     return render_template("userside/restaurants.html",restaurants = restaurants,Feedback = Feedback )
 @user_bp.route("/restaurants/profile/<string:rest_slug>")
-def restaurantsProfile(rest_slug):
-   pass
+def restaurantProfile(rest_slug):
+
+    selected_restaurant = Restaurant.query.filter_by(slug=rest_slug).first()
+    verified_feedbacks_about_selected = list(filter(lambda item : item.verified==True,selected_restaurant.feedbacks))
+    avg_taste,avg_service,avg_atmp = findAverageRatings(verified_feedbacks_about_selected)
+   
+    return render_template("userside/restaurant_profile.html",selected = selected_restaurant,avg_taste = avg_taste,
+    avg_service = avg_service,avg_atmp = avg_atmp,Restaurant = Restaurant,User = User,month = month_in_azeri,
+    Like = Like,Dislike = Dislike,Feedback = Feedback,myList = usually_used_method() )
+
 @user_bp.route("/about_us")
 def about():
     verifiedAboutUs = AboutUs.query.filter_by(verified=True)
@@ -226,6 +256,12 @@ def dislikeFeedback(id):
         )
         db.session.commit()
     return redirect("/feedbacks")
+
+    
+
+
+
+
 
     
    
