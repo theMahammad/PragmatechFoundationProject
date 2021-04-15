@@ -5,7 +5,7 @@
 @import url('https://fonts.googleapis.com/css?family=Cardo:400i|Rubik:400,700&display=swap');
 
 html{
-    font-size: 10px;
+    font-size: 10px !important;
 }
 
 $imageIds: '1517021897933-0e0319cfbc28', '1533903345306-15d1c30952de', '1545243424-0ce743321e11', '1531306728370-e2ebd9d7bb99';
@@ -136,7 +136,7 @@ section .section-title {
   border-radius: 15px;
   font-size: 1.3rem;
   &:hover{
-    background-color: $orange;
+    background-color: rgb(230, 75, 19);
     color: white;
     border: none;
   }
@@ -196,3 +196,4 @@ h1{
   margin-left: 10px;
   }
 }
+

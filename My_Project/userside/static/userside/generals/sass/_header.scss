@@ -1,4 +1,5 @@
 @import 'variables';
+
 body{
     margin: 0;
 }
@@ -11,22 +12,29 @@ body{
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    margin: 0;
+    padding-left: 50px;
     .buttons{
-        width: 300px;
-        display: flex;
-        justify-content: space-around;
-        a{
-            font-size: 2rem;
+        z-index:100;
+        width: 100%;
+       
+        
+
+        a{  margin-right: 10px;
+            font-size: 1.5rem;
             color: white;
             @include classic-border(white);
             padding: 5px;
             border-radius: 10px;
-            transition: all 0.2s linear;
+            transition: all 0.5s linear;
             &:hover{
                 border:none ;
                 border-bottom: 1px solid white;
             }
+            
+          
         }
+        
     }
    
 }
@@ -176,3 +184,22 @@ body{
         }
     }
 }
+
+
+$base-duration: 500ms;
+
+// Colors
+$color-1: #444;
+$color-2: #3498db;
+$color-3: #2ecc71;
+
+// Breakpoints
+$sm: new-breakpoint(min-width 320px);
+$med: new-breakpoint(min-width 768px);
+$lg: new-breakpoint(min-width 1024px);
+
+*, *:before, *:after {
+	box-sizing: border-box;
+	outline: none;
+}
+

@@ -15,6 +15,7 @@ active
 
     
     {% block page %}
+  
     <section class="restaurants">
         <div class="container">
           <h1 style="text-align: center;">Restoranlar</h1>
@@ -66,7 +67,7 @@ active
                             <div class="card-body text-center">
                                 <p><img class=" img-fluid" src="{{url_for('adminPanel.static',filename = 'admin/uploads/%s' %restaurant.logo)}}" alt="card image"></p>
                                 <h4 class="card-title">
-                                  <a href="/restaurants/profile/{{restaurant.slug}}"  class="btn btn-outline-primary see-profile-link" >Profilə bax</a>
+                                  <a href="/restaurants/profile/{{restaurant.slug}}"  class="btn btn-outline-primary see-profile-link"  >Profilə bax</a>
                                 </h4>
                                  
                                   <div class="ratings d-flex  " style="flex-direction: column; ">
@@ -160,17 +161,11 @@ active
       </section>
     {% endblock %}
     {% block jsLink %}
+
+
     <script>
-      var default_items= $(".rest-list").children()
-      $(document).ready(function() {
-        
-    var $sections = $(".rest-list").children().detach();
-    $sections.sort(function(a, b) {
-      if ($(a).find(".card-header").text().toLocaleLowerCase('tr') > $(b).find(".card-header").text().toLocaleLowerCase('tr')) return 1;
-      if ($(a).find(".card-header").text().toLocaleLowerCase('tr') < $(b).find(".card-header").text().toLocaleLowerCase('tr')) return -1;
-      return 0;
-    });
-    $(".rest-list").append($sections);
+    
+      
     $('#order-by-alphabet').click(function(){
      
       let aph = $(".rest-list").children().detach();
@@ -224,9 +219,8 @@ active
     $(".rest-list").append(atmp);
 
   })
-  });
+
   
- 
 
 
     </script>

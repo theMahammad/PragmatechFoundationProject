@@ -4,7 +4,7 @@ from flask_migrate import Migrate
 from werkzeug.utils import secure_filename
 from flask_login import UserMixin
 from sqlalchemy import MetaData,event
-from slugify import slugify
+
 from math import *
 import os
 from flask_login import LoginManager,login_user,current_user,logout_user,login_required
@@ -25,6 +25,7 @@ def convertation(text,obj):
     text = text.lower()
     temp_text = ''
     class_ = obj.__class__
+    print(text)
     for letter in text:
         for key,value in fromAzeriToEnglish.items():
             if(key==letter):
@@ -37,7 +38,8 @@ def convertation(text,obj):
             temp_text = ''
             temp_text = newText+"_"+str(count)
             count+=1
-    newText = temp_text
+        newText = temp_text
+    print(newText)
     return newText
 
     
@@ -62,19 +64,22 @@ from flask_sqlalchemy import SQLAlchemy
 
 
 
-
+from slugify import slugify
 class Restaurant(db.Model):
     id=db.Column(db.Integer,primary_key=True)
     name = db.Column(db.String(50),unique=True)
-    slug = db.Column(db.String(50),unique=True)
+    slug = db.Column(db.String(50))
     logo = db.Column(db.String(50),default = "default_rest_logo.png")
     about = db.Column(db.Text)
     feedbacks = db.relationship('Feedback',backref = 'restaurant',lazy = True)
+    promoSliders = db.relationship('PromotionsSlider',backref = 'restaurant',lazy = True)
+    partner_status = db.Column(db.Boolean,default = False)
     @staticmethod
     def generate_slug(target,value,oldvalue,initiator):
         
         if value and (not target.slug or value!=oldvalue):
             target.slug=convertation(slugify(value),Restaurant())
+
 db.event.listen(Restaurant.name, 'set', Restaurant.generate_slug, retval=False)
 class FAQ(db.Model):
     id=db.Column(db.Integer,primary_key=True)
@@ -115,6 +120,8 @@ class User(UserMixin,db.Model):
     feedbacks = db.relationship('Feedback',backref = 'user',lazy = True)
     likes = db.relationship('Like',backref = 'user',lazy = True)
     dislikes = db.relationship('Dislike',backref = 'user',lazy = True)
+    comments = db.relationship('Comment',backref = 'user',lazy = True)
+   
 class AboutUs(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     content = db.Column(db.Text)
@@ -136,29 +143,51 @@ class Feedback(db.Model):
     time = db.Column(db.String(250))
     likes = db.relationship('Like',backref = 'feedback',lazy = True)
     dislikes = db.relationship('Dislike',backref = 'feedback',lazy = True)
+    comments = db.relationship('Comment',backref = 'feedback',lazy = True)
     @staticmethod
     def generate_slug(target,value,oldvalue,initiator):
         
         if value and (not target.slug or value!=oldvalue):
             target.slug=convertation(slugify(value),Feedback())
 db.event.listen(Feedback.topic, 'set', Feedback.generate_slug, retval=False)
-class PromotionsAboutPartners(db.Model):
-    id = db.Column(db.Integer,primary_key=True)
-    title = db.Column(db.String(100))
-    restaurant_id = db.Column(db.Integer, db.ForeignKey('restaurant.id'))
-    content = db.Column(db.String(100))
-    read_more_url = db.Column(db.String(200))
+
 class Like(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     feedback_id = db.Column(db.Integer, db.ForeignKey('feedback.id'))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'),
-        nullable=False)
+       )
 class Dislike(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     title = db.Column(db.String(100))
     feedback_id = db.Column(db.Integer, db.ForeignKey('feedback.id'))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'),
-        nullable=False)
+       )
+class PromotionsSlider(db.Model):
+    id = db.Column(db.Integer,primary_key=True)
+    title = db.Column(db.String(100))
+    description = db.Column(db.String(100))
+   
+    read_more_url = db.Column(db.String(255))
+    slider_img = db.Column(db.String(150))
+    restaurant_id = db.Column(db.Integer,db.ForeignKey('restaurant.id'))
+class Comment(db.Model):
+    id = db.Column(db.Integer,primary_key=True)
+    content = db.Column(db.Text())
+    user_id = db.Column(db.Integer,db.ForeignKey('user.id'))
+    feedback_id = db.Column(db.Integer,db.ForeignKey('feedback.id'))
+    time = db.Column(db.String(250))
+    comments = db.relationship('Replies',backref = 'comment',lazy = True)
+class Replies(db.Model):
+    id = db.Column(db.Integer,primary_key=True)
+    content = db.Column(db.Text())
+    user_id = db.Column(db.Integer,db.ForeignKey('user.id'))
+    comment_id = db.Column(db.Integer,db.ForeignKey('comment.id'))
+    time = db.Column(db.String(250))
+
+
+
+    
+
 
     
 

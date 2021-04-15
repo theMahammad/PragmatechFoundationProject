@@ -46,7 +46,7 @@ a {
 active
 {% endblock %}
 {% block page %}
-<section class="loading-screen">
+<!-- <section class="loading-screen">
     <div class="body animate__animated animate__delay-2s ">
     <div id="container">
         {% if get_flashed_messages() %}
@@ -73,7 +73,7 @@ active
  
 </div>
 </div>
-</section>
+</section> -->
 <div class="introes " style="box-shadow: 0px -1px 2px ;">
     <!-- ' -->
         <div class="intro " >
@@ -141,7 +141,7 @@ active
 data-flickity-options='{ "freeScroll":true,"wrapAround":true,"autoPlay": 3500,"pauseAutoPlayOnHover": false }'>
  
 
-  {% for feedback in feedbacks %}
+  {% for feedback in feedbacks[:5] %}
   
   
   <div class="gallery-cell">
@@ -193,17 +193,53 @@ data-flickity-options='{ "freeScroll":true,"wrapAround":true,"autoPlay": 3500,"p
              </div>
           </div>
         </div>
-        <div class="card-footer d-flex justify-content-between" style="background-color: #f16121;color: #fff !important;">
-            <div class="date">
+        <div class="card-footer  d-flex justify-content-between" style="height: 40px;background-color: #f16121;color: #fff !important;">
+          <div class="date">
 
-                {{((feedback.time.split(" ")[0].split("-")[2])|int)|string +" "+ month[feedback.time.split(" ")[0].split("-")[1]]+" " +feedback.time.split(" ")[0].split("-")[0]}}
+              {{((feedback.time.split(" ")[0].split("-")[2])|int)|string +" "+ month[feedback.time.split(" ")[0].split("-")[1]]+" " +feedback.time.split(" ")[0].split("-")[0]}}
+           
+          </div>
+          <div class="like-or-dislike " >
+          {% if current_user.id %}
+              {% if Like.query.filter_by(feedback_id=feedback.id,user_id=current_user.id).first() %}
+              <a href="/feedbacks/like/{{feedback.id}}"  class="like">
+                  
+              <i class="fas fa-thumbs-up mr-3"  style="color: blue;"></i>
+          </a>
+              
+              {{Like.query.filter_by(feedback_id=feedback.id).count()}}
+              <a href="" class="dislike"><i class="fas fa-thumbs-down mt-2" style="color: gray;" ></i></a>
+              {{Dislike.query.filter_by(feedback_id=feedback.id).count()}}
+              {% elif Dislike.query.filter_by(feedback_id=feedback.id,user_id=current_user.id).first() %}
+              <a href=""  class="like" >
+                  <i class="fas fa-thumbs-up mr-3"  style="color:gray"></i></a>
+                  {{Like.query.filter_by(feedback_id=feedback.id).count()}}
+                  <a href="/feedbacks/dislike/{{feedback.id}}" class="dislike"><i class="fas fa-thumbs-down mt-2" style="color: blue;" ></i></a>
+              
+                  {{Dislike.query.filter_by(feedback_id=feedback.id).count()}}
+              {% else %}
+              <a href="/feedbacks/like/{{feedback.id}}"  class="like">
+              <i class="fas fa-thumbs-up mr-3"  style="color: white;"></i></a>
+              {{Like.query.filter_by(feedback_id=feedback.id).count()}}
+              <a href="/feedbacks/dislike/{{feedback.id}}" class="dislike"><i class="fas fa-thumbs-down mt-2" style="color: white;" ></i></a>
+              {{Dislike.query.filter_by(feedback_id=feedback.id).count()}}
+              {% endif %}
+          {% else %}
+              <a href=""   class="like">
+                  <i class="fas fa-thumbs-up mr-3"  style="color: white;"></i></a>
+                  {{Like.query.filter_by(feedback_id=feedback.id).count()}}
+                  <a href="" class="dislike"><i class="fas fa-thumbs-down mt-2" style="color: white;" ></i></a>
+                  {{Dislike.query.filter_by(feedback_id=feedback.id).count()}}
+          {% endif %}
+              
              
-            </div>
-            <div class="read-more">
-                <a href="" class="btn btn-primary">Davamını oxu </a>
-            </div>
-            
-        </div>
+             
+          </div>
+          <div class="read-more d-none">
+              <a href="/feedbacks/see_all_content/{{feedback.slug}}" class="btn btn-primary">Davamını oxu </a>
+          </div>
+          
+      </div>
       </div>
   </div>
   {% endfor %}
@@ -229,8 +265,11 @@ data-flickity-options='{ "freeScroll":true,"wrapAround":true,"autoPlay": 3500,"p
             <div class="content"  style="background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.8)),
             url(https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg);">
               <blockquote>
-                <p>I got my red dress on tonight dancing in the dark in the pale moonlight.</p>
-                <span>Summertime Sadness - Lana Del Rey</span>
+                <h3>I got my red dress on tonight dancing in the dark in the pale moonlight.</h3>
+                <br>8
+                <span>Summertime Sadness - Lana Del Rey
+                  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam sequi, voluptas placeat saepe laborum debitis id amet tempore accusantium incidunt reprehenderit facere? Sequi ipsa magnam illum fugiat dolorum molestiae dolor.
+                </span>
               </blockquote>
             </div>
           </li>
@@ -282,7 +321,14 @@ data-flickity-options='{ "freeScroll":true,"wrapAround":true,"autoPlay": 3500,"p
 
 {% endblock %}
 {% block jsLink %}
-
+<script>
+  {% if current_user.id %}
+    $bool =  true
+ {% else %}
+    $bool = false
+ {% endif %}
+ 
+</script>
 <script>
     
   (function() {

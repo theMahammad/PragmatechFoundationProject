@@ -26,6 +26,9 @@ active
                 {{selected.name}}
                </h1> 
             </div>
+            <div class="restaurant-info-btn">
+              <i class="fas fa-info" style="border: 1px solid white;"></i>
+            </div>
             <hr class="our-hr-style">
             <h3 style="font-size: 3rem;text-align: center;" >
                 Ortalama qiymətləndirmə
@@ -98,7 +101,15 @@ active
                       <div class="atmp-rating-header">Atmosfer </div>
                       <div class="atmp-rating-score"> 
                          {{avg_atmp}}/5
-                         <div class="atmp-rating-score-with-stars">
+                        
+                         <div class="atmp-rating-score-with-stars"
+                         {% if avg_atmp==0 %}
+                         style="padding: 20px;"
+                         {% endif %}
+                           
+                      
+                         
+                         >
                             {%- set remainderOfAtmp,integerOfAtmp = modf(avg_atmp)|list-%}
                             {% for star in range(integerOfAtmp|int) %}
                             <i class="fas fa-star"></i>
@@ -137,7 +148,7 @@ active
     </h2>
     <hr class="our-hr-style" style="width: 500px;">
     <div class="container review-list">
-        <div class="row">
+        <div class="row" style="font-size: 1.7rem;">
             {% for feedback in Feedback.query.filter_by(verified=True,restaurant_id=selected.id) %}
            <div class="card-element col-xs-12 col-md-5 col-lg-6" id="{{feedback.id}}">
                <div class="card " style="box-shadow: 1px 2px 3px;">
@@ -249,4 +260,15 @@ active
 </section>
 
 
+{% endblock %}
+{% block jsLink %}
+<script>
+    {% if current_user.id %}
+      $bool =  true
+   {% else %}
+      $bool = false
+   {% endif %}
+   
+</script>
+<script src="{{url_for('user.static',filename = 'userside/restaruant_profile/js/script.js')}}"></script>t
 {% endblock %}

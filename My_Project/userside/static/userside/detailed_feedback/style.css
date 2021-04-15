@@ -6,6 +6,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@600&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@600&display=swap");
 @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+@import url("https://fonts.googleapis.com/css?family=Cardo:400i|Rubik:400,700&display=swap");
+@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
 .our-hr-style {
   border: 2px dashed orange;
   width: 50px;
@@ -54,21 +56,23 @@ body {
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  margin: 0;
+  padding-left: 50px;
 }
 
 .register .buttons {
-  width: 300px;
-  display: flex;
-  justify-content: space-around;
+  z-index: 100;
+  width: 100%;
 }
 
 .register .buttons a {
-  font-size: 2rem;
+  margin-right: 10px;
+  font-size: 1.5rem;
   color: white;
   border: 1px solid white;
   padding: 5px;
   border-radius: 10px;
-  transition: all 0.2s linear;
+  transition: all 0.5s linear;
 }
 
 .register .buttons a:hover {
@@ -143,7 +147,7 @@ body {
 .active {
   border: 1px solid white;
   border-radius: 10px;
-  color: #000 !important;
+  color: #433E3D !important;
   border-top: none;
   border-bottom: none;
 }
@@ -193,9 +197,14 @@ body {
 .nav ul li a:hover {
   border: 1px solid white;
   border-radius: 10px;
-  color: #000 !important;
+  color: #433E3D !important;
   border-top: none;
   border-bottom: none;
+}
+
+*, *:before, *:after {
+  box-sizing: border-box;
+  outline: none;
 }
 
 .our-hr-style {
@@ -207,6 +216,7 @@ body {
   background-color: #433E3D;
   width: 100%;
   height: 250px;
+  margin: 0;
   margin-top: 2px;
   position: relative;
 }
@@ -272,6 +282,7 @@ body {
   border-bottom-left-radius: 3px;
   transform-origin: left bottom;
   z-index: 99;
+  font-size: 1.2rem;
 }
 
 .footer .gate + label:before, .footer .gate + label:after {
@@ -334,6 +345,7 @@ body {
   right: 2.5px;
   color: #fff;
   background-color: #333;
+  font-size: 1.3rem;
   padding: 14px 15px;
   border: none;
   border-top-right-radius: 3px;
@@ -788,5 +800,200 @@ html {
   margin: 0;
   padding-top: 20px;
   z-index: 1;
+}
+
+html {
+  font-size: 10px;
+}
+
+:root {
+  --d: 700ms;
+  --e: cubic-bezier(0.19, 1, 0.22, 1);
+  --font-sans: 'Rubik', sans-serif;
+  --font-serif: 'Cardo', serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* FontAwesome for working BootSnippet :> */
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: #108d6f;
+  border-color: #108d6f;
+  box-shadow: none;
+  outline: none;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #007b5e;
+  border-color: #007b5e;
+}
+
+section {
+  padding: 60px 0;
+}
+
+section .section-title {
+  text-align: center;
+  color: #007b5e;
+  margin-bottom: 50px;
+  text-transform: uppercase;
+}
+
+.frontside {
+  position: relative;
+  -webkit-transform: rotateY(0deg);
+  -ms-transform: rotateY(0deg);
+  z-index: 2;
+  margin-bottom: 30px;
+}
+
+.count-feedbacks {
+  font-family: "Comfortaa";
+  position: absolute;
+  bottom: 20%;
+  left: 40%;
+  font-size: 2rem !important;
+  color: white;
+  font-size: 1rem;
+}
+
+.count-feedbacks i {
+  margin-left: 10px;
+  font-size: 2rem !important;
+}
+
+.frontside .card,
+.backside .card {
+  min-height: 312px;
+  min-width: 250px;
+}
+
+.card {
+  background-color: white;
+  box-shadow: 3px 4px 3px gray;
+  font-family: "Comfortaa";
+  color: #f16121 !important;
+  transition: all 0.2s linear;
+}
+
+.card-header {
+  background-color: #f16121;
+  color: white;
+}
+
+.card-footer {
+  background-color: #f16121;
+  color: white;
+}
+
+.card button {
+  font-size: 1.5rem !important;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+}
+
+.btn-see-profile {
+  background-color: transparent;
+  color: white;
+  position: absolute;
+  border: 1px solid white;
+  bottom: 7%;
+  left: 30%;
+  box-shadow: 0px 0px 1px;
+  transition: all 0.2s linear;
+}
+
+.btn-see-profile:hover {
+  bottom: 10%;
+  box-shadow: 2px 3px 2px;
+}
+
+.see-profile-link {
+  color: #f16121;
+  border: 1px solid #f16121;
+  border-radius: 15px;
+  font-size: 1.3rem;
+}
+
+.see-profile-link:hover {
+  background-color: #f16121;
+  color: white;
+  border: none;
+}
+
+.backside .card a {
+  font-size: 18px;
+  color: #007b5e !important;
+}
+
+.frontside .card .card-body img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+}
+
+.rest-list ::selection {
+  color: orange;
+  background-color: white;
+}
+
+.restaurants {
+  min-height: 500px;
+  font-size: 16px;
+  box-shadow: 0px 0px 2px;
+  padding: 30px;
+  font-family: "Comfortaa";
+}
+
+.restaurants h1 {
+  font-size: 4rem !important;
+}
+
+.restaurants .page-content {
+  display: grid;
+  grid-gap: 1em;
+  padding: 1em;
+  max-width: 1024px;
+  margin: 0 auto;
+  font-family: var(--font-sans);
+}
+
+@media (min-width: 600px) {
+  .restaurants .page-content {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 800px) {
+  .restaurants .page-content {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.rating-types {
+  font-size: 1rem;
+}
+
+.rating-types label {
+  margin-left: 10px;
+}
+
+.card {
+  border: none;
+}
+
+.card-body {
+  background-color: white;
+  color: #f16121;
+}
+
+.card-body .ratings {
+  font-size: 1.7rem;
 }
 /*# sourceMappingURL=style.css.map */

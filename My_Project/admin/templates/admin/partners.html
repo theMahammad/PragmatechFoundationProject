@@ -1,0 +1,92 @@
+{% extends "admin/base.html" %}
+{% block partners %}
+active
+{% endblock %}
+{% block title %}
+Partnyorlar
+{% endblock %}
+
+{% block cssLink %}
+<style>
+  input{
+    margin: 10px 0 !important;
+  }
+</style>
+{% endblock %}
+{% block websiteURL %}
+/partnering
+{% endblock %}
+{% block activationGoToWebsite %}
+
+{% endblock %}
+
+{% block page %}
+
+
+<div class="container">
+  <hr>
+  <h2 class="text-center">Partnyor əlavə et </h2>
+
+    <form action="/adminside/partners" method="POST" enctype="multipart/form-data">
+        
+       <select name="part-rest" id="" class="form-control">
+           {% for restaurant in allRestaurants %}
+           <option value="{{restaurant.id}}">{{restaurant.name}}</option>
+           {% endfor %}
+        
+       </select>
+       <button class="btn btn-primary my-2 btn-block" type="submit">
+           Əlavə et
+       </button>
+
+
+      
+      
+     </form>
+     
+     <hr>
+  <h2 class="text-center"> Partnyor restoranlar</h2>
+  <div class="all-partners" style="height: 200px ; overflow: auto;">
+    <table class="table table-light table-striped">
+        <thead>
+            
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Ad </th>
+            <th scope="col">Əməliyyat</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for restaurant in partner_restaurants %}
+            
+           
+          <tr>
+            <th scope="row">{{restaurant.id}}</th>
+            <td>{{restaurant.name}}</td>
+            
+            <td>
+                <a href="/adminside/restaurants/edit/{{restaurant.id}}" title="Dəyişdir" style="color: green;"><i class="bi bi-pencil-square"></i></a>
+                <a href="/adminside/partners/end_partnering/{{restaurant.id}}" title="Partnyorluqdan çıxart" style="color: red;"><i class="bi bi-x-square"></i></a>
+                <a href="/adminside/restaurants/seeDetails/{{restaurant.id}}" title="Detallarına bax"><i class="bi bi-info-square"></i></a>
+            </td>
+          </tr>
+          {% endfor %}
+         
+        </tbody>
+      </table>
+  </div>
+  
+
+
+{% endblock %}
+{% block jsLink %}
+<script>
+
+
+  $("#summernote").summernote("code",'{{content|safe}}')
+  
+  
+  
+  
+</script>
+{% endblock %}

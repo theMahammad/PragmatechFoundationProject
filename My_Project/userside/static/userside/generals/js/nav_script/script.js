@@ -23,9 +23,18 @@ $(window).scroll(function (e) {
         nav.css("width", "1000px");
         nav.css("border-radius", "50px")
     }
+    if(scroll>=28){
+        $('.sidebar').css('top','0')
+    }
+    if(scroll<28){
+        $('.sidebar').css('top','inherit')
+    }
 
 
 })
 
+/*
+  Slidemenu
+*/
 
    

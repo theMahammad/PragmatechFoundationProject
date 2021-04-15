@@ -9,11 +9,14 @@ from .forms import RegistrationForm,LoginForm,FeedbackForm
 
 from werkzeug.security import generate_password_hash,check_password_hash
 from flask_login import login_user,current_user,logout_user,login_required
+from flask_paginate import Pagination,get_page_parameter
+
 from math import ceil,floor,modf
 
 
 user_bp = Blueprint('user',__name__,template_folder='templates',static_folder='static',static_url_path='/static/userside')
-from app import (ContactWays,Details,FAQ,Restaurant,Rules,Subscription,Superiorities,User,AboutUs,Feedback,Like,Dislike)
+from app import (ContactWays,Details,FAQ,Restaurant,Rules,Subscription,
+Superiorities,User,AboutUs,Feedback,Like,Dislike,Comment,Replies)
 def usually_used_method():
     return [ceil ,floor,round,modf]
 time_zone_Baku = pytz.timezone('Asia/Baku')
@@ -31,6 +34,7 @@ month_in_azeri = {
     "11" : "Noyabr",
     "12" : "Dekabr"
 }
+
 def findAverageRatings(feedback_list):
     sum_taste_rating = 0
     sum_service_rating = 0
@@ -107,11 +111,13 @@ def index():
             flash("Siz abunə olmusunuz")
         return redirect("/FAQ")
       
-    return render_template("userside/home-page.html",feedbacks = verifiedFeedbacks,Restaurant = Restaurant,User=User,month = month_in_azeri)
+    return render_template("userside/home-page.html",feedbacks = verifiedFeedbacks,Restaurant = Restaurant,User=User,month = month_in_azeri,Like = Like,Dislike = Dislike)
 @user_bp.route("/restaurants")
 def restaurants():
-    restaurants = Restaurant.query.all()
-    return render_template("userside/restaurants.html",restaurants = restaurants,Feedback = Feedback )
+    
+    
+    restaurants = Restaurant.query.order_by(Restaurant.name.asc())
+    return render_template("userside/restaurants.html",restaurants = restaurants,Feedback = Feedback)
 @user_bp.route("/restaurants/profile/<string:rest_slug>")
 def restaurantProfile(rest_slug):
 
@@ -145,11 +151,12 @@ def feedbacks():
     verifiedFeedbacks  = Feedback.query.filter_by(verified =True)
     
     return render_template("userside/feedbacks.html",feedbacks  = verifiedFeedbacks,Restaurant = Restaurant,User = User,month = month_in_azeri,Like = Like,Dislike = Dislike )
-@user_bp.route("/feedbacks/see_all_content/<string:feedback_slug>")
+@user_bp.route("/feedbacks/<string:feedback_slug>")
 def showFeedbackDetails(feedback_slug):
+    
     selectedFeedback = Feedback.query.filter_by(slug = feedback_slug).first()
-
-    return render_template("userside/detailed_feedback.html",selected = selectedFeedback,User = User,Restaurant =Restaurant,month = month_in_azeri)
+    selectedRestaurant = Restaurant.query.filter_by(id=selectedFeedback.restaurant_id).first()
+    return render_template("userside/detailed_feedback.html",Replies = Replies,restaurant=selectedRestaurant,selected = selectedFeedback,User = User,Feedback=Feedback,Restaurant =Restaurant,month = month_in_azeri,Comment = Comment)
 @user_bp.route("/login",methods = ['GET','POST'])
 def login():
     reg_form = RegistrationForm()
@@ -158,8 +165,8 @@ def login():
         if reg_form.fullname.data:
             user = User(
                 fullname=reg_form.fullname.data,
-                email = reg_form.email.data,
-                password = reg_form.password.data
+                email =  reg_form.email.data,
+                password = generate_password_hash(reg_form.password.data,method='sha256')
                 )
             registeredUser = User.query.filter_by(email=reg_form.email.data).first()
             if registeredUser:
@@ -174,7 +181,7 @@ def login():
         if log_form.email.data:
             searchedUser = User.query.filter_by(email=log_form.email.data).first()
             if searchedUser:
-                if searchedUser.password==log_form.password.data:
+                if check_password_hash(searchedUser.password,log_form.password.data):
                     
                     if log_form.remember.data:
                         remember=True
@@ -256,6 +263,40 @@ def dislikeFeedback(id):
         )
         db.session.commit()
     return redirect("/feedbacks")
+@user_bp.route("/feedbacks/<string:feedback_slug>/leave_comment",methods = ['GET','POST'])
+def leave_comment(feedback_slug):
+    beCommentedFeedback = Feedback.query.filter_by(slug=feedback_slug).first()
+    if request.method=="POST":
+        db.session.add(
+            Comment(
+                content=request.form['comment-content'],
+                user_id = current_user.get_id(),
+                feedback_id = beCommentedFeedback.id,
+                time = datetime.now(time_zone_Baku).strftime('%Y-%m-%d | %H:%M:%S')
+            )
+        )
+        db.session.commit()
+        return redirect(f'/feedbacks/{beCommentedFeedback.slug}')
+@user_bp.route("/feedbacks/<string:feedback_slug>/<int:id>/leave_reply",methods = ['GET','POST'])
+def leave_reply(feedback_slug,id):
+    beRepliedComment = Comment.query.get(id)
+    if request.method=="POST":
+        db.session.add(
+            Replies(
+                content = request.form['reply-content'],
+                comment_id = id,
+                user_id = current_user.get_id(),
+                time = datetime.now(time_zone_Baku).strftime('%Y-%m-%d | %H:%M:%S')
+            )
+        )
+        db.session.commit()
+    return redirect(f'/feedbacks/{feedback_slug}')
+
+
+
+       
+        
+
 
     
 

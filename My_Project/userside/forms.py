@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import  StringField,TextAreaField,SubmitField,FileField,PasswordField,BooleanField,SelectField,validators
 from wtforms.fields.html5 import EmailField
+from wtforms.validators import Length
 class RegistrationForm(FlaskForm):
     fullname = StringField('fullname')
     email = EmailField('email')
@@ -18,7 +19,7 @@ class FeedbackForm(FlaskForm):
     tasteRating = SelectField('taste')
     atmosphereRating = SelectField('atmosphere')
     topic = StringField('topic')
-    content = TextAreaField('content')
+    content = TextAreaField('content',validators=[Length(min=2)])
     photo = FileField('photo')
 
 

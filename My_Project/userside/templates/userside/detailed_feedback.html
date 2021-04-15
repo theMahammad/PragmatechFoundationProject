@@ -4,7 +4,15 @@ Detallı Feedback
 {% endblock %}
 {% block cssLink %}
 <link rel="stylesheet" href="{{url_for('user.static', filename='userside/detailed_feedback/style.css')}}">
-
+<style>
+  .comments .cardam{
+    transition:  0.2s all linear;
+  }
+  .comments .cardam:hover{
+    transform: scaleY(1.1) scaleX(1.1)
+    
+  }
+</style>
 {% endblock %}
 {% block page %}
 <section class="review">
@@ -19,7 +27,7 @@ Detallı Feedback
                           <div class="card">
                               <div class="card-body text-center my-5">
                                   <p><img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_01.png" alt="card image"></p>
-                                  <h4 class="card-title" >Istifadəçi adı</h4>
+                                  <h4 class="card-title" >{{User.query.filter_by(id=selected.user_id).first().fullname}}</h4>
                               
   
                               </div>
@@ -32,25 +40,97 @@ Detallı Feedback
           </div>
         </div>
         <div class="rest-profile">
-          <div class="col-xs-12 col-sm-6 col-md-3">
-              <div class="image-flip" >
-                  <div class="mainflip flip-0">
-                      <div class="frontside">
-                          <div class="card">
-                              <div class="card-body text-center">
-                                  <p><img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_01.png" alt="card image"></p>
-                                  <h4 class="card-title">Restoran adı</h4>
-                                  <span class="card-rating">Reytinq <i class="fas fa-star"></i></span>
-                                  <span class="count-feedbacks">8<i class="fas fa-comments"></i></span>
-  
+            <div class="col-xs-12 col-sm-6 col-md-3">
+             
+                <div class="image-flip" >
+                    <div class="mainflip flip-0">
+                        <div class="frontside">
+                            <div class="card">
+                              <div class="card-header" > {{restaurant.name}}</div>
+                                <div class="card-body text-center">
+                                    <p><img class=" img-fluid" src="{{url_for('adminPanel.static',filename = 'admin/uploads/%s' %restaurant.logo)}}" alt="card image"></p>
+                                    <h4 class="card-title">
+                                      <a href="/restaurants/profile/{{restaurant.slug}}"  class="btn btn-outline-primary see-profile-link" >Profilə bax</a>
+                                    </h4>
+                                     
+                                      <div class="ratings d-flex  " style="flex-direction: column; ">
+                                        <div class="taste-rating d-flex justify-content-between " style="text-align: center;border-bottom: 1px dotted orangered;"> 
+                                            <div class="taste-rating-header">
+                                              Dad </div>
+                                            <div class="taste-rating-score">
+                                                
+                                             
+                                                 {%- set taste_list = [] %}
+                                                 {%- for feedback in Feedback.query.filter_by(restaurant_id = restaurant.id,verified = True) %}
+                                                 {%-       set taste_list = taste_list.append( feedback.tasteRating ) %}
+                                                 {%- endfor %}
+                                                 {% if taste_list %}
+                                                 {{- '%0.1f'  % (taste_list|sum / taste_list |count)|float -}}
+                                                 {% else %}
+                                                 0
+                                                 {% endif %}
+                                                
+                                               ⭐
+                                             
+                                               
+                                          </div>
+                                          
+                                          </div>
+                                       
+                                        <div class="service-rating d-flex justify-content-between" style="text-align: center;border-bottom: 1px dotted orangered;">
+                                          <div class="service-rating-header" >Xidmət </div>
+                                          <div class="service-rating-score">
+                                             
+                                            {%- set serv_list = [] %}
+                                            {%- for feedback in Feedback.query.filter_by(restaurant_id = restaurant.id,verified = True) %}
+                                            {%-       set serv_list = serv_list.append( feedback.serviceRating ) %}
+                                            {%- endfor %}
+                                            {% if serv_list %}
+                                            {{- '%0.1f'  % (serv_list|sum / serv_list |count)|float -}}
+                                            {% else %}
+                                            0
+                                            {% endif %}
+                                               
+                                            ⭐
+                                          </div>
+                                          
+                                        </div>
+                          
+                                        <div class="atmp-rating d-flex justify-content-between" style="text-align: center;border-bottom: 1px dotted orangered;">
+                                          <div class="atmp-rating-header">Atmosfer </div>
+                                          <div class="atmp-rating-score"> 
+                                            {%- set atmp_list = [] %}
+                                            {%- for feedback in Feedback.query.filter_by(restaurant_id = restaurant.id,verified = True) %}
+                                            {%-       set atmp_list = atmp_list.append( feedback.atmosphereRating ) %}
+                                            {%- endfor %}
+                                            {% if atmp_list %}
+                                            {{- '%0.1f'  % (atmp_list|sum / atmp_list |count)|float -}}
+                                            {% else %}
+                                            0
+                                            {% endif %}                                  
+                                                   
+                                           
+                                            ⭐
+                                               </div>
+                                       </div>
+                                    </div>
+                                   
+                                   
+                                    <!-- <span class="count-feedbacks"><i class="fas fa-comments">{{(restaurant.feedbacks)|length}}</i></span> -->
+                                   
+                                    
+    
+                                </div>
+                                <div class="card-footer">
+                                  
+                                </div>
+                                <!-- <a href="/restaurants/profile/{{restaurant.slug}}" class="btn-see-profile btn " >Profilə bax</a> -->
                               </div>
-                              <button class="btn-see-profile btn " >Profilə bax</button>
-                            </div>
-                      </div>
-                    
-                  </div>
-              </div>
-          </div>
+                        </div>
+                      
+                    </div>
+                </div>
+            </div>
         </div>
         
     </div>
@@ -176,5 +256,167 @@ Detallı Feedback
   
   
   </section>
+  <div class="container" style="font-size: 1.6rem;">
+
+  
+  <section class="below-feedback d-flex" style="justify-content: space-between;">
+    <div class="comments w-50">
+      <h2 class="text-center" style="font-size: 3rem;">Bu fikrə yazılmış kommentlər</h2>
+      <hr>
+      {% for comment in Comment.query.filter_by(feedback_id=selected.id) %}
+      <div class="" style="background-color: rgb(231, 223, 223);">
+
+     
+      <div class="cardam my-5" style="box-shadow: 0px 0px 5px; padding: 5px;">
+             
+       
+        
+    
+        <div class="user-date d-flex justify-content-between " style=" width: 100%;background-color: #fff;color: #f16121 !important;">
+        
+         
+          <div class="user d-flex justify-content-start">
+            <div class="user-icon mr-5"> 
+             <i class="fas fa-user" style="color:#f16121">
+                 
+             </i>
+         </div>
+         <div class="user-name">
+             <span style="color:#f16121 ;">{{User.query.filter_by(id=comment.user_id).first().fullname}}</span>
+         </div>
+          </div> 
+          <div class="date " >
+            <span>{{((comment.time.split(" ")[0].split("-")[2])|int)|string +" "+ month[comment.time.split(" ")[0].split("-")[1]]+" " +comment.time.split(" ")[0].split("-")[0] }}</span>
+            <span> {{comment.time.split("|")[1].split(":")[0]+ ":" +comment.time.split("|")[1].split(":")[1]}}</span>
+         </div>
+          
+         </div>
+
+         
+         
+         <div class="bar"> <hr>
+           
+           
+         </div>
+        <div class="content-review" style="background-color: #fff;">
+            <div class="real-content" >
+                <div class="icon-quote">
+                    <i class="fas fa-quote-left" style=" color: #f16121 !important;"></i>
+                </div>
+                 <p class="review-paragraph" style=" color: #f16121 !important;">
+                     {{comment.content}}
+              </p>
+             
+              
+            </div>
+               
+         </div>
+         <div class="card-footer cardam-footer text-center    ">
+            
+            <button class=" btn-block btn btn-primary leave-reply" id="comment{{comment.id}}">Cavab yaz</button>
+            <div class="leave-reply-area">
+              <form action="/feedbacks/{{selected.slug}}/{{comment.id}}/leave_reply   " class="leaving-reply" method="POST">
+              
+              <label for="">
+                <b> {{User.query.filter_by(id=comment.user_id).first().fullname}}</b> adlı istifadəçiyə cavab yazın
+              </label>
+              <textarea type="text" name="reply-content" style="font-size: 1.4rem;"  rows="3" cols="20"  class="form-control" id=""></textarea>
+              <button type="submit" class="btn btn-block my-3 btn-primary">Göndər </button>
+            </form>
+            </div>
+          
+      
+          </div>
+         
+         
+       </div>
+       {% for reply in Replies.query.filter_by(comment_id=comment.id) %}
+       <div class="cardam my-5  w-75" style="box-shadow: 0px 0px 5px; padding: 5px;">
+             
+       
+        
+    
+        <div class="user-date d-flex justify-content-between " style=" width: 100%;background-color: #fff;color: #f16121 !important;">
+        
+         
+          <div class="user d-flex justify-content-start">
+            <div class="user-icon mr-5"> 
+             <i class="fas fa-user" style="color:#f16121">
+                 
+             </i>
+         </div>
+         <div class="user-name">
+             <span style="color:#f16121 ;">{{User.query.filter_by(id=reply.user_id).first().fullname}}</span>
+         </div>
+          </div> 
+          <div class="date " >
+            <span>{{((reply.time.split(" ")[0].split("-")[2])|int)|string +" "+ month[reply.time.split(" ")[0].split("-")[1]]+" " +reply.time.split(" ")[0].split("-")[0] }}</span>
+            <span> {{reply.time.split("|")[1].split(":")[0]+ ":" +reply.time.split("|")[1].split(":")[1]}}</span>
+         </div>
+          
+         </div>
+
+         
+         
+         <div class="bar"> <hr>
+           
+           
+         </div>
+        <div class="content-review" style="background-color: #fff;">
+            <div class="real-content" >
+                <div class="icon-quote">
+                    <i class="fas fa-quote-left" style=" color: #f16121 !important;"></i>
+                </div>
+                 <p class="review-paragraph" style=" color: #f16121 !important;">
+                     {{reply.content}}
+              </p>
+             
+              
+            </div>
+               
+         </div>
+         <div class="card-footer cardam-footer text-center    ">
+            
+            
+          
+      
+          </div>
+         
+         
+       </div>
+       {% endfor %}
+      </div>
+      {% endfor %}
+      
+     
+  </div>
+  <div class="leave-comment">
+    <form action="/feedbacks/{{selected.slug}}/leave_comment" class="leaving-comment" method="POST">
+    
+    <label for="">
+      Komment yaz
+    </label>
+    <textarea type="text" name="comment-content" style="font-size: 1.4rem;"  rows="10" cols="50"  class="form-control" id=""></textarea>
+    <button type="submit" class="btn btn-block my-3 btn-primary">Göndər </button>
+  </form>
+  </div>
+
+  
+
+</section>
+</div>
  
+ 
+ 
+{% endblock %}
+{% block jsLink %}
+<script>
+  div = document.createElement('div')
+  $('.leave-reply-area').hide()
+  $('.leave-reply').click(function(){
+    
+    $(this).siblings('.leave-reply-area').slideToggle()
+
+  })
+</script>
 {% endblock %}

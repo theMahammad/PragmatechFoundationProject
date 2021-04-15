@@ -41,7 +41,7 @@ def deleteFromUploadFolder(element):
 def deleteCompletely(object_,*args):
     if args:
         for arg in args:
-            if arg is not None:
+            if arg is not None and arg!="default_rest_logo.png":
                 deleteFromUploadFolder(arg)
     db.session.delete(object_)
     db.session.commit()
@@ -124,6 +124,10 @@ def  unverifyAboutContent(id):
 @admin_bp.route("/users")
 def users():
     return render_template("admin/users.html",users = User.query.all())
+@admin_bp.route("/users/delete_user/<int:id>")
+def deleteUser(id):
+    deleteCompletely(User.query.get(id))
+    return redirect("/adminside/users")
 # ###############################################
 # FAQ CRUD OPERATION
 @admin_bp.route("/faq",methods=["GET","POST"])
@@ -331,7 +335,22 @@ def editContact(id):
         db.session.commit()
         return redirect("/adminside/contact_ways")
     return render_template('admin/update_contact_ways.html',selectedContact = selectedContact)
-    
+@admin_bp.route("/partners",methods = ['GET','POST'])
+def partners():
+    partner_restaurants= Restaurant.query.filter_by(partner_status=True)
+    allRestaurants = Restaurant.query.all() 
+    if request.method=="POST":
+        addedToPartners_id = request.form['part-rest']
+        Restaurant.query.filter_by(id=addedToPartners_id).first().partner_status=True
+        db.session.commit()
+        return redirect("/adminside/partners")
+    return render_template("admin/partners.html",partner_restaurants = partner_restaurants,allRestaurants = allRestaurants)
+@admin_bp.route("/partners/end_partnering/<int:id>")
+def end_partnering(id):
+    forEndingPartnering = Restaurant.query.get(id)
+    forEndingPartnering.partner_status=False
+    db.session.commit()
+    return redirect("/adminside/partners")
 
 
 
