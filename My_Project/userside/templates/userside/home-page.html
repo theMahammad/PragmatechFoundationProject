@@ -46,7 +46,7 @@ a {
 active
 {% endblock %}
 {% block page %}
-<!-- <section class="loading-screen">
+<section class="loading-screen">
     <div class="body animate__animated animate__delay-2s ">
     <div id="container">
         {% if get_flashed_messages() %}
@@ -55,6 +55,7 @@ active
         {% endfor %}
         
         {% endif %}
+       
     <div class="load-screen-logo animate__animated animate__delay-1s animate__flash">
         <img src="{{url_for('user.static', filename='userside/generals/img/brand-logo.png')}}"  alt="">
     </div>
@@ -73,7 +74,7 @@ active
  
 </div>
 </div>
-</section> -->
+</section>
 <div class="introes " style="box-shadow: 0px -1px 2px ;">
     <!-- ' -->
         <div class="intro " >
@@ -236,7 +237,7 @@ data-flickity-options='{ "freeScroll":true,"wrapAround":true,"autoPlay": 3500,"p
              
           </div>
           <div class="read-more d-none">
-              <a href="/feedbacks/see_all_content/{{feedback.slug}}" class="btn btn-primary">Davamını oxu </a>
+              <a href="/feedbacks/{{feedback.slug}}" class="btn btn-primary">Davamını oxu </a>
           </div>
           
       </div>
@@ -254,7 +255,7 @@ data-flickity-options='{ "freeScroll":true,"wrapAround":true,"autoPlay": 3500,"p
 
 
        <!-- Content Source: https://www.farmflavor.com/at-home/cooking/10-fun-facts-about-apples/  -->
-     <div class="container">
+     <!-- <div class="container">
 
          <hr style="margin: 5px auto;" class="our-hr-style">
          <h3 style="font-size: 3rem; color: rgb(241, 97, 33);text-align: center;">Partnyorlarlardan son kompaniyalar</h3>
@@ -315,7 +316,7 @@ data-flickity-options='{ "freeScroll":true,"wrapAround":true,"autoPlay": 3500,"p
 </div>
         
      </div>
-       
+        -->
 	
   <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.js" integrity="sha512-WNZwVebQjhSxEzwbettGuQgWxbpYdoLf7mH+25A7sfQbbxKeS5SQ9QBf97zOY4nOlwtksgDA/czSTmfj4DUEiQ==" crossorigin="anonymous"></script>
 
@@ -329,6 +330,8 @@ data-flickity-options='{ "freeScroll":true,"wrapAround":true,"autoPlay": 3500,"p
  {% endif %}
  
 </script>
+<script type="text/javascript" src="{{url_for('user.static',filename='userside/feedbacks/js/script.js')}}"></script>
+
 <script>
     
   (function() {

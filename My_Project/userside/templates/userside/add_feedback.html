@@ -32,7 +32,7 @@ Fikir əlavə et
         
                 <form action="/add_feedback" method="POST" class="contactform" enctype="multipart/form-data">
                     
-                    <p class="input_wrapper">{{form.restaurant(list="restaurants" ,id= "restaurant")}}{{form.restaurant.label("Restoran")}}
+                    <p class="input_wrapper">{{form.restaurant(list="restaurants" ,id= "restaurant",required='required')}}{{form.restaurant.label("Restoran")}}
                         <datalist  id="restaurants">
                             {% for restaurant in restaurants %}
                            
@@ -41,12 +41,12 @@ Fikir əlavə et
                           </datalist>
                     </p>
                     
-                    <p class="input_wrapper">{{form.topic(id= "topic")}}{{form.topic.label("Başlıq")}}</p>
+                    <p class="input_wrapper">{{form.topic(id= "topic",required='required')}}{{form.topic.label("Başlıq")}}</p>
     
                     <p class="input_wrapper" id="filed">{{form.photo(id= "photo")}}{{form.photo.label("Şəkil")}}</p>
                     <div class="select-boxes d-flex">
                         <div class="taste-rating" style="height: 100px;" >
-                            <input type="radio" id="taste-star5" name="taste-rating" value="5" /><label for="taste-star5"></label>
+                            <input type="radio" id="taste-star5" name="taste-rating"  value="5" /><label for="taste-star5"></label>
                             <input type="radio" id="taste-star4" name="taste-rating" value="4" /><label for="taste-star4"></label>
                             <input type="radio" id="taste-star3" name="taste-rating" value="3" /><label for="taste-star3"></label>
                             <input type="radio" id="taste-star2" name="taste-rating" value="2" /><label for="taste-star2"></label>
@@ -76,7 +76,7 @@ Fikir əlavə et
                            </div>
                     <p class="textarea_wrapper">{{form.content(id="contact_message",required='required')}}</p>
                     
-                    <p class="submit_wrapper"><input type="submit" disabled style="font-size: 2rem;" class="adding-button" value="Bildir"></p>			
+                    <p class="submit_wrapper"><input type="submit"  style="font-size: 2rem;" class="adding-button" value="Bildir"></p>			
                 </form>
         </article>
     </section>
@@ -114,12 +114,25 @@ Fikir əlavə et
        $('input[id="topic"]').keyup(function(){
        $(`label[for="topic"]`).css('left','85%')
        })
-       $('input[id="topic"]').focusout(function(){
-           if(!($(this).val())){
-            $(`label[for="topic"]`).css('left','0%')
+       checkVal = false
+       $('input[type="submit"]').submit(function(e){
+           if( checkVal==false){
+            e.preventDefault()
            }
+          
+         
+          if($('input[name="taste-rating"]:checked').val()!=undefined){
+            checkVal=true
+            setInterval(function(){
+                $('input[type="submit"]').submit()
+            },2000 )
+          }else{
+
+              alert("Qiymətləndirin zəhmət olmasa")
+          }
        
        })
+       
       
     
           
